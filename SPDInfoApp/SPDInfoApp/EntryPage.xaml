@@ -1,16 +1,184 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+xmlns:maskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SPDInfoApp.EntryPage">
-    <ContentPage.Content>
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Color x:Key="BackGroundColorList">White</Color>
+      <Color x:Key="BackGroundColorLeaveRemainRoundBox">#39557C</Color>
+      <Color x:Key="BorderColorLeaveRemainRoundBox">Black</Color>
+      <Color x:Key="BaseBackGroundColorBlue">#39557C</Color>
+      <Color x:Key="BaseBackGroundColorRed">Red</Color>
+      <Color x:Key="BaseForeGroundColor">White</Color>
+      <Color x:Key="DefColorBlack">Black</Color>
+      <Color x:Key="DefColorWhite">White</Color>
+      <Color x:Key="DefColorFloralWhite">FloralWhite</Color>
+      <Color x:Key="DefColorRed">Red</Color>
+      <Color x:Key="DefColorBlue">#39557C</Color>
+      <Color x:Key="LabelDefColorBackground">FloralWhite</Color>
+      <Color x:Key="LabelDefColorForeground">Black</Color>
+
+      <Color x:Key="EntryDefColorBackground">FloralWhite</Color>
+      <Color x:Key="EntryDefColorForeground">Black</Color>
+
+      <Style x:Key="Entryfont" TargetType="Entry">
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+
+      <Style x:Key="Lablefont" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+      </Style>
+
+      <OnPlatform x:Key="FontBarSize"
+      x:TypeArguments="x:Double">
+        <On Platform="iOS">24</On>
+        <On Platform="Android, UWP">28</On>
+      </OnPlatform>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ContentPage.Content>
+    <StackLayout>
+      <StackLayout HeightRequest="60" HorizontalOptions="FillAndExpand"  BackgroundColor="{StaticResource BaseBackGroundColorRed}">
+        <Label Text="Govt. PG College Seoni: Student Info" FontSize="20" TextColor="{StaticResource DefColorFloralWhite}" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+      </StackLayout>
+      <ScrollView>
         <StackLayout>
-            <StackLayout HeightRequest="60" HorizontalOptions="FillAndExpand" BackgroundColor="">
-                
-                
+
+          <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Vertical" Padding="0"  Margin="0" BackgroundColor="White" HorizontalOptions="FillAndExpand">
+              <Label Text="Apearing Class(Bsc. BA etc):" TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}"  HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="ApplicationID (of First Addmission):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Roll No:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Student Name:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Roll No(RDVV):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Enrolment No(RDVV):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}"   BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Date of Birth (DD/MM/YYYY):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <StackLayout Orientation="Horizontal">
+                <!--<Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />-->
+                <maskededit:SfMaskedEdit x:Name="maskedEdit" Keyboard="Numeric" Mask="00/00/0000" FontSize="20" TextColor="Black" HorizontalOptions="FillAndExpand" />
+                <!--<DatePicker x:Name="PickerDOB" FontSize="12"/>-->
+              </StackLayout>
+              <Label Text="Medium:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <radiogroup:SfRadioGroup x:Name="radioGroupMedium" Orientation="Horizontal">
+                <radiogroup:SfRadioButton x:Name="radioButtonHindi" Text="Hindi"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonEnglish" Text="English"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonOther" Text="Other"/>
+              </radiogroup:SfRadioGroup>
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Gender:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <radiogroup:SfRadioGroup x:Name="radioGroupGender" Orientation="Horizontal">
+                <radiogroup:SfRadioButton x:Name="radioButtonMale" Text="Male"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonFemale" Text="Female"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonTrans" Text="Trans"/>
+              </radiogroup:SfRadioGroup>
+              <Label Text="Category:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <radiogroup:SfRadioGroup x:Name="radioGroupCategory" Orientation="Horizontal">
+                <radiogroup:SfRadioButton x:Name="radioButtonSC" Text="SC"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonST" Text="ST"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonOBC" Text="OBC"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonGen" Text="General"/>
+              </radiogroup:SfRadioGroup>
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Registration No of Cast Certificate:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Physically Handicapped?:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <radiogroup:SfRadioGroup x:Name="radioGroupIsHandicapped" Orientation="Horizontal">
+                <radiogroup:SfRadioButton x:Name="radioButtonHCYes" Text="Yes"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonHCNo" Text="No"/>
+              </radiogroup:SfRadioGroup>
+              <Label Text="Blood Group:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <StackLayout >
+                  <combobox:SfComboBox x:Name="comboBox" WidthRequest="200" HeightRequest="45" DropDownItemHeight="55">
+                    <combobox:SfComboBox.ComboBoxSource>
+                      <ListCollection:List x:TypeArguments="x:String">
+                        <x:String>A</x:String>
+                        <x:String>B</x:String>
+                        <x:String>AB</x:String>
+                        <x:String>O</x:String>
+                      </ListCollection:List>
+                    </combobox:SfComboBox.ComboBoxSource>
+                  </combobox:SfComboBox>
+                </StackLayout>
+                <StackLayout  Orientation="Horizontal">
+                  <StackLayout >
+                    <radiogroup:SfRadioGroup x:Name="radioGroupBloodGroup" Orientation="Horizontal">
+                      <radiogroup:SfRadioButton x:Name="radioButtonPositive" Text="+ Positive"/>
+                      <radiogroup:SfRadioButton x:Name="radioButtonNagetive" Text="- Negative"/>
+                    </radiogroup:SfRadioGroup>
+                  </StackLayout>
+                </StackLayout>
+              </StackLayout>
+              <Label Text="Contact No(Personal):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" Keyboard="Numeric" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Child SSSM ID:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Aadhar No:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" Keyboard="Numeric" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Email ID:" TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" Keyboard="Email"  BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Address (Permanent):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Editor Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Address (Current):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Editor Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Living Area(Urban/Rural):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <radiogroup:SfRadioGroup x:Name="radioGroupLivingArea" Orientation="Horizontal">
+                <radiogroup:SfRadioButton x:Name="radioButtonUrban" Text="Urban (शहरी)"/>
+                <radiogroup:SfRadioButton x:Name="radioButtonRural" Text="Rural (ग्रामीण)"/>
+              </radiogroup:SfRadioGroup>
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Native Place:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Registration No of Native Place Certificate:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Father/Husband Name:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Mother Name:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Contact No(Father/Guardian):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" Keyboard="Numeric"  BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="(Yearly)Income of Father/Guardian:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" Keyboard="Numeric" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Occupation (Father/Guardian):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Bank Acc No(Self):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" Keyboard="Numeric"  BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Bank IFSC:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Bank Name:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Bank Branch(Address):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Voter ID:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Driving Lincense No:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+              <Label Text="Scholarship Name (if any):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+              <Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
             </StackLayout>
-            
-            
-            
+          </StackLayout>
+
         </StackLayout>
-    </ContentPage.Content>
+      </ScrollView>
+
+      <!--<BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>-->
+      <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0">
+        <Button x:Name="BtnApply"  Text="Submit" IsEnabled="True"   Clicked="BtnApply_Clicked"  HorizontalOptions="FillAndExpand" TextColor="OrangeRed" BackgroundColor="CadetBlue"   FontAttributes="None" VerticalOptions="End" Margin="0"/>
+      </StackLayout>
+      <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+    </StackLayout>
+  </ContentPage.Content>
 </ContentPage>

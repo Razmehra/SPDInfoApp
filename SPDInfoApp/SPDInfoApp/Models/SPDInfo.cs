@@ -31,7 +31,7 @@ namespace SPDInfoApp.Models
         public string RegNativeCertificateNo { get; set; }
         public string FHName { get; set; }
         public string MotherName { get; set; }
-        public string PhoneMobile_Gardian { get; set; }
+        public string PhoneMobile_Gaurdian { get; set; }
         public double IncomeFather { get; set; }
         public string OccupationFather { get; set; }
         public string BankAcNo { get; set; }

@@ -16,5 +16,10 @@ namespace SPDInfoApp
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void BtnApply_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
