@@ -14,7 +14,7 @@ namespace SPDInfoApp
 
             InitializeComponent();
 
-            MainPage = new EntryPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()

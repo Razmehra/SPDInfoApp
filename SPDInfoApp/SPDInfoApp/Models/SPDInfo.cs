@@ -6,12 +6,12 @@ namespace SPDInfoApp.Models
 {
    public class SPDInfo
     {
-        public int Appid { get; set; }
+        public double Appid { get; set; }
         public string AppearingClass { get; set; }
-        public int ApplicationID { get; set; }
+        public Nullable<double> ApplicationID { get; set; }
         public string StudentName { get; set; }
-        public int RollNo { get; set; }
-        public int EnrolmentNo { get; set; }
+        public Nullable<double> RollNo { get; set; }
+        public Nullable<double> EnrolmentNo { get; set; }
         public DateTime DOB { get; set; }
         public string Medium { get; set; }
         public string Gender { get; set; }
@@ -32,7 +32,7 @@ namespace SPDInfoApp.Models
         public string FHName { get; set; }
         public string MotherName { get; set; }
         public string PhoneMobile_Gaurdian { get; set; }
-        public double IncomeFather { get; set; }
+        public Nullable<double> IncomeFather { get; set; }
         public string OccupationFather { get; set; }
         public string BankAcNo { get; set; }
         public string BankIFSC { get; set; }

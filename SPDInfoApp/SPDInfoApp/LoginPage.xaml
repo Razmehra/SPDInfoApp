@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SPDInfoApp.LoginPage"
+            >
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+            <Image Source="Logo.png" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+            <BoxView HeightRequest="40"/>
+            <!--<Image HorizontalOptions="Center" WidthRequest="300" Source="maco.jpg"/>-->
+            <Frame BackgroundColor="#BF043055" HasShadow="True">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Label Text="User Id" TextColor="LightSkyBlue"  Margin="0"/>
+                    <Entry x:Name="UserName" Text="{Binding UserName}" Placeholder="User name"   
+                           PlaceholderColor="White"    
+                           Keyboard="Email"  
+                           TextColor="White"/>
+                    <Label Text="Password" TextColor="LightSkyBlue" Margin="0"/>
+                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password"   
+                           PlaceholderColor="White"   
+                           IsPassword="True"  
+                           TextColor="White"/>
+                </StackLayout>
+            </Frame>
+            <Button Command="{Binding SubmitCommand}" Text="Login" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" />
+
+            <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0" HorizontalOptions="End">
+                <Button x:Name="BtnSkipLogin"  Text="Skip" IsEnabled="True"   Clicked="BtnSkipLogin_Clicked" 
+                     WidthRequest="100"  TextColor="White" BackgroundColor="OrangeRed" HorizontalOptions="End"
+                     CornerRadius="30" BorderRadius="30" BorderColor="Black"
+                     FontAttributes="None" VerticalOptions="End" Margin="0"/>
+            </StackLayout>
+            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
