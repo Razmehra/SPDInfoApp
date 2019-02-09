@@ -51,7 +51,7 @@ namespace SPDInfoApp
                 sPDInfo.RegCastCertificate = txtRegCastCertificate.Text;
                 sPDInfo.IsHandicapped = (bool)radioButtonHCYes.IsChecked ? true : false;
                 sPDInfo.HandicappDetail = "";
-                sPDInfo.BloodGroup = cmbBloodGroup.Text + ((bool)radioButtonPositive.IsChecked ? "+" : "-");
+                sPDInfo.BloodGroup = cmbBloodGroup.Text + ((bool)radioButtonPositive.IsChecked ? "+" : (bool)radioButtonNagetive.IsChecked ?"-":"");
                 sPDInfo.PhoneMobile = txtPhoneMobile.Text;
                 sPDInfo.SSSMId = txtSSSMId.Text;
                 sPDInfo.AadharNo = txtAadharNo.Text;
@@ -82,7 +82,7 @@ namespace SPDInfoApp
             catch (Exception ex)
             {
 
-                App.Current.MainPage.DisplayAlert("Error...", "Something went wrong.. Check your entries..", "OK");
+                App.Current.MainPage.DisplayAlert("Error...", "Something went wrong.. Check your entries..\n" + ex.Message, "OK");
                 return null;
             }
 

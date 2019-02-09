@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPDInfoApp.Android", "SPDIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPDInfoApp.UWP", "SPDInfoApp\SPDInfoApp.UWP\SPDInfoApp.UWP.csproj", "{4EE75C33-50DC-41D3-ADEE-57CB46CA4004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPDInfoApp", "SPDInfoApp\SPDInfoApp\SPDInfoApp.csproj", "{48D7574F-5803-482F-B7DF-CBBAC453E5DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPDInfoApp", "SPDInfoApp\SPDInfoApp\SPDInfoApp.csproj", "{48D7574F-5803-482F-B7DF-CBBAC453E5DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
