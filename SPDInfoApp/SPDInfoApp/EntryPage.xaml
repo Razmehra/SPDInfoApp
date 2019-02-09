@@ -92,11 +92,34 @@ xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Bu
                             <!--<Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />-->
                             <Label Text="Registration No of Cast Certificate:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                             <Entry x:Name="txtRegCastCertificate"  Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
-                            <Label Text="Physically Handicapped?:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
-                            <radiogroup:SfRadioGroup x:Name="radioGroupIsHandicapped" Orientation="Horizontal">
-                                <radiogroup:SfRadioButton x:Name="radioButtonHCYes" Text="Yes"/>
-                                <radiogroup:SfRadioButton x:Name="radioButtonHCNo" Text="No"/>
-                            </radiogroup:SfRadioGroup>
+                            <StackLayout x:Name="LayerHandiCap" Orientation="Horizontal" IsVisible="True">
+                                <Label Text="Physically Handicapped?:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+                                <radiogroup:SfRadioGroup x:Name="radioGroupIsHandicapped" Orientation="Horizontal">
+                                    <radiogroup:SfRadioButton x:Name="radioButtonHCYes" Text="Yes"/>
+                                    <radiogroup:SfRadioButton x:Name="radioButtonHCNo" Text="No"/>
+                                </radiogroup:SfRadioGroup>
+                                <StackLayout HorizontalOptions="FillAndExpand" WidthRequest="200">
+                                    <combobox:SfComboBox x:Name="cmbHCType"  HeightRequest="45" DropDownItemHeight="55">
+                                        <combobox:SfComboBox.ComboBoxSource>
+                                            <ListCollection:List x:TypeArguments="x:String">
+                                                <x:String>Select Handicap Type</x:String>
+                                                <x:String>OH-Orthopedically Handicapped</x:String>
+                                                <x:String>HH-Hearing Handicapped</x:String>
+                                                <x:String>VH-Visually Handicapped</x:String>
+                                                <x:String>Other</x:String>
+                                            </ListCollection:List>
+                                        </combobox:SfComboBox.ComboBoxSource>
+                                    </combobox:SfComboBox>
+                                </StackLayout>
+                            </StackLayout>
+                            <Entry x:Name="txtHCOtherTypeDetail" Placeholder="Enter detail..." Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="%:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+                                <Entry x:Name="txtHCPercent" Keyboard="Numeric" WidthRequest="30" Placeholder="%" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+                                <Label Text="UDID No:"/>
+                                <Entry x:Name="txtUDIDNo" WidthRequest="30" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+
                             <Label Text="Blood Group:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <StackLayout >

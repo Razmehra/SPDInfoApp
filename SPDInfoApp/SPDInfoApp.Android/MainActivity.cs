@@ -11,11 +11,15 @@ using Xamarin.Essentials;
 
 namespace SPDInfoApp.Droid
 {
-    [Activity(Label = "SPDInfoApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    //@style/AppTheme",
+    [Activity(Label = "SPDInfo", Icon = "@drawable/Logo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+       // [Android.Runtime.Preserve]
+      //  [Android.Runtime.Preserve(AllMembers = true)]
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

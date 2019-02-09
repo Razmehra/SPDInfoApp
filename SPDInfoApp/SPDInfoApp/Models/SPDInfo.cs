@@ -18,6 +18,7 @@ namespace SPDInfoApp.Models
         public string Category { get; set; }
         public string RegCastCertificate { get; set; }
         public bool IsHandicapped { get; set; }
+        public string HandicappPercent { get; set; }
         public string HandicappDetail { get; set; }
         public string BloodGroup { get; set; }
         public string PhoneMobile { get; set; }
