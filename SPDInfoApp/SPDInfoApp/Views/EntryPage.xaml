@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
-xmlns:maskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
-xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SPDInfoApp.EntryPage">
+                xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+                xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+                xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="SPDInfoApp.Views.EntryPage">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -20,10 +19,10 @@ xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Bu
             <Color x:Key="DefColorFloralWhite">FloralWhite</Color>
             <Color x:Key="DefColorRed">Red</Color>
             <Color x:Key="DefColorBlue">#39557C</Color>
-            <Color x:Key="LabelDefColorBackground">FloralWhite</Color>
+            <Color x:Key="LabelDefColorBackground">White</Color>
             <Color x:Key="LabelDefColorForeground">Black</Color>
 
-            <Color x:Key="EntryDefColorBackground">FloralWhite</Color>
+            <Color x:Key="EntryDefColorBackground">#daeed8</Color>
             <Color x:Key="EntryDefColorForeground">Black</Color>
 
             <Style x:Key="Entryfont" TargetType="Entry">
@@ -63,12 +62,17 @@ xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Bu
                             <Entry x:Name="txtRollNo" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
                             <Label Text="Enrolment No(RDVV):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                             <Entry x:Name="txtEnrolmentNo" Style="{StaticResource Entryfont}"   BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
-                            <Label Text="Date of Birth (DD/MM/YYYY):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
-                            <StackLayout Orientation="Horizontal">
-                                <!--<Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />-->
-                                <maskededit:SfMaskedEdit x:Name="txtDOB"  Keyboard="Numeric" Mask="00/00/0000" FontSize="20" TextColor="Black" HorizontalOptions="FillAndExpand" />
-                                <!--<DatePicker x:Name="PickerDOB" FontSize="12"/>-->
+                            <Label Text="Date of Birth (DD-MMM-YYYY):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+                            <StackLayout Orientation="Vertical" BackgroundColor="{StaticResource BaseBackGroundColorBlue}" HorizontalOptions="StartAndExpand" >
+                                <DatePicker x:Name="PickerDOB" Format="mm-dd-yyyy"  IsVisible="False" DateSelected="PickerDOB_DateSelected"  WidthRequest="0" HeightRequest="0" />
+                                <!--<controls:ExtendedDatePicker x:Name="PickerDateLeaveDate" Format="mm-dd-yyyy"  IsVisible="False" DateSelected="PickerLeaveDate_DateSelectedAsync"  WidthRequest="0" HeightRequest="0"/>-->
+                                <Label x:Name="lblDOB" Text="Tap to Select Date" FontSize="13" TextColor="{StaticResource DefColorWhite}" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" HorizontalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
+
                             <Label Text="Medium:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                             <radiogroup:SfRadioGroup x:Name="radioGroupMedium" Orientation="Horizontal">
                                 <radiogroup:SfRadioButton x:Name="radioButtonHindi" Text="Hindi"/>
@@ -92,17 +96,20 @@ xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Bu
                             <!--<Entry Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />-->
                             <Label Text="Registration No of Cast Certificate:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                             <Entry x:Name="txtRegCastCertificate"  Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
-                            <StackLayout x:Name="LayerHandiCap" Orientation="Horizontal" IsVisible="True">
+                            <StackLayout Orientation="Horizontal">
                                 <Label Text="Physically Handicapped?:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                                 <radiogroup:SfRadioGroup x:Name="radioGroupIsHandicapped" Orientation="Horizontal">
-                                    <radiogroup:SfRadioButton x:Name="radioButtonHCYes" Text="Yes"/>
+                                    <radiogroup:SfRadioButton x:Name="radioButtonHCYes" Text="Yes" />
                                     <radiogroup:SfRadioButton x:Name="radioButtonHCNo" Text="No"/>
                                 </radiogroup:SfRadioGroup>
-                                <StackLayout HorizontalOptions="FillAndExpand" WidthRequest="200">
-                                    <combobox:SfComboBox x:Name="cmbHCType"  HeightRequest="45" DropDownItemHeight="55">
+                            </StackLayout>
+                            <StackLayout x:Name="HCLayout" BindingContext="{x:Reference radioButtonHCYes}" IsVisible="{Binding Path=IsChecked}">
+                                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Start" Padding="0" WidthRequest="400">
+                                    <combobox:SfComboBox x:Name="cmbHCType" IsEditableMode="false" TextSize="14"
+                                                         Watermark="Select Type of Handicap Here.." WatermarkColor="Gray"
+                                                         TextColor="#1976d2" BorderColor="#1976d2" FontAttributes="Bold" HorizontalOptions="Start" >
                                         <combobox:SfComboBox.ComboBoxSource>
                                             <ListCollection:List x:TypeArguments="x:String">
-                                                <x:String>Select Handicap Type</x:String>
                                                 <x:String>OH-Orthopedically Handicapped</x:String>
                                                 <x:String>HH-Hearing Handicapped</x:String>
                                                 <x:String>VH-Visually Handicapped</x:String>
@@ -111,38 +118,43 @@ xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Bu
                                         </combobox:SfComboBox.ComboBoxSource>
                                     </combobox:SfComboBox>
                                 </StackLayout>
-                            </StackLayout>
-                            <Entry x:Name="txtHCOtherTypeDetail" Placeholder="Enter detail..." Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="%:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
-                                <Entry x:Name="txtHCPercent" Keyboard="Numeric" WidthRequest="30" Placeholder="%" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
-                                <Label Text="UDID No:"/>
-                                <Entry x:Name="txtUDIDNo" WidthRequest="30" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
-                            </StackLayout>
 
+                                <Entry x:Name="txtHCOtherTypeDetail" Placeholder="Enter detail..." Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="%:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+                                    <Entry x:Name="txtHCPercent" Keyboard="Numeric" WidthRequest="50" Placeholder="%" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" />
+                                    <Label Text="UDID No:"/>
+                                    <Entry x:Name="txtUDIDNo" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+                                </StackLayout>
+                            </StackLayout>
                             <Label Text="Blood Group:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                <StackLayout >
-                                    <combobox:SfComboBox x:Name="cmbBloodGroup" WidthRequest="200" HeightRequest="45" DropDownItemHeight="55">
+                                <StackLayout WidthRequest="400">
+                                    <combobox:SfComboBox x:Name="cmbBloodGroup"  HeightRequest="45" DropDownItemHeight="55"  DropDownCornerRadius="30" 
+                                               Watermark="Select Blood Group Here.." WatermarkColor="Gray" IsEditableMode="false" TextSize="14" TextColor="#1976d2" BorderColor="#1976d2" FontAttributes="Bold" HorizontalOptions="Start" >
                                         <combobox:SfComboBox.ComboBoxSource>
                                             <ListCollection:List x:TypeArguments="x:String">
-                                                <x:String>Select Blood Group</x:String>
-                                                <x:String>A</x:String>
-                                                <x:String>B</x:String>
-                                                <x:String>AB</x:String>
-                                                <x:String>O</x:String>
+                                                <!--<x:String>Select Blood Group</x:String>-->
+                                                <x:String>A(+)</x:String>
+                                                <x:String>A(-)</x:String>
+                                                <x:String>B(+)</x:String>
+                                                <x:String>B(-)</x:String>
+                                                <x:String>AB(+)</x:String>
+                                                <x:String>AB(-)</x:String>
+                                                <x:String>O(+)</x:String>
+                                                <x:String>O(-)</x:String>
                                             </ListCollection:List>
                                         </combobox:SfComboBox.ComboBoxSource>
                                     </combobox:SfComboBox>
                                 </StackLayout>
-                                <StackLayout  Orientation="Horizontal">
+                                <!--<StackLayout  Orientation="Horizontal">
                                     <StackLayout >
                                         <radiogroup:SfRadioGroup x:Name="radioGroupBloodGroup" Orientation="Horizontal">
                                             <radiogroup:SfRadioButton x:Name="radioButtonPositive" Text="+ Positive"/>
                                             <radiogroup:SfRadioButton x:Name="radioButtonNagetive" Text="- Negative"/>
                                         </radiogroup:SfRadioGroup>
                                     </StackLayout>
-                                </StackLayout>
+                                </StackLayout>-->
                             </StackLayout>
                             <Label Text="Contact No(Personal):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                             <Entry x:Name="txtPhoneMobile" Style="{StaticResource Entryfont}" Keyboard="Numeric" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />

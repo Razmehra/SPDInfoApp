@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SPDInfoApp.LoginPage"
+             x:Class="SPDInfoApp.Views.LoginPage"
+             BackgroundColor="White"
             >
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
-            <Image Source="Logo.png" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Image Source="SPDLogo.png" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
             <BoxView HeightRequest="40"/>
             <!--<Image HorizontalOptions="Center" WidthRequest="300" Source="maco.jpg"/>-->
@@ -28,13 +29,15 @@
                     BackgroundColor="#088da5" />
 
             <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0" HorizontalOptions="End">
-                <Button x:Name="BtnSkipLogin"  Text="Skip" IsEnabled="True"   Clicked="BtnSkipLogin_Clicked" 
+                <Button x:Name="BtnCancle"  Text="Skip" IsEnabled="True"   Clicked="BtnCancle_Clicked" 
                      WidthRequest="100"  TextColor="White" BackgroundColor="OrangeRed" HorizontalOptions="End"
                      CornerRadius="30" BorderRadius="30" BorderColor="Black"
                      FontAttributes="None" VerticalOptions="End" Margin="0"/>
             </StackLayout>
-            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
-
+            <StackLayout VerticalOptions="EndAndExpand" >
+                <Label Text="IndRaz Solutions:Demo App (ver. 0.01)" FontSize="8" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  />
+                <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

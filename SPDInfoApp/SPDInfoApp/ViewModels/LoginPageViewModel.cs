@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Acr.UserDialogs;
 using SPDInfoApp.WebServices;
 using System.Threading.Tasks;
+using SPDInfoApp.Views;
 
 namespace SPDInfoApp.ViewModels
 {
@@ -29,17 +30,30 @@ namespace SPDInfoApp.ViewModels
 
         public ICommand SubmitCommand { get; set; }
         public ICommand SkipCommand { get; set; }
+        public ICommand CancleCommand { get; set; }
 
         public LoginPageViewModel()
         {
             SubmitCommand = new Command(OnSubmitAsync);
             SkipCommand = new Command(OnSkipLoginAsync);
+            CancleCommand = new Command(OnCancleAsync);
+        }
+
+        private async void OnCancleAsync()
+        {
+            await CancleLogin();
+        }
+
+        private async Task CancleLogin()
+        {
+            Application.Current.MainPage = new LoginMenu();
         }
 
         private async void OnSkipLoginAsync()
         {
             await SkipLogin();
         }
+
 
         private async Task SkipLogin()
         {
@@ -69,15 +83,11 @@ namespace SPDInfoApp.ViewModels
             else
             {
                 //User data = User.FromJson(result);
-                //App.Current.Properties["UserName"] = data.Result.UserName;
-                //App.Current.Properties["FirstName"] = data.Result.FirstName;
-                //App.Current.Properties["LastName"] = data.Result.LastName;
-                //App.Current.Properties["Role"] = data.Result.Role;
-                //App.Current.Properties["Enabled"] = data.Result.Enabled;
-                //App.Current.Properties["Email"] = data.Result.Email;
-                //await App.Current.SavePropertiesAsync();
+                App.Current.Properties["AdminUserName"] = UserName;
+                App.Current.Properties["AdminUserPW"] = Password;
+                await App.Current.SavePropertiesAsync();
 
-                //Application.Current.MainPage = new EntryPage();
+                Application.Current.MainPage = new PinPage("Admin");
             }
 
             //////////////////// Implement Login check through web service

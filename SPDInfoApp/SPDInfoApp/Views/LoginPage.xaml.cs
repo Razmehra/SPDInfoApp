@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SPDInfoApp
+namespace SPDInfoApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginPage : ContentPage
@@ -25,12 +25,17 @@ namespace SPDInfoApp
             Password.Text = "";// "admin1234";
             UserName.Completed += (object sender, EventArgs e) => { Password.Focus(); };
             Password.Completed += (object sender, EventArgs e) => { VM.SubmitCommand.Execute(null); };
-            BtnSkipLogin.Clicked += (object sender, EventArgs e) => { VM.SkipCommand.Execute(null); };
+            BtnCancle.Clicked += (object sender, EventArgs e) => { VM.SkipCommand.Execute(null); };
         }
 
         private void BtnSkipLogin_Clicked(object sender, EventArgs e)
         {
            
+        }
+
+        private void BtnCancle_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

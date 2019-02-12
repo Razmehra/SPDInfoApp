@@ -12,7 +12,7 @@ using Xamarin.Essentials;
 namespace SPDInfoApp.Droid
 {
     //@style/AppTheme",
-    [Activity(Label = "SPDInfo", Icon = "@drawable/Logo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "SPDInfo", Icon = "@drawable/SPDLogo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
        // [Android.Runtime.Preserve]

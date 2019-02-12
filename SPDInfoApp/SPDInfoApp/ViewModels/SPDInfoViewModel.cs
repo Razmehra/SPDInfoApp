@@ -13,14 +13,17 @@ namespace SPDInfoApp.ViewModels
     {
         public SPDInfo _entryData { get; set; }// = new List<SPDInfo>();
         public ICommand SubmitCommand { get; set; }
+        public DatesInfo datesInfo { get; set; }
         public SPDInfoViewModel(SPDInfo spdinfo = null)
         {
+           // datesInfo = new DatesInfo();
             this._entryData = spdinfo;
             SubmitCommand = new Command(OnSubmitAsync);
         }
-
+       
         public async void OnSubmitAsync()
         {
+            if (!await App.Current.MainPage.DisplayAlert("Submit Information", "Are you sure?", "Yes", "No")) return;
             PHPServices MyService = new PHPServices();
             string result = "";
             string[] dataArray = {

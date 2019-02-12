@@ -1,3 +1,4 @@
+using Syncfusion.SfPicker.XForms.UWP;
 using Syncfusion.XForms.UWP.ComboBox;
 using Syncfusion.XForms.UWP.MaskedEdit;
 using Syncfusion.XForms.UWP.Buttons;
@@ -57,6 +58,7 @@ namespace SPDInfoApp.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
 List<Assembly> assembliesToInclude = new List<Assembly>();
+assembliesToInclude.Add(typeof(SfPickerRenderer).GetTypeInfo().Assembly);
 assembliesToInclude.Add(typeof(SfComboBoxRenderer).GetTypeInfo().Assembly);
 assembliesToInclude.Add(typeof(SfMaskedEditRenderer).GetTypeInfo().Assembly);
 assembliesToInclude.Add(typeof(SfRadioButtonRenderer).GetTypeInfo().Assembly);

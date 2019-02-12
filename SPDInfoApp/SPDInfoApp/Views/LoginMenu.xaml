@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SPDInfoApp.Views.LoginMenu"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+                <StackLayout Spacing="0">
+                    <Label Text="SPDInfo" FontSize="20" FontAttributes="Bold" TextColor="#314C1A" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  />
+                    <Image Source="SPDLogo.png" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <!--<BoxView HeightRequest="20"/>-->
+                <!--<Image HorizontalOptions="Center" WidthRequest="300" Source="maco.jpg"/>-->
+                <StackLayout Spacing="0">
+                    <Label Text="Choose Login Type" FontSize="20" FontAttributes="Bold" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  />
+                    <Frame BackgroundColor="GhostWhite" HasShadow="True">
+
+                        <radiogroup:SfRadioGroup x:Name="radioGroup" Spacing="10" BackgroundColor="DeepSkyBlue">
+                            <radiogroup:SfRadioButton x:Name="rbAdminLogin" Text="Admin" IsChecked="{Binding isAdmin,Mode=OneWayToSource}" StateChanged="RbAdminLogin_StateChanged" FontSize="18" FontAttributes="Bold" />
+                            <radiogroup:SfRadioButton x:Name="rbStudentLogin" Text="Student"  IsChecked="{Binding isStudent,Mode=OneWayToSource}" FontSize="18" FontAttributes="Bold" />
+                            <radiogroup:SfRadioButton x:Name="rbAlumniLogin" Text="Alumni" IsChecked="{Binding isAlumni,Mode=OneWayToSource}" FontSize="18"  FontAttributes="Bold" />
+                        </radiogroup:SfRadioGroup>
+                    </Frame>
+                </StackLayout>
+                <Button Command="{Binding LoginCommand}" CommandParameter="Test" Text="Login" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center"  
+                    BackgroundColor="#088da5"
+                    WidthRequest="200" 
+                    CornerRadius="30" BorderRadius="30" BorderColor="Black"/>
+                <StackLayout Spacing="10" VerticalOptions="EndAndExpand">
+                    <StackLayout IsVisible="False" Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0" HorizontalOptions="End">
+                        <Button x:Name="BtnSkipLogin"  Text="Skip" IsEnabled="True"   Clicked="BtnSkipLogin_Clicked" 
+                     WidthRequest="100"  TextColor="White" BackgroundColor="OrangeRed" HorizontalOptions="End"
+                     CornerRadius="30" BorderRadius="30" BorderColor="Black"
+                     FontAttributes="None" VerticalOptions="End" Margin="0"/>
+                    </StackLayout>
+                    <StackLayout Spacing="2" VerticalOptions="End">
+                        <Label Text="IndRaz Solutions:Demo App (ver. 0.01)" FontSize="10" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  />
+                        <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

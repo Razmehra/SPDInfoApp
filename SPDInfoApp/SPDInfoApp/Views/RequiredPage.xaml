@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SPDInfoApp.Views.RequiredPage"
+             BackgroundColor="White"
+             >
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="10" Spacing="10">
+            <Image Source="SPDLogo.png" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <BoxView HeightRequest="10"/>
+            <!--<Image HorizontalOptions="Center" WidthRequest="300" Source="maco.jpg"/>-->
+            <Frame BackgroundColor="#111210" HasShadow="True">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Label Text="Please Enter Your Name:" TextColor="#00f3f5"  Margin="0"/>
+                    <Entry x:Name="UserName"  Placeholder="Name.."   
+                           PlaceholderColor="Gray"    
+                           Keyboard="Email"  
+                           TextColor="White"/>
+                    <Label Text="Please Enter Your Mobile No:" TextColor="#00f3f5" Margin="0"/>
+                    <Entry x:Name="UserMobile" Placeholder="Mobile No.."   
+                           PlaceholderColor="Gray"   
+                           TextColor="White"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="End"  Margin="0" HorizontalOptions="FillAndExpand">
+                <Button x:Name="BtnSubmit" Text="Submit" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Clicked="BtnSubmit_Clicked" />
+
+                <Button x:Name="BtnCancle"  Text="Cancel" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="OrangeRed" Clicked="BtnCancle_Clicked"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand" >
+                <Label Text="IndRaz Solutions:Demo App (ver. 0.01)" FontSize="8" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  />
+                <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
