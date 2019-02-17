@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1053385042070",
+    "firebase_url": "https://spdinfoapp.firebaseio.com",
+    "project_id": "spdinfoapp",
+    "storage_bucket": "spdinfoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053385042070:android:d87d24e4d76304c2",
+        "android_client_info": {
+          "package_name": "com.IndRazsolutions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053385042070-9kk7vjqlt1rpeq6870fsjthbln6luk12.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.IndRazsolutions",
+            "certificate_hash": "8adb04733c9c9a94fc8f3cf95036cde5eb3b5f21"
+          }
+        },
+        {
+          "client_id": "1053385042070-rgcqetnpgoj5g6ttiti30fms40o60586.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6CZTdVeYtjSXGixwIK14qTCVUtIQZyxo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053385042070-rgcqetnpgoj5g6ttiti30fms40o60586.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

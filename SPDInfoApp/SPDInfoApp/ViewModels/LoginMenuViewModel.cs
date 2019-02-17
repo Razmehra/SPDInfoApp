@@ -15,13 +15,13 @@ namespace SPDInfoApp.ViewModels
         public bool isAlumni { get; set; }
         public LoginMenuViewModel()
         {
-            LoginCommand = new Command<string>(OnLoginSubmit);
+            LoginCommand = new Command (OnLoginSubmit);
             isAdmin = false;
             isStudent = false;
             isAlumni = false;
         }
 
-        private void OnLoginSubmit(string obj)
+        private void OnLoginSubmit()
         {
             if (isAdmin)
             {

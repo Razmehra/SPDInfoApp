@@ -43,7 +43,7 @@ namespace SPDInfoApp.Views
                 SPDInfo sPDInfo = new SPDInfo();
                 sPDInfo.AppearingClass = txtAppearingClass.Text;
                 sPDInfo.ApplicationID = int.Parse(txtApplicationID.Text);
-                sPDInfo.StudentName = txtStudentName.Text.Trim();
+                sPDInfo.StudentFName = txtStudentName.Text.Trim();
                 sPDInfo.RollNo = txtRollNo.Text == null ? 0 : (double.Parse(txtRollNo.Text));
                 sPDInfo.EnrolmentNo = txtEnrolmentNo.Text == null ? 0 : double.Parse(txtEnrolmentNo.Text);
                 sPDInfo.DOB = DateTime.Parse(lblDOB.Text.ToString());
@@ -57,13 +57,12 @@ namespace SPDInfoApp.Views
                 sPDInfo.HandicappDetail = txtHCOtherTypeDetail.Text;
                 sPDInfo.BloodGroup = cmbBloodGroup.Text;// + ((bool)radioButtonPositive.IsChecked ? "+" : (bool)radioButtonNagetive.IsChecked ?"-":"");
                 sPDInfo.PhoneMobile = txtPhoneMobile.Text;
-                sPDInfo.SSSMId = txtSSSMId.Text;
                 sPDInfo.AadharNo = txtAadharNo.Text;
                 sPDInfo.EMail = txtEMail.Text;
                 sPDInfo.AddressPermanent = txtAddressPermanent.Text;
                 sPDInfo.AddressCurrent = txtAddressCurrent.Text;
                 sPDInfo.IsUrban = (bool)radioButtonUrban.IsChecked ? true : false;
-                sPDInfo.NativePlace = txtNativePlace.Text;
+                sPDInfo.Domicile = txtNativePlace.Text;
                 sPDInfo.RegNativeCertificateNo = txtRegNativeCertificateNo.Text;
                 sPDInfo.FHName = txtFHName.Text;
                 sPDInfo.MotherName = txtMotherName.Text;
@@ -78,6 +77,8 @@ namespace SPDInfoApp.Views
                 sPDInfo.PANNo = txtPAN.Text;
                 sPDInfo.DrivingLicNo = txtDrivingLicNo.Text;
                 sPDInfo.ScholershipName = txtScholershipName.Text;
+                sPDInfo.FamilySSSMID = txtSSSMId.Text;
+
                 return sPDInfo;
 
             }

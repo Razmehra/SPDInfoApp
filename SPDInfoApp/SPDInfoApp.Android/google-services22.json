@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "96016025097",
+    "firebase_url": "https://spdinfoproj.firebaseio.com",
+    "project_id": "spdinfoproj",
+    "storage_bucket": "spdinfoproj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96016025097:android:16c0dbc5f0c61ef4",
+        "android_client_info": {
+          "package_name": "com.IndRazsolutions.SPDInfo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96016025097-1d81g63legk863htdu5r3bgsakftnu87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB2toKEKy4TPVSQdtnrlfu6-iPyTeYuvc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

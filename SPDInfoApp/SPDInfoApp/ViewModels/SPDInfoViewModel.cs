@@ -16,11 +16,11 @@ namespace SPDInfoApp.ViewModels
         public DatesInfo datesInfo { get; set; }
         public SPDInfoViewModel(SPDInfo spdinfo = null)
         {
-           // datesInfo = new DatesInfo();
+            // datesInfo = new DatesInfo();
             this._entryData = spdinfo;
             SubmitCommand = new Command(OnSubmitAsync);
         }
-       
+
         public async void OnSubmitAsync()
         {
             if (!await App.Current.MainPage.DisplayAlert("Submit Information", "Are you sure?", "Yes", "No")) return;
@@ -29,7 +29,7 @@ namespace SPDInfoApp.ViewModels
             string[] dataArray = {
                 _entryData.AppearingClass,
                 _entryData.ApplicationID.ToString(),
-                _entryData.StudentName,
+                _entryData.StudentFName,
                 _entryData.RollNo.ToString(),
                 _entryData.EnrolmentNo.ToString(),
                 _entryData.DOB.ToString("yyyy/MM/dd"),
@@ -41,13 +41,12 @@ namespace SPDInfoApp.ViewModels
                 _entryData.HandicappDetail,
                 _entryData.BloodGroup,
                 _entryData.PhoneMobile,
-                _entryData.SSSMId,
                 _entryData.AadharNo,
                 _entryData.EMail,
                 _entryData.AddressPermanent,
                 _entryData.AddressCurrent,
                 _entryData.IsUrban.ToString(),
-                _entryData.NativePlace,
+                _entryData.Domicile,
                 _entryData.RegNativeCertificateNo,
                 _entryData.FHName,
                 _entryData.MotherName,
@@ -61,10 +60,12 @@ namespace SPDInfoApp.ViewModels
                 _entryData.VoterID,
                 _entryData.PANNo,
                 _entryData.DrivingLicNo,
-                _entryData.ScholershipName
+                _entryData.ScholershipName,
+                _entryData.FamilySSSMID
+
             };
 
-            
+
 
             //string[] dataArray = _entryData as string[];
             using (UserDialogs.Instance.Loading("Submiting data.\nPlease Wait.", null, null, true, MaskType.Black))
@@ -75,7 +76,7 @@ namespace SPDInfoApp.ViewModels
 
             if (result == "failure")
             {
-              await   App.Current.MainPage.DisplayAlert("Failed", "!Oops... Somthing went wrong. \n(" + result+")","Ok");
+                await App.Current.MainPage.DisplayAlert("Failed", "!Oops... Somthing went wrong. \n(" + result + ")", "Ok");
                 return;
             }
             else

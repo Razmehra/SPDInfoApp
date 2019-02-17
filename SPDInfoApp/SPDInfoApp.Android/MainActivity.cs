@@ -8,6 +8,8 @@ using Android.Widget;
 using Android.OS;
 using Acr.UserDialogs;
 using Xamarin.Essentials;
+using Plugin.FirebasePushNotification;
+using Android.Content;
 
 namespace SPDInfoApp.Droid
 {
@@ -15,8 +17,8 @@ namespace SPDInfoApp.Droid
     [Activity(Label = "SPDInfo", Icon = "@drawable/SPDLogo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-       // [Android.Runtime.Preserve]
-      //  [Android.Runtime.Preserve(AllMembers = true)]
+        // [Android.Runtime.Preserve]
+        //  [Android.Runtime.Preserve(AllMembers = true)]
         protected override void OnCreate(Bundle savedInstanceState)
         {
 
@@ -28,6 +30,10 @@ namespace SPDInfoApp.Droid
             Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
+
+
+
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -36,5 +42,16 @@ namespace SPDInfoApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            FirebasePushNotificationManager.ProcessIntent(this, intent);
+        }
+
+
+
+
+
     }
 }

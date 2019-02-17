@@ -4,12 +4,20 @@ using System.Text;
 
 namespace SPDInfoApp.Models
 {
-   public class SPDInfo
+    public class SPDInfo
     {
         public double Appid { get; set; }
         public string AppearingClass { get; set; }
+        public bool IsPG { get; set; }
+        public int YearSemester { get; set; }
+        public DateTime AddmissionDate1 { get; set; }
+        public DateTime AddmissionDate2 { get; set; }
+        public DateTime AddmissionDate3 { get; set; }
         public Nullable<double> ApplicationID { get; set; }
-        public string StudentName { get; set; }
+        public string StudentFName { get; set; }
+        public string StudentMName { get; set; }
+        public string StudentLName { get; set; }
+        public string Minority { get; set; }
         public Nullable<double> RollNo { get; set; }
         public Nullable<double> EnrolmentNo { get; set; }
         public DateTime DOB { get; set; }
@@ -24,13 +32,13 @@ namespace SPDInfoApp.Models
         public string HandicappDetail { get; set; }
         public string BloodGroup { get; set; }
         public string PhoneMobile { get; set; }
-        public string SSSMId { get; set; }
         public string AadharNo { get; set; }
         public string EMail { get; set; }
         public string AddressPermanent { get; set; }
         public string AddressCurrent { get; set; }
         public bool IsUrban { get; set; }
-        public string NativePlace { get; set; }
+        public string Domicile { get; set; }
+        public string SSSMID { get; set; }
         public string RegNativeCertificateNo { get; set; }
         public string FHName { get; set; }
         public string MotherName { get; set; }
@@ -45,5 +53,7 @@ namespace SPDInfoApp.Models
         public string PANNo { get; set; }
         public string DrivingLicNo { get; set; }
         public string ScholershipName { get; set; }
+        public string FamilySSSMID { get; set; }
+
     }
 }

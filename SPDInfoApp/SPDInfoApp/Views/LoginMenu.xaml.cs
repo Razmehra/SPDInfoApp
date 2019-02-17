@@ -10,20 +10,20 @@ using Xamarin.Forms.Xaml;
 
 namespace SPDInfoApp.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoginMenu : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LoginMenu : ContentPage
+    {
         LoginMenuViewModel viewModel = new LoginMenuViewModel();
-		public LoginMenu ()
-		{
+        public LoginMenu()
+        {
             this.BindingContext = viewModel;
-            InitializeComponent ();
-            
+            InitializeComponent();
+
         }
 
         private void BtnSkipLogin_Clicked(object sender, EventArgs e)
         {
-           
+
         }
 
         private void RbAdminLogin_StateChanged(object sender, Syncfusion.XForms.Buttons.StateChangedEventArgs e)
