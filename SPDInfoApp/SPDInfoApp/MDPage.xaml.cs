@@ -16,6 +16,7 @@ namespace SPDInfoApp
         public MDPage(string loginmode)
         {
             InitializeComponent();
+            IsPresented = false;
             switch (loginmode)
             {
                 case "Admin":
@@ -30,6 +31,7 @@ namespace SPDInfoApp
                 default:
                     break;
             }
+            
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
         }
 

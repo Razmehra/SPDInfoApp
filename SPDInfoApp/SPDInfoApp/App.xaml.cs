@@ -74,7 +74,7 @@ namespace SPDInfoApp
 
             InitializeComponent();
 
-            MainPage = new LoginMenu();
+            MainPage = new  LoginMenu();//EntryPage();
 
 
 

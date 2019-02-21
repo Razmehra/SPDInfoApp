@@ -80,10 +80,16 @@
       <Version>2.3.5</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>16.4.0.52</Version>
+      <Version>16.4.0.54</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
-      <Version>16.4.0.52</Version>
+      <Version>16.4.0.54</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker">
+      <Version>16.4.0.54</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfRating">
+      <Version>16.4.0.54</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.0.1</Version>
@@ -104,6 +110,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\Me.png" />
     <AndroidResource Include="Resources\drawable\Me.jpg" />
+    <AndroidResource Include="Resources\drawable\Date.png" />
     <GoogleServicesJson Include="google-services.json" />
     <Content Include="Assets\IndRazFont-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

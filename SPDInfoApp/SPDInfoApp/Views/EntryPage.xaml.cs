@@ -2,6 +2,7 @@
 using SPDInfoApp.Models;
 using SPDInfoApp.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,12 +17,16 @@ namespace SPDInfoApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EntryPage : ContentPage
     {
+        public List<StatesAndUTs> _states = new List<StatesAndUTs>();
+
+        private Button _admButton;
         private SPDInfoViewModel _vm;
         public EntryPage()
         {
-            BindingContext = new  DatesInfo();
+           // BindingContext = new  DatesInfo();
             _vm = new SPDInfoViewModel();
             InitializeComponent();
+            PopulateData();
         }
 
         private void BtnApply_Clicked(object sender, EventArgs e)
@@ -269,72 +274,62 @@ namespace SPDInfoApp.Views
         {
             lblDOB.Text = PickerDOB.Date.ToString("dd-MMM-yyyy");
         }
-    }
 
-    public class DatesInfo
-    {
-        public ObservableCollection<object> Dates { get; set; }
-
-        //Day is the collection of day numbers
-        private ObservableCollection<string> Day { get; set; }
-
-        //Month is the collection of Month Names
-        private ObservableCollection<string> Month { get; set; }
-
-        //Year is the collection of Years from 1990 to 2050
-        private ObservableCollection<string> Year { get; set; }
-
-        public ObservableCollection<string> Headers { get; set; }
-
-        private object _selecteddate;
-
-        //update the selected dates
-        public object SelectedDate
+        private void AdmBTN_Clicked(object sender, EventArgs e)
         {
-            get { return _selecteddate; }
-            set { _selecteddate = value; }
+            _admButton = (Button)sender;
+            AdmDt1.IsOpen = !AdmDt1.IsOpen;
+            AdmDt1.AttechedObject = _admButton;
         }
 
-        public DatesInfo()
+        private void AdmDateTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            Dates = new ObservableCollection<object>();
-            Headers = new ObservableCollection<string>();
-
-            //Populate Day, Month and Year values of each collection
-            PopulateDates();
-
-            //first column of SfPicker
-            Dates.Add(Day);
-            //Second column of SfPicker
-            Dates.Add(Month);
-            //Third column of SfPicker
-            Dates.Add(Year);
-
-            //first column header of SfPicker
-            Headers.Add("Day");
-            //second column header of SfPicker
-            Headers.Add("Month");
-            //third column header of SfPicker
-            Headers.Add("Year");
-
-            //  SelectedDate = new ObservableCollection<object>() {DateTime.Now.Day.ToString(), System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month),DateTime.Now.Year.ToString() };
+            Image img = (Image)sender;
+            _admButton = img.Equals(ImgAdmDT1) ? btnAdmDt1 : img.Equals(ImgAdmDT2) ? btnAdmDt2 : img.Equals(ImgAdmDT3) ? btnAdmDt3: btnDOB;
+            AdmDt1.IsOpen = !AdmDt1.IsOpen;
+            AdmDt1.AttechedObject = _admButton;
         }
 
-        private void PopulateDates()
+        private void BtnDOB_Clicked(object sender, EventArgs e)
         {
-            Day = new ObservableCollection<string>();
-            Month = new ObservableCollection<string>();
-            Year = new ObservableCollection<string>();
 
-            for (int i = 1; i <= 31; i++)
-                Day.Add(i.ToString());
+        }
 
-            for (int i = 1; i <= 12; i++)
-                Month.Add(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i));
+        private void PopulateData()
+        {
+            string[] statesName = ("Andhra Pradesh,Arunachal Pradesh,Assam,Bihar,Chhattisgarh,Goa,Gujarat,Haryana,Himachal Pradesh,Jammu and Kashmir,Jharkhand,Karnataka,Kerala,Madhya Pradesh,Maharashtra,Manipur,Meghalaya,Mizoram,Nagaland,Odisha,Punjab,Rajasthan,Sikkim,Tamil Nadu,Telangana,Tripura,Uttar Pradesh,Uttarakhand,West Bengal").Split(',');
+            string[] uts = ("Andaman and Nicobar Islands,Chandigarh,Dadra and Nagar Haveli,Daman and Diu,Lakshadweep,National Capital Territory of Delhi,Puducherry").Split(',');
 
-            for (int i = 1990; i <= 2050; i++)
-                Year.Add(i.ToString());
+            int i=0;
+            foreach (var item in statesName)
+            {
+                _states.Add( new StatesAndUTs { id = i++, Name = item, isUT = false });
+            }
+
+            foreach (var item in uts)
+            {
+                _states.Add(new StatesAndUTs { id = i++, Name = item, isUT = true });
+            }
+
+            cmbDomicile.DataSource = _states;
+            cmbDomicile.DisplayMemberPath = "Name";
+        }
+
+        private void AdmDt1_CancelButtonClicked(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
+        {
+            AdmDt1.IsOpen=false;
+        }
+
+        private void AdmDt1_OkButtonClicked(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
+        {
+            var month = (e.NewValue as IList)[0].ToString();
+            var day = (e.NewValue as IList)[1].ToString();
+            var year = (e.NewValue as IList)[2].ToString();
+
+            var SelectedDate = day + "-" + month + "-" + year;
+            //  if(AdmDt1.IsOpen)
+            if (AdmDt1.IsOpen) _admButton.Text = SelectedDate;
+
         }
     }
-
 }
