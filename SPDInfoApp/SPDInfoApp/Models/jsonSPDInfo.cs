@@ -25,12 +25,35 @@ namespace SPDInfoApp.Models
         [JsonProperty("AppearingClass")]
         public string AppearingClass { get; set; }
 
+        [JsonProperty("IsPG")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public bool IsPg { get; set; }
+
+        [JsonProperty("YearSemester")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public int YearSemester { get; set; }
+
+        [JsonProperty("AddmissionDate1")]
+        public DateTime AddmissionDate1 { get; set; }
+
+        [JsonProperty("AddmissionDate2")]
+        public DateTime AddmissionDate2 { get; set; }
+
+        [JsonProperty("AddmissionDate3")]
+        public DateTime AddmissionDate3 { get; set; }
+
         [JsonProperty("ApplicationID")]
         [JsonConverter(typeof(ParseStringConverter))]
         public long ApplicationId { get; set; }
 
-        [JsonProperty("StudentName")]
-        public string StudentName { get; set; }
+        [JsonProperty("StudentFName")]
+        public string StudentFName { get; set; }
+
+        [JsonProperty("StudentMName")]
+        public string StudentMName { get; set; }
+
+        [JsonProperty("StudentLName")]
+        public string StudentLName { get; set; }
 
         [JsonProperty("RollNo")]
         [JsonConverter(typeof(ParseStringConverter))]
@@ -41,7 +64,7 @@ namespace SPDInfoApp.Models
         public long EnrolmentNo { get; set; }
 
         [JsonProperty("DOB")]
-        public string Dob { get; set; }
+        public DateTime Dob { get; set; }
 
         [JsonProperty("Medium")]
         public string Medium { get; set; }
@@ -55,18 +78,26 @@ namespace SPDInfoApp.Models
         [JsonProperty("RegCastCertificate")]
         public string RegCastCertificate { get; set; }
 
+        [JsonProperty("IsMinority")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public bool IsMinority { get; set; }
+
+        [JsonProperty("Minority")]
+        public string Minority { get; set; }
+
         [JsonProperty("IsHandicapped")]
         [JsonConverter(typeof(ParseStringConverter))]
-        public long IsHandicapped { get; set; }
+        public bool IsHandicapped { get; set; }
 
         [JsonProperty("HandicapType")]
-        public object HandicapType { get; set; }
+        public string HandicapType { get; set; }
 
         [JsonProperty("HandicappedOtherDetail")]
-        public object HandicappedOtherDetail { get; set; }
+        public string HandicappedOtherDetail { get; set; }
 
         [JsonProperty("HandicappPercent")]
-        public object HandicappPercent { get; set; }
+        [JsonConverter(typeof(ParseStringConverter))]
+        public long? HandicappPercent { get; set; }
 
         [JsonProperty("HandicappDetail")]
         public string HandicappDetail { get; set; }
@@ -76,9 +107,6 @@ namespace SPDInfoApp.Models
 
         [JsonProperty("PhoneMobile")]
         public string PhoneMobile { get; set; }
-
-        [JsonProperty("SSSMId")]
-        public string SssmId { get; set; }
 
         [JsonProperty("AadharNo")]
         public string AadharNo { get; set; }
@@ -94,13 +122,16 @@ namespace SPDInfoApp.Models
 
         [JsonProperty("IsUrban")]
         [JsonConverter(typeof(ParseStringConverter))]
-        public long IsUrban { get; set; }
+        public bool IsUrban { get; set; }
 
-        [JsonProperty("NativePlace")]
-        public string NativePlace { get; set; }
+        [JsonProperty("Domicile")]
+        public string Domicile { get; set; }
 
-        [JsonProperty("RegNativeCertificateNo")]
-        public string RegNativeCertificateNo { get; set; }
+        [JsonProperty("SSSMId")]
+        public string SssmId { get; set; }
+
+        [JsonProperty("RegDomicileCertificateNo")]
+        public string RegDomicileCertificateNo { get; set; }
 
         [JsonProperty("FHName")]
         public string FhName { get; set; }
@@ -141,8 +172,44 @@ namespace SPDInfoApp.Models
 
         [JsonProperty("ScholershipName")]
         public string ScholershipName { get; set; }
-    }
 
+        [JsonProperty("FamilySSSMID")]
+        public string FamilySssmid { get; set; }
+
+        [JsonProperty("IsNCC")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public bool IsNcc { get; set; }
+
+        [JsonProperty("CertNCC")]
+        public string CertNcc { get; set; }
+
+        [JsonProperty("CampNCC")]
+        public string CampNcc { get; set; }
+
+        [JsonProperty("NCCCampOtherDetail")]
+        public string NccCampOtherDetail { get; set; }
+
+        [JsonProperty("IsNSS")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public bool IsNss { get; set; }
+
+        [JsonProperty("CertNSS")]
+        public string CertNss { get; set; }
+
+        [JsonProperty("IsScoutGuide")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public bool IsScoutGuide { get; set; }
+
+        [JsonProperty("IsSports")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public bool IsSports { get; set; }
+
+        [JsonProperty("CertSports")]
+        public string CertSports { get; set; }
+
+        [JsonProperty("SportsOtherDetail")]
+        public string SportsOtherDetail { get; set; }
+    }
     public partial class JsonSpdInfo
     {
         public static List<JsonSpdInfo> FromJson(string json) => JsonConvert.DeserializeObject<List<JsonSpdInfo>>(json, SPDInfoApp.Models.Converter.Settings);

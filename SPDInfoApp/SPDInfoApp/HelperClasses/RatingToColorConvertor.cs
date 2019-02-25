@@ -6,43 +6,41 @@ using Xamarin.Forms;
 
 namespace SPDInfoApp.HelperClasses
 {
-    public class RatingToTextConvertor : IValueConverter
+    class RatingToColorConvertor : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             var feedbackValue = (double)value;
             if (feedbackValue == 0) feedbackValue = 0;
-            string feedbackText;
+            Color feedbackColor;
             switch (feedbackValue)
             {
                 case 1:
-                    feedbackText = "Poor";
+                    feedbackColor = Color.Red;
                     break;
                 case 2:
-                    feedbackText = "Tolerable";
+                    feedbackColor = Color.FromHex("#ff8000");
                     break;
 
                 case 3:
-                    feedbackText = "Moderate";
+                    feedbackColor = Color.Purple;
                     break;
                 case 4:
-                    feedbackText = "Good";
+                    feedbackColor = Color.FromHex("#325b32");
                     break;
                 case 5:
-                    feedbackText = "Excellent";
+                    feedbackColor = Color.ForestGreen;
                     break;
                 default:
-                    feedbackText = "";
+                    feedbackColor = Color.Red;
                     break;
             }
-            return feedbackText;
+            return feedbackColor;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //throw new NotImplementedException();
-            return "";
+            return Color.Red;
         }
     }
 }

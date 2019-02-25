@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using SPDInfoApp.Models;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -24,48 +29,78 @@ namespace SPDInfoApp.WebServices
             return await Result("POST", "login.php", jsonRequest, Params, dic4);
         }
 
-        public async Task<string> Submit(string[] Params)
+        public async Task<string> Submit(SPDInfo Params)
         {
-            var dic4 = new Dictionary<string, string>
-                {
-                   {"AppearingClass", Params[0] },
-                   {"ApplicationID", Params[1] },
-                   {"StudentName", Params[2] },
-                   {"RollNo", Params[3] },
-                   {"EnrolmentNo", Params[4] },
-                   {"DOB", Params[5] },
-                   {"Medium", Params[6] },
-                   {"Gender", Params[7] },
-                   {"Category", Params[8] },
-                   {"RegCastCertificate", Params[9] },
-                   {"IsHandicapped", Params[10] },
-                   {"HandicappDetail", Params[11] },
-                   {"BloodGroup", Params[12] },
-                   {"PhoneMobile", Params[13] },
-                   {"SSSMId", Params[14] },
-                   {"AadharNo", Params[15] },
-                   {"EMail", Params[16] },
-                   {"AddressPermanent", Params[17] },
-                   {"AddressCurrent", Params[18] },
-                   {"IsUrban", Params[19] },
-                   {"NativePlace", Params[20] },
-                   {"RegNativeCertificateNo", Params[21] },
-                   {"FHName", Params[22] },
-                   {"MotherName", Params[23] },
-                   {"PhoneMobile_Gaurdian", Params[24] },
-                   {"IncomeFather", Params[25] },
-                   {"OccupationFather", Params[26] },
-                   {"BankAcNo", Params[27] },
-                   {"BankIFSC", Params[28] },
-                   {"BankName", Params[29] },
-                   {"BankBranch", Params[30] },
-                   {"VoterID", Params[31] },
-                   {"PANNo", Params[32] },
-                   {"DrivingLicNo", Params[33] },
-                   {"ScholershipName", Params[34] }
-                };
 
-            return await Result("POST", "insertSPDInfoRecords.php", null, null, dic4);
+            PropertyInfo[] infos = Params.GetType().GetProperties();
+
+            Dictionary<string, string> dix = new Dictionary<string, string>();
+
+            foreach (PropertyInfo info in infos)
+            {
+                var xx = info.GetValue(Params, null);
+                if (info.Name != "Appid")
+                {
+                    
+                    bool isDateType = info.PropertyType.ToString().Equals("System.DateTime");
+                    if (isDateType)
+                    {
+                        string dtVal = ((DateTime) xx).ToString("yyyy/MM/dd");
+                        
+                        dix.Add(info.Name, xx == null ? null : dtVal);
+                    }
+                    else
+                    {
+                        dix.Add(info.Name, xx?.ToString());
+                    }
+                    
+                }
+            }
+            //  sringDictionary)Params;
+           // var dic = new Dictionary<string, string>();
+            //var  listOfFieldNames = typeof(SPDInfo).GetProperties().Select(f => f.Name).ToList();
+
+            //var dic4 = dix;// new Dictionary<string, string>();
+            //var dic4 = new Dictionary<string, string>
+            //    {
+            //       {"AppearingClass", Params[0].ToString() },
+            //       {"ApplicationID", Params[1] },
+            //       {"StudentName", Params[2] },
+            //       {"RollNo", Params[3] },
+            //       {"EnrolmentNo", Params[4] },
+            //       {"DOB", Params[5] },
+            //       {"Medium", Params[6] },
+            //       {"Gender", Params[7] },
+            //       {"Category", Params[8] },
+            //       {"RegCastCertificate", Params[9] },
+            //       {"IsHandicapped", Params[10] },
+            //       {"HandicappDetail", Params[11] },
+            //       {"BloodGroup", Params[12] },
+            //       {"PhoneMobile", Params[13] },
+            //       {"SSSMId", Params[14] },
+            //       {"AadharNo", Params[15] },
+            //       {"EMail", Params[16] },
+            //       {"AddressPermanent", Params[17] },
+            //       {"AddressCurrent", Params[18] },
+            //       {"IsUrban", Params[19] },
+            //       {"NativePlace", Params[20] },
+            //       {"RegNativeCertificateNo", Params[21] },
+            //       {"FHName", Params[22] },
+            //       {"MotherName", Params[23] },
+            //       {"PhoneMobile_Gaurdian", Params[24] },
+            //       {"IncomeFather", Params[25] },
+            //       {"OccupationFather", Params[26] },
+            //       {"BankAcNo", Params[27] },
+            //       {"BankIFSC", Params[28] },
+            //       {"BankName", Params[29] },
+            //       {"BankBranch", Params[30] },
+            //       {"VoterID", Params[31] },
+            //       {"PANNo", Params[32] },
+            //       {"DrivingLicNo", Params[33] },
+            //       {"ScholershipName", Params[34] }
+            //    };
+
+            return await Result("POST", "insertSPDInfoRecords.php", null, null,dix);
         }
 
         public async Task<string> DbUpdate(string[] Params)

@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:cnvrts="clr-namespace:SPDInfoApp.HelperClasses"
+             x:Class="SPDInfoApp.Views.StudentFeedback"
+             Title="Feedback"
+             BackgroundColor="GhostWhite" NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackGroundColorList">White</Color>
+            <Color x:Key="BackGroundColorLeaveRemainRoundBox">#39557C</Color>
+            <Color x:Key="BorderColorLeaveRemainRoundBox">Black</Color>
+            <Color x:Key="BaseBackGroundColorBlue">#39557C</Color>
+            <Color x:Key="BaseBackGroundColorRed">Red</Color>
+            <Color x:Key="BaseForeGroundColor">White</Color>
+            <Color x:Key="DefColorBlack">Black</Color>
+            <Color x:Key="DefColorWhite">White</Color>
+            <Color x:Key="DefColorFloralWhite">FloralWhite</Color>
+            <Color x:Key="DefColorRed">Red</Color>
+            <Color x:Key="DefColorBlue">#39557C</Color>
+            <Color x:Key="LabelDefColorBackground">White</Color>
+            <Color x:Key="LabelDefColorForeground">Black</Color>
+
+            <Color x:Key="EntryDefColorBackground">#daeed8</Color>
+            <Color x:Key="EntryDefColorForeground">Black</Color>
+
+            <Style x:Key="Entryfont" TargetType="Entry">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <Style x:Key="Lablefont" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <cnvrts:DateConvertor x:Key="dateConvert"></cnvrts:DateConvertor>
+            <cnvrts:RatingToTextConvertor x:Key="ratingToTextConvertor"></cnvrts:RatingToTextConvertor>
+            <cnvrts:RatingToColorConvertor x:Key="ratingToColorConvertor"></cnvrts:RatingToColorConvertor>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout WidthRequest="100"  HeightRequest="100" HorizontalOptions="Center" VerticalOptions="StartAndExpand">
+                        <Image Source="Rating.png"  Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        </Image>
+                    </StackLayout>
+
+                    <Label Text="'We all need people who will give us feedback. That's how we improve.'" FontSize="15" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" TextColor="Black"/>
+                    <BoxView BackgroundColor="SkyBlue" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                    <ListView x:Name="lstFeedback" HasUnevenRows="True" SelectionMode="None" SeparatorVisibility="None" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Spacing="5">
+                                        <Label Text="{Binding FeedbackQues,Mode=TwoWay}"  TextColor="#086487"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                                            <rating:SfRating ItemSize="30" HorizontalOptions="StartAndExpand" Value="{Binding FeedbackValue,Mode=TwoWay}" >
+                                                <rating:SfRating.RatingSettings>
+                                                    <rating:SfRatingSettings RatedStroke="Black" RatedStrokeWidth="2"/>
+                                                </rating:SfRating.RatingSettings>
+                                            </rating:SfRating>
+                                            <Label Text="{Binding FeedbackValue ,Mode=TwoWay,Converter={StaticResource ratingToTextConvertor}}" 
+                                           WidthRequest="70" VerticalTextAlignment="Center"
+                                           TextColor="{Binding FeedbackValue,Mode=TwoWay,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!--<StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Teaching and Learning:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP1"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP1}" Text="{Binding Source={x:Reference ratingP1}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}" 
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Interaction with faculty and teacher:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP2"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP2}" Text="{Binding Source={x:Reference ratingP2}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}" 
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Interaction with administration and office staff:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP3"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP3}" Text="{Binding Source={x:Reference ratingP3}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}" 
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Examination and evaluation:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP4"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP4}" Text="{Binding Source={x:Reference ratingP4}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"  
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Infrastructre and facilities:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP5"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP5}" Text="{Binding Source={x:Reference ratingP5}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}" 
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Library facilities:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP6"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP6}" Text="{Binding Source={x:Reference ratingP6}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"  
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Library facilities:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP7"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP7}" Text="{Binding Source={x:Reference ratingP7}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Sports facilities:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP8"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP8}" Text="{Binding Source={x:Reference ratingP8}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"   
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Personality development and Placement  facilities:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP9"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP9}" Text="{Binding Source={x:Reference ratingP9}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"   
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Internet and Computer facilities:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP10"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP10}" Text="{Binding Source={x:Reference ratingP10}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"   
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Extra-curricular activities:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP11"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP11}" Text="{Binding Source={x:Reference ratingP11}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"  
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Overall rating:"  TextColor="{StaticResource LabelDefColorForeground}"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                            <rating:SfRating x:Name="ratingP12"   ItemSize="30" HorizontalOptions="StartAndExpand"  />
+                            <Label BindingContext="{x:Reference ratingP12}" Text="{Binding Source={x:Reference ratingP12}, Path=Value,Converter={StaticResource ratingToTextConvertor},ConverterParameter=2}"  
+                                   WidthRequest="70" VerticalTextAlignment="Center"
+                                   TextColor="{Binding Path=Value,Converter={StaticResource ratingToColorConvertor}}" FontSize="10" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>-->
+                </StackLayout>
+            </ScrollView>
+            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+            <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0">
+                <Button x:Name="BtnApply"  Text="Submit" IsEnabled="True"   Clicked="BtnApply_Clicked"  HorizontalOptions="FillAndExpand"
+                        TextColor="White" BackgroundColor="DeepSkyBlue"   FontAttributes="None" VerticalOptions="End" Margin="0"/>
+            </StackLayout>
+            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

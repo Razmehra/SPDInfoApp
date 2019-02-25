@@ -111,6 +111,7 @@
     <AndroidResource Include="Resources\Me.png" />
     <AndroidResource Include="Resources\drawable\Me.jpg" />
     <AndroidResource Include="Resources\drawable\Date.png" />
+    <AndroidResource Include="Resources\drawable\Rating.png" />
     <GoogleServicesJson Include="google-services.json" />
     <Content Include="Assets\IndRazFont-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

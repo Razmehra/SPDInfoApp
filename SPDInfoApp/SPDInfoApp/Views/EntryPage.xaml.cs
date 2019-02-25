@@ -23,7 +23,7 @@ namespace SPDInfoApp.Views
         private SPDInfoViewModel _vm;
         public EntryPage()
         {
-           // BindingContext = new  DatesInfo();
+            // BindingContext = new  DatesInfo();
             _vm = new SPDInfoViewModel();
             InitializeComponent();
             PopulateData();
@@ -41,22 +41,35 @@ namespace SPDInfoApp.Views
         private SPDInfo CollectData()
         {
 
-            if (!ValidateEntry()) return null;
+             if (!ValidateEntry()) return null;
 
             try
             {
                 SPDInfo sPDInfo = new SPDInfo();
-                sPDInfo.AppearingClass = txtAppearingClass.Text;
+                sPDInfo.AppearingClass = cmbClass.SelectedItem.ToString();
+                sPDInfo.IsPG = cmbClass.Text.Substring(0, 1) == "B";//.ToString("yyyy/MM/dd")
+                if (!string.IsNullOrWhiteSpace(btnAdmDt1.Text)) {
+                  //  dtstring1 = btnAdmDt1.Text;
+                    //DateTime dt1 = DateTime.Parse(btnAdmDt1.Text).Date;
+                    //dt1 = dt1.ToString("yyyy/MM/dd");
+                    sPDInfo.AddmissionDate1 = DateTime.Parse(btnAdmDt1.Text).Date;
+                }
+                if (!string.IsNullOrWhiteSpace(btnAdmDt2.Text)) { sPDInfo.AddmissionDate2 = DateTime.Parse(btnAdmDt2.Text).Date; }
+                if (!string.IsNullOrWhiteSpace(btnAdmDt3.Text)) { sPDInfo.AddmissionDate3 = DateTime.Parse(btnAdmDt3.Text).Date; }
                 sPDInfo.ApplicationID = int.Parse(txtApplicationID.Text);
-                sPDInfo.StudentFName = txtStudentName.Text.Trim();
-                sPDInfo.RollNo = txtRollNo.Text == null ? 0 : (double.Parse(txtRollNo.Text));
-                sPDInfo.EnrolmentNo = txtEnrolmentNo.Text == null ? 0 : double.Parse(txtEnrolmentNo.Text);
-                sPDInfo.DOB = DateTime.Parse(lblDOB.Text.ToString());
+                sPDInfo.StudentFName = txtStudentFName.Text;
+                sPDInfo.StudentMName = txtStudentMName.Text;
+                sPDInfo.StudentLName = txtStudentLName.Text;
+                sPDInfo.RollNo = txtRollNo.Text;
+                sPDInfo.EnrolmentNo = txtEnrolmentNo.Text;
+                sPDInfo.DOB = DateTime.Parse(btnDOB.Text);
                 sPDInfo.Medium = ((bool)radioButtonHindi.IsChecked ? "Hindi" : (bool)radioButtonEnglish.IsChecked ? "English" : "Other");
                 sPDInfo.Gender = ((bool)radioButtonTrans.IsChecked ? "Trans" : (bool)radioButtonFemale.IsChecked ? "Female" : "Male");
                 sPDInfo.Category = ((bool)radioButtonSC.IsChecked ? "SC" : (bool)radioButtonST.IsChecked ? "ST" : (bool)radioButtonOBC.IsChecked ? "OBC" : "General");
                 sPDInfo.RegCastCertificate = txtRegCastCertificate.Text;
-                sPDInfo.IsHandicapped = (bool)radioButtonHCYes.IsChecked ? true : false;
+                sPDInfo.IsMinority = (bool)radioButtonMinorYes.IsChecked;
+                sPDInfo.Minority = cmbMinority.Text;
+                sPDInfo.IsHandicapped = (bool)radioButtonHCYes.IsChecked;
                 sPDInfo.HandicapType = cmbHCType.Text;
                 sPDInfo.HandicappPercent = txtHCPercent.Text == null ? "0" : txtHCPercent.Text;
                 sPDInfo.HandicappDetail = txtHCOtherTypeDetail.Text;
@@ -66,9 +79,10 @@ namespace SPDInfoApp.Views
                 sPDInfo.EMail = txtEMail.Text;
                 sPDInfo.AddressPermanent = txtAddressPermanent.Text;
                 sPDInfo.AddressCurrent = txtAddressCurrent.Text;
-                sPDInfo.IsUrban = (bool)radioButtonUrban.IsChecked ? true : false;
-                sPDInfo.Domicile = txtNativePlace.Text;
-                sPDInfo.RegNativeCertificateNo = txtRegNativeCertificateNo.Text;
+                sPDInfo.IsUrban = (bool)radioButtonUrban.IsChecked;
+                sPDInfo.Domicile = cmbDomicile.Text;
+                sPDInfo.RegDomicileCertificateNo = txtRegNativeCertificateNo.Text;
+                sPDInfo.SSSMID = txtSSSMId.Text;
                 sPDInfo.FHName = txtFHName.Text;
                 sPDInfo.MotherName = txtMotherName.Text;
                 sPDInfo.PhoneMobile_Gaurdian = txtPhoneMobile_Gaurdian.Text;
@@ -82,7 +96,19 @@ namespace SPDInfoApp.Views
                 sPDInfo.PANNo = txtPAN.Text;
                 sPDInfo.DrivingLicNo = txtDrivingLicNo.Text;
                 sPDInfo.ScholershipName = txtScholershipName.Text;
-                sPDInfo.FamilySSSMID = txtSSSMId.Text;
+                sPDInfo.FamilySSSMID = txtFamilySSSMId.Text;
+                sPDInfo.IsNCC = swtNCC.IsToggled;
+                sPDInfo.CertNCC = ((bool)chkNCCCA.IsChecked ? "A" : "") + ((bool)chkNCCCB.IsChecked ? "B" : "") + ((bool)chkNCCCC.IsChecked ? "C" : "");
+                sPDInfo.CampNCC = chkCamp_CATC.IsChecked.ToString() + "," + chkCamp_NIC.IsChecked.ToString() + "," + chkCamp_TrackingCamp.IsChecked.ToString() + "," + chkCamp_AACamp.IsChecked.ToString() + "," + chkCamp_Other.IsChecked.ToString();
+                sPDInfo.NCCCampOtherDetail = txtNCCCampOtherDetail.Text;
+                sPDInfo.IsNSS = swtNSS.IsToggled;
+                sPDInfo.CertNSS = ((bool)chkNSSA.IsChecked ? "A" : "") + ((bool)chkNSSB.IsChecked ? "B" : "") + ((bool)chkNSSC.IsChecked ? "C" : "");
+                sPDInfo.IsScoutGuide = (bool)radioButtonScoutGuideYes.IsChecked ? true : false;
+                sPDInfo.IsSports = swtSports.IsToggled;
+                sPDInfo.CertSports = chkSportsCDiv.IsChecked.ToString() + "," + chkSportsCInterUni.IsChecked.ToString()
+                    + "," + chkSportsCState.IsChecked.ToString() + "," + chkSportsCNational.IsChecked.ToString()
+                    + "," + chkSportsCInterNational.IsChecked.ToString() + "," + chkSportsCOther.IsChecked.ToString() + chkSportsCNone.IsChecked.ToString();
+                sPDInfo.SportsOtherDetail = txtSportsOtherDetail.Text;
 
                 return sPDInfo;
 
@@ -117,54 +143,54 @@ namespace SPDInfoApp.Views
 
             }
             // result = int.TryParse(txtApplicationID.Text, out int resultvalue);
-            if (txtStudentName.Text != null)
+            if (txtStudentFName.Text != null)
             {
-                if (txtStudentName.Text.Trim() == "" || string.IsNullOrEmpty(txtStudentName.Text))
+                if (txtStudentFName.Text.Trim() == "" || string.IsNullOrEmpty(txtStudentFName.Text))
                 {
                     ShowToast("Invalid Student Name..");
-                    txtStudentName.Focus();
+                    txtStudentFName.Focus();
                     return false;
                 }
             }
             else
             {
                 ShowToast("Invalid Student Name..");
-                txtStudentName.Focus();
+                txtStudentFName.Focus();
                 return false;
             }
 
-            if (lblDOB.Text != null)
+            if (btnDOB.Text != null)
             {
-                result = DateTime.TryParse(lblDOB.Text.ToString(), out DateTime dt);
-                if (lblDOB.Text.ToString() == "" || string.IsNullOrEmpty(lblDOB.Text.ToString()) || !result)
+                result = DateTime.TryParse(btnDOB.Text.ToString(), out DateTime dt);
+                if (btnDOB.Text.ToString() == "" || string.IsNullOrEmpty(btnDOB.Text.ToString()) || !result)
                 {
                     ShowToast("Invalid Date of Birth");
-                    PickerDOB.Focus();
+                    btnDOB.Focus();
                     return false;
                 }
             }
             else
             {
                 ShowToast("Invalid Date of Birth");
-                PickerDOB.Focus();
+                btnDOB.Focus();
                 return false;
             }
-            if (txtPhoneMobile.Text != null)
-            {
-                if (txtPhoneMobile.Text.Trim() == "" || string.IsNullOrEmpty(txtPhoneMobile.Text))
-                {
-                    txtPhoneMobile.Focus();
-                    Task.Delay(200);
-                    ShowToast("Invalid Mobile/Phone number..");
-                    return false;
-                }
-            }
-            else
-            {
-                ShowToast("Invalid Mobile/Phone number..");
-                txtPhoneMobile.Focus();
-                return false;
-            }
+            //if (txtPhoneMobile.Text != null)
+            //{
+            //    if (txtPhoneMobile.Text.Trim() == "" || string.IsNullOrEmpty(txtPhoneMobile.Text))
+            //    {
+            //        txtPhoneMobile.Focus();
+            //        Task.Delay(200);
+            //        ShowToast("Invalid Mobile/Phone number..");
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    ShowToast("Invalid Mobile/Phone number..");
+            //    txtPhoneMobile.Focus();
+            //    return false;
+            //}
 
             if (txtEMail.Text != null)
             {
@@ -285,7 +311,7 @@ namespace SPDInfoApp.Views
         private void AdmDateTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             Image img = (Image)sender;
-            _admButton = img.Equals(ImgAdmDT1) ? btnAdmDt1 : img.Equals(ImgAdmDT2) ? btnAdmDt2 : img.Equals(ImgAdmDT3) ? btnAdmDt3: btnDOB;
+            _admButton = img.Equals(ImgAdmDT1) ? btnAdmDt1 : img.Equals(ImgAdmDT2) ? btnAdmDt2 : img.Equals(ImgAdmDT3) ? btnAdmDt3 : btnDOB;
             AdmDt1.IsOpen = !AdmDt1.IsOpen;
             AdmDt1.AttechedObject = _admButton;
         }
@@ -300,10 +326,10 @@ namespace SPDInfoApp.Views
             string[] statesName = ("Andhra Pradesh,Arunachal Pradesh,Assam,Bihar,Chhattisgarh,Goa,Gujarat,Haryana,Himachal Pradesh,Jammu and Kashmir,Jharkhand,Karnataka,Kerala,Madhya Pradesh,Maharashtra,Manipur,Meghalaya,Mizoram,Nagaland,Odisha,Punjab,Rajasthan,Sikkim,Tamil Nadu,Telangana,Tripura,Uttar Pradesh,Uttarakhand,West Bengal").Split(',');
             string[] uts = ("Andaman and Nicobar Islands,Chandigarh,Dadra and Nagar Haveli,Daman and Diu,Lakshadweep,National Capital Territory of Delhi,Puducherry").Split(',');
 
-            int i=0;
+            int i = 0;
             foreach (var item in statesName)
             {
-                _states.Add( new StatesAndUTs { id = i++, Name = item, isUT = false });
+                _states.Add(new StatesAndUTs { id = i++, Name = item, isUT = false });
             }
 
             foreach (var item in uts)
@@ -317,7 +343,7 @@ namespace SPDInfoApp.Views
 
         private void AdmDt1_CancelButtonClicked(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
         {
-            AdmDt1.IsOpen=false;
+            AdmDt1.IsOpen = false;
         }
 
         private void AdmDt1_OkButtonClicked(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
@@ -330,6 +356,11 @@ namespace SPDInfoApp.Views
             //  if(AdmDt1.IsOpen)
             if (AdmDt1.IsOpen) _admButton.Text = SelectedDate;
 
+        }
+
+        private void ChkSameAsPAddress_StateChanged(object sender, Syncfusion.XForms.Buttons.StateChangedEventArgs e)
+        {
+            if (e.IsChecked == true) txtAddressCurrent.Text = txtAddressPermanent.Text;
         }
     }
 }

@@ -17,14 +17,15 @@ namespace SPDInfoApp.Models
         public string StudentFName { get; set; }
         public string StudentMName { get; set; }
         public string StudentLName { get; set; }
-        public string Minority { get; set; }
-        public Nullable<double> RollNo { get; set; }
-        public Nullable<double> EnrolmentNo { get; set; }
+        public string RollNo { get; set; }
+        public string EnrolmentNo { get; set; }
         public DateTime DOB { get; set; }
         public string Medium { get; set; }
         public string Gender { get; set; }
         public string Category { get; set; }
         public string RegCastCertificate { get; set; }
+        public bool IsMinority { get; set; }
+        public string Minority { get; set; }
         public bool IsHandicapped { get; set; }
         public string HandicapType { get; set; }
         public string HandicappedOtherDetail { get; set; }
@@ -39,7 +40,7 @@ namespace SPDInfoApp.Models
         public bool IsUrban { get; set; }
         public string Domicile { get; set; }
         public string SSSMID { get; set; }
-        public string RegNativeCertificateNo { get; set; }
+        public string RegDomicileCertificateNo { get; set; }
         public string FHName { get; set; }
         public string MotherName { get; set; }
         public string PhoneMobile_Gaurdian { get; set; }
@@ -54,6 +55,15 @@ namespace SPDInfoApp.Models
         public string DrivingLicNo { get; set; }
         public string ScholershipName { get; set; }
         public string FamilySSSMID { get; set; }
-
+        public bool IsNCC { get; set; }
+        public string CertNCC { get; set; }
+        public string CampNCC { get; set; }
+        public string NCCCampOtherDetail { get; set; } 
+        public bool IsNSS { get; set; }
+        public string CertNSS { get; set; }
+        public bool IsScoutGuide { get; set; }
+        public bool IsSports { get; set; }
+        public string CertSports { get; set; }
+        public string SportsOtherDetail { get; set; }
     }
 }

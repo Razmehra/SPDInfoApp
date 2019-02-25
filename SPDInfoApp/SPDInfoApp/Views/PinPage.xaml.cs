@@ -251,7 +251,7 @@ namespace SPDInfoApp.Views
                         //  {
 
                         //** Write code for validate user before home screen
-                        Application.Current.MainPage = new NavigationPage(new MDPage(loginMode));
+                        Application.Current.MainPage = new MDPage(loginMode);
                         // Application.Current.MainPage = new MDPage();
                         // }
                         // else

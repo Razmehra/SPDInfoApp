@@ -26,62 +26,21 @@ namespace SPDInfoApp.ViewModels
             if (!await App.Current.MainPage.DisplayAlert("Submit Information", "Are you sure?", "Yes", "No")) return;
             PHPServices MyService = new PHPServices();
             string result = "";
-            string[] dataArray = {
-                _entryData.AppearingClass,
-                _entryData.ApplicationID.ToString(),
-                _entryData.StudentFName,
-                _entryData.RollNo.ToString(),
-                _entryData.EnrolmentNo.ToString(),
-                _entryData.DOB.ToString("yyyy/MM/dd"),
-                _entryData.Medium,
-                _entryData.Gender,
-                _entryData.Category,
-                _entryData.RegCastCertificate,
-                _entryData.IsHandicapped.ToString(),
-                _entryData.HandicappDetail,
-                _entryData.BloodGroup,
-                _entryData.PhoneMobile,
-                _entryData.AadharNo,
-                _entryData.EMail,
-                _entryData.AddressPermanent,
-                _entryData.AddressCurrent,
-                _entryData.IsUrban.ToString(),
-                _entryData.Domicile,
-                _entryData.RegNativeCertificateNo,
-                _entryData.FHName,
-                _entryData.MotherName,
-                _entryData.PhoneMobile_Gaurdian,
-                _entryData.IncomeFather.ToString(),
-                _entryData.OccupationFather,
-                _entryData.BankAcNo,
-                _entryData.BankIFSC,
-                _entryData.BankName,
-                _entryData.BankBranch,
-                _entryData.VoterID,
-                _entryData.PANNo,
-                _entryData.DrivingLicNo,
-                _entryData.ScholershipName,
-                _entryData.FamilySSSMID
-
-            };
-
-
-
-            //string[] dataArray = _entryData as string[];
             using (UserDialogs.Instance.Loading("Submiting data.\nPlease Wait.", null, null, true, MaskType.Black))
             {
-                result = await MyService.Submit(dataArray);
+                result = await MyService.Submit(_entryData);
             }
             //User data = User.FromJson(result);
 
-            if (result == "failure")
+            if (result == "Success")
             {
-                await App.Current.MainPage.DisplayAlert("Failed", "!Oops... Somthing went wrong. \n(" + result + ")", "Ok");
-                return;
+                await App.Current.MainPage.DisplayAlert("Sucess", "Information Submitted Successfully..", "Ok");
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Sucess", "Information Submitted Successfully..", "Ok");
+                await App.Current.MainPage.DisplayAlert("Failed", "!Oops... Somthing went wrong. \n(" + result + ")", "Ok");
+                return;
+
             }
         }
     }

@@ -23,7 +23,7 @@ namespace SPDInfoApp
                     Detail = new NavigationPage(new HomePageAdmin()); 
                     break;
                 case "Student":
-                    Detail = new NavigationPage(new EntryPage());
+                    Detail = new NavigationPage(new TabPageStudentInfo());//(new EntryPage())
                     break;
                 case "Alumni":
                     Detail = new NavigationPage(new HomePageAlumni());
