@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SPDInfoApp.Views.PhotoActionPage" NavigationPage.HasNavigationBar="True" NavigationPage.HasBackButton="True" NavigationPage.BackButtonTitle="Back"
+             BackgroundColor="GhostWhite">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Spacing="10" Padding="10">
+                    <Button x:Name="takePhoto" Text="Take Photo"/>
+                    <Button x:Name="pickPhoto" Text="Pick Photo"/>
+                    <!--<Button x:Name="takeVideo" Text="Take Video"/>
+                <Button x:Name="pickVideo" Text="Pick Video"/>-->
+                    <Image x:Name="image"/>
+                </StackLayout>
+            </ScrollView>
+            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+            <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0">
+                <Button x:Name="BtnOk"  Text="OK" IsEnabled="False"   Clicked="BtnOk_Clicked"  HorizontalOptions="FillAndExpand" TextColor="White" BackgroundColor="OrangeRed"   FontAttributes="None" VerticalOptions="End" Margin="0"/>
+                <Button x:Name="BtnCancel"  Text="Cancel" IsEnabled="True"   Clicked="BtnCancel_Clicked"  HorizontalOptions="FillAndExpand" TextColor="White" BackgroundColor="OrangeRed"   FontAttributes="None" VerticalOptions="End" Margin="0"/>
+            </StackLayout>
+            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -10,6 +10,7 @@ using Acr.UserDialogs;
 using Xamarin.Essentials;
 using Plugin.FirebasePushNotification;
 using Android.Content;
+using Plugin.CurrentActivity;
 
 namespace SPDInfoApp.Droid
 {
@@ -27,13 +28,11 @@ namespace SPDInfoApp.Droid
 
             UserDialogs.Init(this);
             base.OnCreate(savedInstanceState);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             FirebasePushNotificationManager.ProcessIntent(this, Intent);
-
-
-
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

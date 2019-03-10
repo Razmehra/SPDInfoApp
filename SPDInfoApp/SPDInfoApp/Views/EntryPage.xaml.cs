@@ -25,8 +25,16 @@ namespace SPDInfoApp.Views
         {
             // BindingContext = new  DatesInfo();
             _vm = new SPDInfoViewModel();
+            this.BindingContext = _vm;
             InitializeComponent();
             PopulateData();
+
+        }
+
+        private void PhotoTaken(NavigationMessage obj)
+        {
+            String photoSource = (string)obj.Options;
+            imgPhoto.Source = photoSource;
         }
 
         private void BtnApply_Clicked(object sender, EventArgs e)
@@ -361,6 +369,12 @@ namespace SPDInfoApp.Views
         private void ChkSameAsPAddress_StateChanged(object sender, Syncfusion.XForms.Buttons.StateChangedEventArgs e)
         {
             if (e.IsChecked == true) txtAddressCurrent.Text = txtAddressPermanent.Text;
+        }
+
+        private async void PhotoButton_Clicked(object sender, EventArgs e)
+        {
+            await  Navigation.PushModalAsync(new PhotoActionPage());
+            //_vm.TackPhotoCommand.Execute(null);
         }
     }
 }

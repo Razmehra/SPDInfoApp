@@ -51,7 +51,6 @@ xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRat
             </StackLayout>
             <ScrollView>
                 <StackLayout>
-
                     <StackLayout Orientation="Horizontal">
                         <StackLayout Orientation="Vertical" Padding="0"  Margin="0" BackgroundColor="White" HorizontalOptions="FillAndExpand">
                             <Label Text="Appearing Class(Bsc. BA etc):" TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}"  HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
@@ -95,8 +94,25 @@ xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRat
                             </StackLayout>
                         </StackLayout>
                         <StackLayout WidthRequest="100" BackgroundColor="Black" HeightRequest="100" HorizontalOptions="End" VerticalOptions="StartAndExpand">
-                            <Image Source="Me.jpg" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            </Image>
+                            <AbsoluteLayout x:Name="PhotoLayout"  Padding="2" HorizontalOptions="Start" >
+                                <Image x:Name="imgPhoto" BackgroundColor="Transparent" Source="{Binding Photo}" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" >
+                                </Image>
+                                <StackLayout BackgroundColor="Transparent"  Orientation="Horizontal"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     AbsoluteLayout.LayoutBounds="0,1,-1,-1" Spacing="0">
+                                    <!--<Button x:Name="PhotoButton" Text="E" BorderColor="#EC9B26" CornerRadius="12"  BorderWidth="2"
+                                            FontSize="18" FontAttributes="Bold" BackgroundColor="#99000000" TextColor ="White"                                     
+                                            HeightRequest="25" WidthRequest="25"
+                                            VerticalOptions="End"
+                                            Clicked="PhotoButton_Clicked"
+                                            Margin="0,0,5,0" />-->
+                                    <ImageButton Aspect="AspectFit" Source="cam2.png" HeightRequest="25" WidthRequest="25"
+                                            Margin="0,0,5,0"
+                                            VerticalOptions="End"
+                                            HorizontalOptions="Start"
+                                            Clicked="PhotoButton_Clicked"/>
+                                </StackLayout>
+                            </AbsoluteLayout>
                         </StackLayout>
                     </StackLayout>
                     <StackLayout Orientation="Vertical">
