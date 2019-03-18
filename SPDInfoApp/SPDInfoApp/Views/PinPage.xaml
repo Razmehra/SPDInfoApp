@@ -25,9 +25,9 @@
 
                             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" >
                                 <Image Source="default_user_icon.png" Aspect="AspectFit" HeightRequest="75" WidthRequest="75" HorizontalOptions="CenterAndExpand" >
-                                    <!--<Image.GestureRecognizers>
-                                        --><!--<TapGestureRecognizer Tapped="BtnReset_ClickedAsync"/>--><!--
-                                    </Image.GestureRecognizers>-->
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="BtnReset_ClickedAsync"/>
+                                    </Image.GestureRecognizers>
                                 </Image>
                                 <Label Text="Reset User" FontSize="8" TextColor="DarkBlue" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
                             </StackLayout>

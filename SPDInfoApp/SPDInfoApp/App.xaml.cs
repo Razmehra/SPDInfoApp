@@ -27,6 +27,11 @@ namespace SPDInfoApp
                 Xamarin.Forms.Application.Current.Properties["BaseUrl"] = IsLive ? UrlLive : UrlDemo;
             }
 
+            if (!Application.Current.Properties.ContainsKey("LoginInfo"))
+            {
+                Application.Current.Properties.Add("LoginInfo",null);
+            }
+
 
             if (!Application.Current.Properties.ContainsKey("AdminUserName"))
             {
@@ -70,6 +75,22 @@ namespace SPDInfoApp
             {
                 Application.Current.Properties.Add("StudentMobile", "");
             }
+
+            if (!Application.Current.Properties.ContainsKey("StudentInfo"))
+            {
+                Application.Current.Properties.Add("StudentInfo", "");
+            }
+
+            if (!Application.Current.Properties.ContainsKey("AdminInfo"))
+            {
+                Application.Current.Properties.Add("AdminInfo", "");
+            }
+
+            if (!Application.Current.Properties.ContainsKey("AlumniInfo"))
+            {
+                Application.Current.Properties.Add("AlumniInfo", "");
+            }
+
 
 
             InitializeComponent();

@@ -7,6 +7,7 @@ using Acr.UserDialogs;
 using SPDInfoApp.WebServices;
 using System.Threading.Tasks;
 using SPDInfoApp.Views;
+using SPDInfoApp.Models;
 
 namespace SPDInfoApp.ViewModels
 {
@@ -85,6 +86,9 @@ namespace SPDInfoApp.ViewModels
                 //User data = User.FromJson(result);
                 App.Current.Properties["AdminUserName"] = UserName;
                 App.Current.Properties["AdminUserPW"] = Password;
+                LoginInfo loginInfo = new LoginInfo();
+
+
                 await App.Current.SavePropertiesAsync();
 
                 Application.Current.MainPage = new PinPage("Admin");

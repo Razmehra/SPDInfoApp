@@ -315,19 +315,23 @@ namespace SPDInfoApp.Views
             lblNum4.Text = "◌";
         }
 
-        private async Task BtnReset_ClickedAsync()
+        private async void BtnReset_ClickedAsync(object sender, EventArgs e)
         {
-
             var confirmed = await DisplayAlert("Reset User", "Are you sure?", "Yes", "No");
             if (confirmed)
             {
-                Xamarin.Forms.Application.Current.Properties.Clear();
-                Xamarin.Forms.Application.Current.Properties.Add("MobVeryfied", true);
-                await Xamarin.Forms.Application.Current.SavePropertiesAsync();
-                Xamarin.Forms.Application.Current.MainPage = new LoginMenu();
+                //Xamarin.Forms.Application.Current.Properties.Clear();
+                // Xamarin.Forms.Application.Current.Properties.Add("MobVeryfied", true);
+                // await Xamarin.Forms.Application.Current.SavePropertiesAsync();
+                if (loginMode == "Admin")
+                {
+                    Xamarin.Forms.Application.Current.MainPage = new LoginPage();
+                    return;
+                }
+                Xamarin.Forms.Application.Current.MainPage = new RequiredPage(loginMode);
             }
         }
-        private async void OnEntryTextChangedAsync(object sender, TextChangedEventArgs e)
+        private void OnEntryTextChangedAsync(object sender, TextChangedEventArgs e)
         {
             var entry = (Entry)sender;
             if (entry.Text.Length == 4)
@@ -454,6 +458,11 @@ namespace SPDInfoApp.Views
                     }
                 }
             }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+
         }
     }
 }
