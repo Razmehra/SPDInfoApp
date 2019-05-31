@@ -149,15 +149,24 @@ namespace SPDInfoApp.Controls
 
         private void CustomDatePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateDays(Date, e);
+            try
+            {
+                UpdateDays(Date, e);
 
-            var month = (e.NewValue as IList)[0].ToString();
-            var day = (e.NewValue as IList)[1].ToString();
-            var year = (e.NewValue as IList)[2].ToString();
+                var month = (e.NewValue as IList)[0].ToString();
+                var day = (e.NewValue as IList)[1].ToString();
+                var year = (e.NewValue as IList)[2].ToString();
 
 
-            // vm.SelectedDate = day + "-" + month + "-" + year;// e.NewValue[0] as string;
-            this.SelectedDate = day + "-" + month + "-" + year;// e.NewValue[0] as string;
+                // vm.SelectedDate = day + "-" + month + "-" + year;// e.NewValue[0] as string;
+                this.SelectedDate = day + "-" + month + "-" + year;// e.NewValue[0] as string;
+
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
         }
 
         public void UpdateDays(ObservableCollection<object> Date, SelectionChangedEventArgs e)

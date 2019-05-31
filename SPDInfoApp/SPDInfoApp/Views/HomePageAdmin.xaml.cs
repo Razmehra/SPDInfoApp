@@ -16,5 +16,15 @@ namespace SPDInfoApp.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void BtnGetStudentData_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AdminStudentReport() { BackgroundColor=Color.GhostWhite, Title="Student Information List" });
+        }
+
+        private void BtnGetAlumniData_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

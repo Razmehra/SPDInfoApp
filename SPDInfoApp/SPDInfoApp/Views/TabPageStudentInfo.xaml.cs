@@ -12,12 +12,12 @@ namespace SPDInfoApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabPageStudentInfo : TabbedPage
     {
-        public TabPageStudentInfo ()
+        public TabPageStudentInfo (string loginmode="")
         {
             InitializeComponent();
 
-            Children.Add(new EntryPage());
-            Children.Add(new StudentFeedback());
+            Children.Add(new EntryPage(loginmode));
+            Children.Add(new StudentFeedback(loginmode));
 
         }
     }

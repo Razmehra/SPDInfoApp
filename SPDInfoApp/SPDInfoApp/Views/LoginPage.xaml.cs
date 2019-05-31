@@ -21,8 +21,8 @@ namespace SPDInfoApp.Views
 
             InitializeComponent();
 
-            UserName.Text = "";// "admin";
-            Password.Text = "";// "admin1234";
+            UserName.Text = "admin";
+            Password.Text = "admin1234";
             UserName.Completed += (object sender, EventArgs e) => { Password.Focus(); };
             Password.Completed += (object sender, EventArgs e) => { VM.SubmitCommand.Execute(null); };
             BtnCancle.Clicked += (object sender, EventArgs e) => { VM.SkipCommand.Execute(null); };

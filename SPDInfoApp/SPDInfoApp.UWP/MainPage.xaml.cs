@@ -1,3 +1,4 @@
+using Syncfusion.SfDataGrid.XForms.UWP;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,8 @@ namespace SPDInfoApp.UWP
     {
         public MainPage()
         {
-            this.InitializeComponent();
+this.InitializeComponent();
+SfDataGridRenderer.Init();
 
             LoadApplication(new SPDInfoApp.App());
         }

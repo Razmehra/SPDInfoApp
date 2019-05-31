@@ -8,10 +8,11 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using SPDInfoApp.HelperClasses;
 
 namespace SPDInfoApp.Models
 {
@@ -25,13 +26,14 @@ namespace SPDInfoApp.Models
         [JsonProperty("AppearingClass")]
         public string AppearingClass { get; set; }
 
+
         [JsonProperty("IsPG")]
-        [JsonConverter(typeof(ParseStringConverter))]
-        public bool IsPg { get; set; }
+        [JsonConverter(typeof(BooleanJsonConverter))]
+        public bool IsPg { get; set; }// { return _isPG; } set { _isPG = value; } }
 
         [JsonProperty("YearSemester")]
         [JsonConverter(typeof(ParseStringConverter))]
-        public int YearSemester { get; set; }
+        public long YearSemester { get; set; }
 
         [JsonProperty("AddmissionDate1")]
         public DateTime AddmissionDate1 { get; set; }
@@ -79,14 +81,14 @@ namespace SPDInfoApp.Models
         public string RegCastCertificate { get; set; }
 
         [JsonProperty("IsMinority")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(BooleanJsonConverter))]
         public bool IsMinority { get; set; }
 
         [JsonProperty("Minority")]
         public string Minority { get; set; }
 
         [JsonProperty("IsHandicapped")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(BooleanJsonConverter))]
         public bool IsHandicapped { get; set; }
 
         [JsonProperty("HandicapType")]
@@ -121,14 +123,14 @@ namespace SPDInfoApp.Models
         public string AddressCurrent { get; set; }
 
         [JsonProperty("IsUrban")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(BooleanJsonConverter))]
         public bool IsUrban { get; set; }
 
         [JsonProperty("Domicile")]
         public string Domicile { get; set; }
 
-        [JsonProperty("SSSMId")]
-        public string SssmId { get; set; }
+        [JsonProperty("SSSMID")]
+        public string SSSMID { get; set; }
 
         [JsonProperty("RegDomicileCertificateNo")]
         public string RegDomicileCertificateNo { get; set; }
@@ -177,7 +179,7 @@ namespace SPDInfoApp.Models
         public string FamilySssmid { get; set; }
 
         [JsonProperty("IsNCC")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(BooleanJsonConverter))]
         public bool IsNcc { get; set; }
 
         [JsonProperty("CertNCC")]
@@ -190,18 +192,18 @@ namespace SPDInfoApp.Models
         public string NccCampOtherDetail { get; set; }
 
         [JsonProperty("IsNSS")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(BooleanJsonConverter))]
         public bool IsNss { get; set; }
 
         [JsonProperty("CertNSS")]
         public string CertNss { get; set; }
 
         [JsonProperty("IsScoutGuide")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(BooleanJsonConverter))]
         public bool IsScoutGuide { get; set; }
 
         [JsonProperty("IsSports")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(BooleanJsonConverter))]
         public bool IsSports { get; set; }
 
         [JsonProperty("CertSports")]
@@ -209,15 +211,25 @@ namespace SPDInfoApp.Models
 
         [JsonProperty("SportsOtherDetail")]
         public string SportsOtherDetail { get; set; }
+
+        [JsonProperty("PhotoPath")]
+        public string PhotoPath { get; set; }
+        [JsonProperty("PhotoName")]
+        public string PhotoName { get; set; }
+        [JsonProperty("EntryDate")]
+        public DateTime EntryDate { get; set; }
+
     }
     public partial class JsonSpdInfo
     {
-        public static List<JsonSpdInfo> FromJson(string json) => JsonConvert.DeserializeObject<List<JsonSpdInfo>>(json, SPDInfoApp.Models.Converter.Settings);
+        // public static List<JsonSpdInfo> FromJson(string json) => JsonConvert.DeserializeObject<List<JsonSpdInfo>>(json, SPDInfoApp.Models.Converter.Settings);
+         public static ObservableCollection<JsonSpdInfo> FromJson(string json) => JsonConvert.DeserializeObject<ObservableCollection<JsonSpdInfo>>(json, SPDInfoApp.Models.Converter.Settings);
+
     }
 
     public static class Serialize
     {
-        public static string ToJson(this List<JsonSpdInfo> self) => JsonConvert.SerializeObject(self, SPDInfoApp.Models.Converter.Settings);
+        public static string ToJson(this ObservableCollection<JsonSpdInfo> self) => JsonConvert.SerializeObject(self, SPDInfoApp.Models.Converter.Settings);
     }
 
     internal static class Converter
@@ -233,34 +245,34 @@ namespace SPDInfoApp.Models
         };
     }
 
-    internal class ParseStringConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
+    //internal class ParseStringConverter : JsonConverter
+    //{
+    //    public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
 
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            long l;
-            if (Int64.TryParse(value, out l))
-            {
-                return l;
-            }
-            throw new Exception("Cannot unmarshal type long");
-        }
+    //    public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+    //    {
+    //        if (reader.TokenType == JsonToken.Null) return null;
+    //        var value = serializer.Deserialize<string>(reader);
+    //        long l;
+    //        if (Int64.TryParse(value, out l))
+    //        {
+    //            return l;
+    //        }
+    //        throw new Exception("Cannot unmarshal type long");
+    //    }
 
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (long)untypedValue;
-            serializer.Serialize(writer, value.ToString());
-            return;
-        }
+    //    public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+    //    {
+    //        if (untypedValue == null)
+    //        {
+    //            serializer.Serialize(writer, null);
+    //            return;
+    //        }
+    //        var value = (long)untypedValue;
+    //        serializer.Serialize(writer, value.ToString());
+    //        return;
+    //    }
 
-        public static readonly ParseStringConverter Singleton = new ParseStringConverter();
-    }
+    //    public static readonly ParseStringConverter Singleton = new ParseStringConverter();
+    //}
 }

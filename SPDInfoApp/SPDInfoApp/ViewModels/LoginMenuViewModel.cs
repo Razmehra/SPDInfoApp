@@ -48,7 +48,7 @@ namespace SPDInfoApp.ViewModels
                     MPIN = (Xamarin.Forms.Application.Current.Properties["AuthMPIN_Student"].ToString());
                     UName = (Xamarin.Forms.Application.Current.Properties["StudentName"].ToString());
                     Mobile = (Xamarin.Forms.Application.Current.Properties["StudentMobile"].ToString());
-
+                  var StudentApplicationID= (Xamarin.Forms.Application.Current.Properties["StudentApplicationID"].ToString());
                 }
                 else
                 {

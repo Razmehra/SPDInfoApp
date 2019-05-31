@@ -64,21 +64,21 @@ xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRat
                                         <ListCollection:List x:TypeArguments="x:String">
                                             <x:String>B.A.</x:String>
                                             <x:String>B.Com</x:String>
-                                            <x:String>B.Com(Comp Appl.)</x:String>
-                                            <x:String>B.Sc.(Biology)</x:String>
-                                            <x:String>B.Sc.(Maths)</x:String>
-                                            <x:String>B.sc.(Comp. Sci.)</x:String>
-                                            <x:String>M.Sc.(Botony)</x:String>
-                                            <x:String>M.Sc.(Physics)</x:String>
-                                            <x:String>M.sc.(Zoology)</x:String>
-                                            <x:String>M.A.(Economics)</x:String>
-                                            <x:String>M.A.(English)</x:String>
-                                            <x:String>M.A.(Hindi)</x:String>
-                                            <x:String>M.A.(Geography)</x:String>
-                                            <x:String>M.A.(History)</x:String>
-                                            <x:String>M.A.(Political Science)</x:String>
-                                            <x:String>M.A.(Sanskrit)</x:String>
-                                            <x:String>M.A.(Sociology)</x:String>
+                                            <x:String>B.Com[Comp Appl.]</x:String>
+                                            <x:String>B.Sc.[Biology]</x:String>
+                                            <x:String>B.Sc.[Maths]</x:String>
+                                            <x:String>B.sc.[Comp. Sci.]</x:String>
+                                            <x:String>M.Sc.[Botony]</x:String>
+                                            <x:String>M.Sc.[Physics]</x:String>
+                                            <x:String>M.sc.[Zoology]</x:String>
+                                            <x:String>M.A.[Economics]</x:String>
+                                            <x:String>M.A.[English]</x:String>
+                                            <x:String>M.A.[Hindi]</x:String>
+                                            <x:String>M.A.[Geography]</x:String>
+                                            <x:String>M.A.[History]</x:String>
+                                            <x:String>M.A.[Political Science]</x:String>
+                                            <x:String>M.A.[Sanskrit]</x:String>
+                                            <x:String>M.A.[Sociology]</x:String>
                                             <x:String>M.Com.</x:String>
                                         </ListCollection:List>
                                     </combobox:SfComboBox.ComboBoxSource>
@@ -481,15 +481,16 @@ xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRat
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
+                    <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
+                    <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0">
+                        <Button x:Name="BtnApply"  Text="Submit" IsEnabled="True"   Clicked="BtnApply_Clicked"  HorizontalOptions="FillAndExpand" TextColor="White" BackgroundColor="OrangeRed"   FontAttributes="None" VerticalOptions="End" Margin="0"/>
+                    </StackLayout>
+                    <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
 
                 </StackLayout>
+                
             </ScrollView>
 
-            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
-            <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="FillAndExpand"  Margin="0">
-                <Button x:Name="BtnApply"  Text="Submit" IsEnabled="True"   Clicked="BtnApply_Clicked"  HorizontalOptions="FillAndExpand" TextColor="White" BackgroundColor="OrangeRed"   FontAttributes="None" VerticalOptions="End" Margin="0"/>
-            </StackLayout>
-            <BoxView HeightRequest="5" BackgroundColor="Black" VerticalOptions="End"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

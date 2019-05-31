@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+             xmlns:local="clr-namespace:SPDInfoApp.Convertors"
+             x:Class="SPDInfoApp.Views.AdminStudentReport">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:GroupConverter x:Key="groupConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <datagrid:SfDataGrid 
+                x:Name="MyDataGrid"
+                ItemsSource="{Binding StudentInfos}"
+                ColumnSizer="Auto"
+                ShowColumnWhenGrouped="False"
+                SelectionMode="Single"
+                GridDoubleTapped="SfDataGrid_GridDoubleTapped"
+                >
+                <datagrid:SfDataGrid.GroupColumnDescriptions>
+                    <datagrid:GroupColumnDescription ColumnName="EntryDate"  Converter="{StaticResource groupConverter}"/>
+                </datagrid:SfDataGrid.GroupColumnDescriptions>
+            </datagrid:SfDataGrid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

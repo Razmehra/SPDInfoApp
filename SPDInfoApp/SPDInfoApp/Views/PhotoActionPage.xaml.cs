@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SPDInfoApp.HelperClasses;
+using PCLStorage;
+//using Xamarin.Essentials;
+//using PCLStorage;
 
 namespace SPDInfoApp.Views
 {
@@ -17,9 +21,14 @@ namespace SPDInfoApp.Views
     {
         private string _photoPath;
         private Stream _stream;
+        private string _applicationID;
+        private string _photoName;
         public PhotoActionPage()
         {
             InitializeComponent();
+            var StudentApplicationID = (Xamarin.Forms.Application.Current.Properties["StudentApplicationID"].ToString());
+            _applicationID = StudentApplicationID;
+
             takePhoto.Clicked += async (sender, args) =>
             {
 
@@ -28,18 +37,19 @@ namespace SPDInfoApp.Views
                     await DisplayAlert("No Camera", ":( No camera available.", "OK");
                     return;
                 }
-
                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
-                    Directory = "Test",
+                    Directory = "MyCollegeAppPhoto",
                     SaveToAlbum = true,
                     CompressionQuality = 75,
                     CustomPhotoSize = 50,
                     PhotoSize = PhotoSize.MaxWidthHeight,
                     MaxWidthHeight = 2000,
-                    RotateImage=true,
-                    DefaultCamera = CameraDevice.Front
-                    
+                    RotateImage = true,
+                    DefaultCamera = CameraDevice.Front,
+                    Name = StudentApplicationID
+
+
                 });
 
                 if (file == null)
@@ -47,16 +57,22 @@ namespace SPDInfoApp.Views
 
                 // await DisplayAlert("File Location", file.Path, "OK");
                 _photoPath = file.Path;
+                _stream = file.GetStream();
+                string FileName = _applicationID + "." + GetFileExtention(file.Path);
+
                 image.Source = ImageSource.FromStream(() =>
                 {
                     var stream = file.GetStream();
                     file.Dispose();
                     return stream;
                 });
-               // _photoPath = file.AlbumPath;
+                _photoName = FileName;
+
                 BtnOk.IsEnabled = true;
 
             };
+
+
 
             pickPhoto.Clicked += async (sender, args) =>
             {
@@ -67,32 +83,47 @@ namespace SPDInfoApp.Views
                 }
                 var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
                 {
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
-                    RotateImage = true
+                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
+                    RotateImage = true,
+
 
                 });
 
 
                 if (file == null)
                     return;
+                IFolder folder = FileSystem.Current.LocalStorage;
+
                 _photoPath = file.Path;
-              var  _stream1= ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
-                    file.Dispose();
-                    return stream;
-                });
+                var _stream1 = ImageSource.FromStream(() =>
+                  {
+                      var stream = file.GetStream();
+                      file.Dispose();
+                      return stream;
+                  });
+
+                var stream11 = file.GetStream();
+                _stream = file.GetStream();
+                string FileName = _applicationID + "." + GetFileExtention(file.Path);
                 image.Source = _stream1;
-                //_stream = _photoPath;
+                _photoName = FileName;
 
                 BtnOk.IsEnabled = true;
             };
 
         }
 
+        private string GetFileExtention(string filename = "")
+        {
+            if (filename == "") return string.Empty;
+            var fn = filename.Split('.');
+            return fn[fn.Length - 1];
+        }
+
         private async void BtnOk_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(new NavigationMessage(_photoPath,_stream), "EntryPage:PhotoTaken");
+            MessagingCenter.Send(new NavigationMessage(_photoPath), "EntryPage:SetPhoto");
+            MessagingCenter.Send(new NavigationMessage(_photoName, _stream), "EntryPage:PhotoTaken");
             await Navigation.PopModalAsync();
         }
 

@@ -9,19 +9,32 @@
             <Image Source="SPDLogo.png" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <BoxView HeightRequest="10"/>
             <!--<Image HorizontalOptions="Center" WidthRequest="300" Source="maco.jpg"/>-->
-            <Frame BackgroundColor="#111210" HasShadow="True">
-                <StackLayout Orientation="Vertical" Spacing="10">
-                    <Label Text="Please Enter Your Name:" TextColor="#00f3f5"  Margin="0"/>
-                    <Entry x:Name="UserName"  Placeholder="Name.."   
+            <ScrollView>
+                <Frame BackgroundColor="#111210" HasShadow="True">
+                    <StackLayout Orientation="Vertical" Spacing="10">
+                        <StackLayout x:Name="layoutStudentAdmNo" Padding="0" Margin="0">
+                            <Label Text="Application No(First Admission):" TextColor="#00f3f5" Margin="0"/>
+                            <Entry x:Name="UserApplicationID" Placeholder="Application No.."   
+                           PlaceholderColor="Gray"   
+                           TextColor="White"/>
+                        </StackLayout>
+                        <Label Text="Please Enter Your Name:" TextColor="#00f3f5"  Margin="0"/>
+                        <Entry x:Name="UserName"  Placeholder="Name.."   
                            PlaceholderColor="Gray"    
                            Keyboard="Email"  
                            TextColor="White"/>
-                    <Label Text="Please Enter Your Mobile No:" TextColor="#00f3f5" Margin="0"/>
-                    <Entry x:Name="UserMobile" Placeholder="Mobile No.."   
+                        <Label Text="Please Enter Your EMail ID:" TextColor="#00f3f5"  Margin="0"/>
+                        <Entry x:Name="UserEmail"  Placeholder="eMail.."   
+                           PlaceholderColor="Gray"    
+                           Keyboard="Email"  
+                           TextColor="White"/>
+                        <Label Text="Please Enter Your Mobile No:" TextColor="#00f3f5" Margin="0"/>
+                        <Entry x:Name="UserMobile" Placeholder="Mobile No.."   
                            PlaceholderColor="Gray"   
                            TextColor="White"/>
-                </StackLayout>
-            </Frame>
+                    </StackLayout>
+                </Frame>
+            </ScrollView>
             <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="End"  Margin="0" HorizontalOptions="FillAndExpand">
                 <Button x:Name="BtnSubmit" Text="Submit" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  

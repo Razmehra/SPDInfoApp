@@ -7,6 +7,8 @@
             <Label Text="Welcome to Admin Homepage!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="btnGetStudentData" Text="Get Student Data" HorizontalOptions="FillAndExpand" FontSize="12" Clicked="BtnGetStudentData_Clicked" />
+            <Button x:Name="btnGetAlumniData" Text="Get Alumni Data" HorizontalOptions="FillAndExpand" FontSize="12" Clicked="BtnGetAlumniData_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

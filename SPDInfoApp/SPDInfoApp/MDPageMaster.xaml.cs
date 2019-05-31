@@ -33,11 +33,11 @@ namespace SPDInfoApp
             {
                 MenuItems = new ObservableCollection<MDPageMenuItem>(new[]
                 {
-                    new MDPageMenuItem { Id = 0, Title = "Page 1" },
-                    new MDPageMenuItem { Id = 1, Title = "Page 2" },
-                    new MDPageMenuItem { Id = 2, Title = "Page 3" },
-                    new MDPageMenuItem { Id = 3, Title = "Page 4" },
-                    new MDPageMenuItem { Id = 4, Title = "Page 5" },
+                    new MDPageMenuItem { Id = 0, Title = "Profile" },
+                    new MDPageMenuItem { Id = 1, Title = "Feedback" },
+                    new MDPageMenuItem { Id = 2, Title = "Gallery" },
+                    new MDPageMenuItem { Id = 3, Title = "About us" },
+                    new MDPageMenuItem { Id = 4, Title = "Exit" },
                 });
             }
             
