@@ -43,6 +43,8 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <MandroidI18n />
+    <AndroidLinkSkip>Newtonsoft.Json</AndroidLinkSkip>
+    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +91,12 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>16.4.0.54</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Compression">
+      <Version>17.1.0.49</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.DataGridExport">
+      <Version>17.1.0.49</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
       <Version>16.4.0.54</Version>
     </PackageReference>
@@ -100,6 +108,9 @@
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRating">
       <Version>16.4.0.54</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.XlsIO">
+      <Version>17.1.0.49</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.2.0-beta</Version>
@@ -118,10 +129,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHelper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveAndroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Date.png" />
@@ -130,6 +143,15 @@
     <AndroidResource Include="Resources\drawable\cam2.png" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
     <AndroidResource Include="Resources\drawable\MyCollegeAppLogoLoading.png" />
+    <AndroidResource Include="Resources\drawable\delete.png" />
+    <AndroidResource Include="Resources\drawable\edit.png" />
+    <AndroidResource Include="Resources\drawable\add.png" />
+    <AndroidResource Include="Resources\drawable\Save.png" />
+    <AndroidResource Include="Resources\drawable\feedbackEdit.png" />
+    <AndroidResource Include="Resources\drawable\feedbackIN.png" />
+    <AndroidResource Include="Resources\drawable\EntryIN.png" />
+    <AndroidResource Include="Resources\drawable\alumni1.png" />
+    <AndroidResource Include="Resources\drawable\Alumni.png" />
     <GoogleServicesJson Include="google-services.json" />
     <Content Include="Assets\IndRazFont-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

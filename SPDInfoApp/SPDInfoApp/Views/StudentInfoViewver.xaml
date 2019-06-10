@@ -9,6 +9,23 @@
                    HorizontalOptions="Center"
                    VerticalOptions="StartAndExpand"
                    />
+            <ListView x:Name="StudentDataList" HasUnevenRows="True" SeparatorColor="Black" BindingContext="StudentDatas" ItemsSource="StudentDatas">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" Padding="0">
+                                <StackLayout  WidthRequest="200"  BackgroundColor="AntiqueWhite" VerticalOptions="FillAndExpand">
+                                    <Label Margin="3,0,0,0" Text="{Binding EntryCaption}" FontSize="13" FontAttributes="None" 
+                                        LineBreakMode="WordWrap"  VerticalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand" >
+                                    <Label Text="{Binding EntryValue}" Margin="3,0,0,3" LineBreakMode="WordWrap" FontSize="13" FontAttributes="Bold" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

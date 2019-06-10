@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace SPDInfoApp.Models
@@ -133,6 +134,10 @@ namespace SPDInfoApp.Models
         public string PhotoName { get; set; }
         [JsonProperty("EntryDate")]
         public DateTime EntryDate { get; set; }
+        [JsonProperty("UpdateDate")]
+        [Description("Last Update on")]
+        public DateTime UpdateDate { get; set; }
+
 
     }
 }

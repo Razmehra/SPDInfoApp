@@ -8,7 +8,7 @@ xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Bu
         <ScrollView>
             <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
                 <StackLayout Spacing="0">
-                    <Label Text="SPDInfo" FontSize="20" FontAttributes="Bold" TextColor="#314C1A" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  />
+                    <Label Text="My CollegeApp" FontSize="20" FontAttributes="Bold" TextColor="#314C1A" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  />
                     <Image Source="SPDLogo.png" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
                 <!--<BoxView HeightRequest="20"/>-->

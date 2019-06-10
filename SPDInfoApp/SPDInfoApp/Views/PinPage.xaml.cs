@@ -53,7 +53,7 @@ namespace SPDInfoApp.Views
                     this.MPIN = (Xamarin.Forms.Application.Current.Properties["AuthMPIN_Student"].ToString());
                     this.UName = (Xamarin.Forms.Application.Current.Properties["StudentName"].ToString());
                     this.Mobile = (Xamarin.Forms.Application.Current.Properties["StudentMobile"].ToString());
-                    this.ApplicationID= (Xamarin.Forms.Application.Current.Properties["StudentApplicationID"].ToString());
+                    this.ApplicationID = (Xamarin.Forms.Application.Current.Properties["StudentApplicationID"].ToString());
 
                     break;
                 case "Alumni":
@@ -249,29 +249,30 @@ namespace SPDInfoApp.Views
                     if (confirmed)
                     {
                         string authType = loginMode == "Admin" ? "AuthMPIN_Admin" : loginMode == "Student" ? "AuthMPIN_Student" : "AuthMPIN_Alumni";
-                        Xamarin.Forms.Application.Current.Properties[authType] =  xMPIN;
-                        
+                        Xamarin.Forms.Application.Current.Properties[authType] = xMPIN;
+
                         var cuurentLoginInfo = Application.Current.Properties["LoginInfo"];
-                        var loginInfos = Utils.DeserializeFromJson<List<LoginInfo>>(cuurentLoginInfo.ToString());// xx.ToString());// LoginInfo.FromJson(cuurentLoginInfo.ToString());// Utils.DeserializeFromJson<LoginInfo>(xx.ToString());
-                        //MyList[0].Holidays.Where(w => w.HolidayDate > DateTime.Now.Date).Select(w => w.IsVisible = true).ToList();
-                        loginInfos.Where(w => w.ApplicationId == ApplicationID).Select(w => w.MPIN = Int32.Parse(xMPIN)).ToList();
+                        if (loginMode == "Student")
+                        {
+                            var loginInfos = Utils.DeserializeFromJson<List<LoginInfo>>(cuurentLoginInfo.ToString());// xx.ToString());// LoginInfo.FromJson(cuurentLoginInfo.ToString());// Utils.DeserializeFromJson<LoginInfo>(xx.ToString());
+                                                                                                                     //MyList[0].Holidays.Where(w => w.HolidayDate > DateTime.Now.Date).Select(w => w.IsVisible = true).ToList();
+                            loginInfos.Where(w => w.ApplicationId == ApplicationID).Select(w => w.MPIN = Int32.Parse(xMPIN)).ToList();
 
-                        var jsonstring = Utils.SerializeToJson(loginInfos);
+                            var jsonstring = Utils.SerializeToJson(loginInfos);
 
-                       //var csid = Application.Current.Properties["StudentApplicationID"];
+                            //var csid = Application.Current.Properties["StudentApplicationID"];
 
-                       // Application.Current.Properties["StudentApplicationID"] = csid;//.Text;
-
-
-                        Application.Current.Properties["LoginInfo"] = jsonstring;
-
-                        var csid = Application.Current.Properties["StudentApplicationID"];
-
-                        Application.Current.Properties["StudentApplicationID"] = csid;//.Text;
+                            // Application.Current.Properties["StudentApplicationID"] = csid;//.Text;
 
 
+                            Application.Current.Properties["LoginInfo"] = jsonstring;
 
+                            var csid = Application.Current.Properties["StudentApplicationID"];
+
+                            Application.Current.Properties["StudentApplicationID"] = csid;//.Text;
+                        }
                         await Xamarin.Forms.Application.Current.SavePropertiesAsync();
+
                         //  Application.Current.MainPage = new NavigationPage(new MDPageMain());
                         // Application.Current.MainPage = new NavigationPage(new MDPageMain());
                         //** Write code for validate user before home screen

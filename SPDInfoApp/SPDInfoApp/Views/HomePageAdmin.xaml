@@ -1,14 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SPDInfoApp.Views.HomePageAdmin">
+             x:Class="SPDInfoApp.Views.HomePageAdmin" Title="My CollegeApp" Icon="SPDLogo.png">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Admin Homepage!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="btnGetStudentData" Text="Get Student Data" HorizontalOptions="FillAndExpand" FontSize="12" Clicked="BtnGetStudentData_Clicked" />
-            <Button x:Name="btnGetAlumniData" Text="Get Alumni Data" HorizontalOptions="FillAndExpand" FontSize="12" Clicked="BtnGetAlumniData_Clicked"/>
-        </StackLayout>
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <Image Source="SPDLogo.png" HeightRequest="80" WidthRequest="80" Aspect="AspectFit" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>
+
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Frame BackgroundColor="#33ffff" Padding="10" CornerRadius="20">
+                        <Label Text="Student Information" TextColor="Black" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                    </Frame>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="GhostWhite">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnEntries" Source="EntryIN.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnEntries_Clicked"/>
+                                <Label x:Name="lblSPDEntries" Text="SPD Entries" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnFeedbackSTD" Source="feedbackIN.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnFeedbackSTD_Clicked"/>
+                                <Label x:Name="lblSPDFeedbacks" Text="Student Feedbacks" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+
+                        </StackLayout>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Frame BackgroundColor="#ccff33" Padding="10" CornerRadius="20">
+                        <Label Text="Alumni Information" TextColor="Black" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                    </Frame>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="GhostWhite">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnAlumnyEntries" Source="alumni1.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnAlumnyEntries_Clicked"/>
+                                <Label x:Name="lblAlumniEntries" Text="Alumni Entries" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnAlumnyFeedbacks" Source="feedbackIN.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnAlumnyFeedbacks_Clicked"/>
+                                <Label x:Name="lblAlumniFeedbacks" Text="Alumni Feedbacks" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+
+                        </StackLayout>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Frame BackgroundColor="#333333" Padding="10" CornerRadius="20">
+                        <Label Text="Settings" TextColor="GhostWhite" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                    </Frame>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="GhostWhite">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                            <ImageButton x:Name="BtnfeedbackMaster" Source="feedbackEdit.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnfeedbackMaster_Clicked"/>
+                                <Label  Text="Feedback Edit(Student)" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        <StackLayout HorizontalOptions="FillAndExpand">
+                            <ImageButton x:Name="BtnfeedbackMasterAlumni" Source="feedbackEdit.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnfeedbackMasterAlumni_Clicked"/>
+                            <Label  Text="Feedback Edit(Alumni)" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+
+                    </StackLayout>
+                </StackLayout>
+
+
+                <!--<Button x:Name="btnGetStudentData" Text="Get Student Data" HorizontalOptions="FillAndExpand" FontSize="12" Clicked="BtnGetStudentData_Clicked" />
+                <Button x:Name="btnGetAlumniData" Text="Get Alumni Data" HorizontalOptions="FillAndExpand" FontSize="12" Clicked="BtnGetAlumniData_Clicked"/>
+                <Button x:Name="btnFeedback" Text="Feedback Master(Student" HorizontalOptions="FillAndExpand" FontSize="12" Clicked="BtnFeedback_Clicked"/>-->
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

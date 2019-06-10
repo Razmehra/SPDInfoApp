@@ -139,6 +139,19 @@ namespace SPDInfoApp.WebServices
 
         }
 
+        public async Task<string> SendExcel2Mail(string[] Params)
+        {
+
+            var dic4 = new Dictionary<string, string>
+                {
+                   {"Email", Params[0] }
+                };
+
+
+            return await Result("POST", "CreateExcel2Mail.php", null, null, dic4);
+        }
+
+
         public async Task<string> DbUpdate(string[] Params)
         {
             var jsonRequest = new { TOWN = Params[0], WARDNO = Params[1], GISID = Params[2] };

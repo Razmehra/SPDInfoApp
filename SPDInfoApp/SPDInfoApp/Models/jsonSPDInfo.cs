@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -21,203 +22,269 @@ namespace SPDInfoApp.Models
     {
         [JsonProperty("Appid")]
         [JsonConverter(typeof(ParseStringConverter))]
+        [Description("ID")]
         public long Appid { get; set; }
 
         [JsonProperty("AppearingClass")]
+        [Description("Appearing Class")]
         public string AppearingClass { get; set; }
 
 
         [JsonProperty("IsPG")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("Is in Post Gradution class")]
         public bool IsPg { get; set; }// { return _isPG; } set { _isPG = value; } }
 
         [JsonProperty("YearSemester")]
         [JsonConverter(typeof(ParseStringConverter))]
+        [Description("Year/Semester")]
         public long YearSemester { get; set; }
 
         [JsonProperty("AddmissionDate1")]
+        [Description("Addmission Date 1st Year")]
         public DateTime AddmissionDate1 { get; set; }
 
         [JsonProperty("AddmissionDate2")]
+        [Description("Addmission Date 2nd Year")]
         public DateTime AddmissionDate2 { get; set; }
 
         [JsonProperty("AddmissionDate3")]
+        [Description("Addmission Date 3rd Year")]
         public DateTime AddmissionDate3 { get; set; }
 
         [JsonProperty("ApplicationID")]
         [JsonConverter(typeof(ParseStringConverter))]
+        [Description("ApplicationID (of First Addmission)")]
         public long ApplicationId { get; set; }
 
         [JsonProperty("StudentFName")]
+        [Description("Student's first name")]
         public string StudentFName { get; set; }
 
         [JsonProperty("StudentMName")]
+        [Description("Student's middle name")]
         public string StudentMName { get; set; }
 
         [JsonProperty("StudentLName")]
+        [Description("Student's last name")]
         public string StudentLName { get; set; }
 
         [JsonProperty("RollNo")]
         [JsonConverter(typeof(ParseStringConverter))]
+        [Description("Roll No(RDVV)")]
         public long RollNo { get; set; }
 
         [JsonProperty("EnrolmentNo")]
         [JsonConverter(typeof(ParseStringConverter))]
+        [Description("Enrolment No(RDVV)")]
         public long EnrolmentNo { get; set; }
 
         [JsonProperty("DOB")]
+        [Description("Date of Birth")]
         public DateTime Dob { get; set; }
 
         [JsonProperty("Medium")]
+        [Description("Medium")]
         public string Medium { get; set; }
 
         [JsonProperty("Gender")]
+        [Description("Gender")]
         public string Gender { get; set; }
 
         [JsonProperty("Category")]
+        [Description("Cast Category")]
         public string Category { get; set; }
 
         [JsonProperty("RegCastCertificate")]
+        [Description("Digital Registration No of Cast Certificate")]
         public string RegCastCertificate { get; set; }
 
         [JsonProperty("IsMinority")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("Belong to minority?")]
         public bool IsMinority { get; set; }
 
         [JsonProperty("Minority")]
+        [Description("Minority")]
         public string Minority { get; set; }
 
         [JsonProperty("IsHandicapped")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("Is Handicapped?")]
         public bool IsHandicapped { get; set; }
 
         [JsonProperty("HandicapType")]
+        [Description("Type of handicap")]
         public string HandicapType { get; set; }
 
         [JsonProperty("HandicappedOtherDetail")]
+        [Description("Other type handicapped(Detail)")]
         public string HandicappedOtherDetail { get; set; }
 
         [JsonProperty("HandicappPercent")]
         [JsonConverter(typeof(ParseStringConverter))]
+        [Description("Percent of handicap")]
         public long? HandicappPercent { get; set; }
 
         [JsonProperty("HandicappDetail")]
+        [Description("Detail of handicap")]
         public string HandicappDetail { get; set; }
 
         [JsonProperty("BloodGroup")]
+        [Description("Blood group")]
         public string BloodGroup { get; set; }
 
         [JsonProperty("PhoneMobile")]
+        [Description("Mobile/Phone number")]
         public string PhoneMobile { get; set; }
 
         [JsonProperty("AadharNo")]
+        [Description("Aadhar number")]
         public string AadharNo { get; set; }
 
         [JsonProperty("EMail")]
+        [Description("EMail ID")]
         public string EMail { get; set; }
 
         [JsonProperty("AddressPermanent")]
+        [Description("Address (Permanent)")]
         public string AddressPermanent { get; set; }
 
         [JsonProperty("AddressCurrent")]
+        [Description("Address (Current)")]
         public string AddressCurrent { get; set; }
 
         [JsonProperty("IsUrban")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("Living area")]
         public bool IsUrban { get; set; }
 
         [JsonProperty("Domicile")]
+        [Description("Domicile")]
         public string Domicile { get; set; }
 
-        [JsonProperty("SSSMID")]
-        public string SSSMID { get; set; }
-
         [JsonProperty("RegDomicileCertificateNo")]
+        [Description("Digital Registration No of Domicile Certificate")]
         public string RegDomicileCertificateNo { get; set; }
 
+        [JsonProperty("SSSMID")]
+        [Description("SSSMID")]
+        public string SSSMID { get; set; }
+
         [JsonProperty("FHName")]
+        [Description("Father's name")]
         public string FhName { get; set; }
 
         [JsonProperty("MotherName")]
+        [Description("Mother's name")]
         public string MotherName { get; set; }
 
         [JsonProperty("PhoneMobile_Gaurdian")]
+        [Description("Mobile/Phone (Gaurdian)")]
         public string PhoneMobileGaurdian { get; set; }
 
         [JsonProperty("IncomeFather")]
         [JsonConverter(typeof(ParseStringConverter))]
+        [Description("Income (Gaurdin)")]
         public long IncomeFather { get; set; }
 
         [JsonProperty("OccupationFather")]
+        [Description("Gaurdian Occupation")]
         public string OccupationFather { get; set; }
 
         [JsonProperty("BankAcNo")]
+        [Description("Bank account no")]
         public string BankAcNo { get; set; }
 
         [JsonProperty("BankIFSC")]
+        [Description("Bank IFSC code")]
         public string BankIfsc { get; set; }
 
         [JsonProperty("BankName")]
+        [Description("Bank name")]
         public string BankName { get; set; }
 
         [JsonProperty("BankBranch")]
+        [Description("Bank address")]
         public string BankBranch { get; set; }
 
         [JsonProperty("VoterID")]
+        [Description("Voter ID")]
         public string VoterId { get; set; }
 
         [JsonProperty("PANNo")]
+        [Description("PAN No")]
         public string PanNo { get; set; }
 
         [JsonProperty("DrivingLicNo")]
+        [Description("Driving License no")]
         public string DrivingLicNo { get; set; }
 
         [JsonProperty("ScholershipName")]
+        [Description("Scholership name(if any)")]
         public string ScholershipName { get; set; }
 
         [JsonProperty("FamilySSSMID")]
+        [Description("Family SSSMID")]
         public string FamilySssmid { get; set; }
 
         [JsonProperty("IsNCC")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("NCC")]
         public bool IsNcc { get; set; }
 
         [JsonProperty("CertNCC")]
+        [Description("NCC Certificates")]
         public string CertNcc { get; set; }
 
         [JsonProperty("CampNCC")]
+        [Description("NCC attanded")]
         public string CampNcc { get; set; }
 
         [JsonProperty("NCCCampOtherDetail")]
+        [Description("NCC camp attanded(other)")]
         public string NccCampOtherDetail { get; set; }
 
         [JsonProperty("IsNSS")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("NSS")]
         public bool IsNss { get; set; }
 
         [JsonProperty("CertNSS")]
+        [Description("NSS Certificates")]
         public string CertNss { get; set; }
 
         [JsonProperty("IsScoutGuide")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("Scout/Guide?")]
         public bool IsScoutGuide { get; set; }
 
         [JsonProperty("IsSports")]
         [JsonConverter(typeof(BooleanJsonConverter))]
+        [Description("Sports?")]
         public bool IsSports { get; set; }
 
         [JsonProperty("CertSports")]
+        [Description("Sports certificates")]
         public string CertSports { get; set; }
 
         [JsonProperty("SportsOtherDetail")]
+        [Description("Sports Other info")]
         public string SportsOtherDetail { get; set; }
 
         [JsonProperty("PhotoPath")]
         public string PhotoPath { get; set; }
         [JsonProperty("PhotoName")]
         public string PhotoName { get; set; }
+
         [JsonProperty("EntryDate")]
+        [Description("Date of Entry")]
         public DateTime EntryDate { get; set; }
+
+        [JsonProperty("UpdateDate")]
+        [Description("Last Update on")]
+        public DateTime UpdateDate { get; set; }
+
 
     }
     public partial class JsonSpdInfo

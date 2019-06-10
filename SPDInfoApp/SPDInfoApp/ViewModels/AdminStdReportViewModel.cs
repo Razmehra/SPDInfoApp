@@ -1,9 +1,13 @@
-﻿using SPDInfoApp.HelperClasses;
+﻿using Acr.UserDialogs;
+using SPDInfoApp.HelperClasses;
 using SPDInfoApp.Models;
+using SPDInfoApp.Views;
 using SPDInfoApp.WebServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Reflection;
 using System.Text;
 
 namespace SPDInfoApp.ViewModels
@@ -31,15 +35,41 @@ namespace SPDInfoApp.ViewModels
                 OnPropertyChanged("StudentList");
             }
         }
+
+        public JsonSpdInfo Student { get; set; }
+
         private PHPServices _phpService = new PHPServices();
 
         public AdminStdReportViewModel()
         {
-            FetchData();
+            try
+            {
+                using (UserDialogs.Instance.Loading("Fetching data..\nPlease Wait.", null, null, true, MaskType.Black))
+                {
+                    try
+                    {
+                        FetchData();
+                    }
+                    catch (Exception ex)
+                    {
+
+                       // throw;
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+
+                App.Current.MainPage.DisplayAlert("Opps", "Something went wrong.. Please tap on refresh button.\nError description:" + ex.Message +"\n"+ex.StackTrace, "OK");
+            }
+            
         }
 
-        private async void FetchData()
+
+        public async void FetchData()
         {
+            
             var data = await _phpService.FetchStudentInfo(new string[] { "0" });
             var mydata = JsonSpdInfo.FromJson(data);
 
@@ -62,17 +92,22 @@ namespace SPDInfoApp.ViewModels
                         PhotoPath=student.PhotoName
                     };
                 StudentInfos.Add(info);
-
+                
             }
-
-            
-
+            //var property = typeof(StudentInfo).GetProperty("EntryDate");
+            //var attribute = property.GetCustomAttributes(typeof(DescriptionAttribute), true)[0];
+            //var description = (DescriptionAttribute)attribute;
+            //var text = description.Description;
+           // var value= property.GetValue()
         }
 
         public async void OnDoubleTapped(StudentInfo student)
         {
-           
+            //await Navigation.PushModalAsync(new StudentInfoViewver((StudentInfo)e.RowData));
+           // await Navigation.PushModalAsync(new StudentInfoViewver(student));
         }
+
+        
 
     }
     public class StudentInfo
@@ -82,6 +117,7 @@ namespace SPDInfoApp.ViewModels
         public string AppearingClass { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
+        [Description("Date of entry submission.")]
         public DateTime EntryDate { get; set; }
         public string PhotoPath { get; set; }
     }

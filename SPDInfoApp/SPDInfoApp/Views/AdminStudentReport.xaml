@@ -11,6 +11,15 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="SkyBlue">
+                <ActivityIndicator x:Name="BusyIndicator" WidthRequest="50" HeightRequest="50" HorizontalOptions="Center" IsVisible="False" />
+                <Image x:Name="ImgRefresh" Source="Sync.png" WidthRequest="60" HeightRequest="60" HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Button x:Name="BtnExportToXLS" Text="Export" FontSize="12" WidthRequest="65" HorizontalOptions="End" Clicked="BtnExportToXLS_Clicked"/>
+            </StackLayout>
             <datagrid:SfDataGrid 
                 x:Name="MyDataGrid"
                 ItemsSource="{Binding StudentInfos}"
@@ -18,11 +27,14 @@
                 ShowColumnWhenGrouped="False"
                 SelectionMode="Single"
                 GridDoubleTapped="SfDataGrid_GridDoubleTapped"
+                LiveDataUpdateMode="AllowDataShaping"
+                AllowPullToRefresh="True"
                 >
                 <datagrid:SfDataGrid.GroupColumnDescriptions>
-                    <datagrid:GroupColumnDescription ColumnName="EntryDate"  Converter="{StaticResource groupConverter}"/>
+                    <datagrid:GroupColumnDescription  ColumnName="EntryDate"  Converter="{StaticResource groupConverter}"/>
                 </datagrid:SfDataGrid.GroupColumnDescriptions>
             </datagrid:SfDataGrid>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
