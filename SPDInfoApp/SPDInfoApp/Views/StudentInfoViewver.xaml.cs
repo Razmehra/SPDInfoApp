@@ -17,7 +17,7 @@ namespace SPDInfoApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StudentInfoViewver : ContentPage
     {
-        private Dictionary<string, string> StudentDic = new Dictionary<string, string>();
+        // private Dictionary<string, string> StudentDic = new Dictionary<string, string>();
         private Dictionary<string, Dictionary<string, string>> StudentData = new Dictionary<string, Dictionary<string, string>>();
         private ObservableCollection<StudentData> StudentDatas = new ObservableCollection<StudentData>();
 
@@ -28,7 +28,13 @@ namespace SPDInfoApp.Views
             ProfilePic.Source = "http://geoinfotech.org.in/spdInfoImages/" + student.PhotoName;   //student.ApplicationID.ToString()+"."+"jpg";
             FetchData(student);
             StudentDataList.BindingContext = StudentDatas;
+            StudentDataList.ItemsSource = null;
             StudentDataList.ItemsSource = StudentDatas;
+
+            lblStudentName.Text = student.StudentFName + " " + student.StudentMName + " " + student.StudentLName;
+            lblApplicationID.Text = "AppID: " + student.ApplicationId.ToString();
+            lblClass.Text = "Class: " + student.AppearingClass;
+            lblDOB.Text = "DOB  : " + student.Dob.ToString("dd-MMM-yyyy");
 
         }
 
@@ -36,6 +42,7 @@ namespace SPDInfoApp.Views
         {
 
             StudentDatas.Clear();
+            StudentDatas = new ObservableCollection<StudentData>();
             Type classType = student.GetType();
             foreach (PropertyInfo propertyInfo in classType.GetProperties())
             {
@@ -88,15 +95,15 @@ namespace SPDInfoApp.Views
                             break;
                         case "IsNCC":
                             break;
-                        case "CertNCC":
+                        case "CertNcc":
                             break;
-                        case "CampNCC":
+                        case "CampNcc":
                             var NCCCampOptions = EvalValue.Split(',');
                             EvalValue = NCCCampOptions[0] == "True" ? "CATC" : "";
-                            EvalValue = EvalValue +( NCCCampOptions[1] == "True" ? (EvalValue.Length > 0 ? "," : "") + " NIC" : "");
-                            EvalValue = EvalValue +( NCCCampOptions[2] == "True" ? (EvalValue.Length > 0 ? "," : "") + " TRACKING CAMP" : "");
-                            EvalValue = EvalValue +( NCCCampOptions[3] == "True" ? (EvalValue.Length > 0 ? "," : "") + " ARMY ATTACHMENT CAMP" : "");
-                            EvalValue = EvalValue +( NCCCampOptions[4] == "True" ? (EvalValue.Length > 0 ? "," : "") + " Other" : "");
+                            EvalValue = EvalValue + (NCCCampOptions[1] == "True" ? (EvalValue.Length > 0 ? "," : "") + " NIC" : "");
+                            EvalValue = EvalValue + (NCCCampOptions[2] == "True" ? (EvalValue.Length > 0 ? "," : "") + " TRACKING CAMP" : "");
+                            EvalValue = EvalValue + (NCCCampOptions[3] == "True" ? (EvalValue.Length > 0 ? "," : "") + " ARMY ATTACHMENT CAMP" : "");
+                            EvalValue = EvalValue + (NCCCampOptions[4] == "True" ? (EvalValue.Length > 0 ? "," : "") + " Other" : "");
                             break;
                         case "IsNSS":
                             break;
@@ -124,7 +131,7 @@ namespace SPDInfoApp.Views
 
 
                     //StudentDic = new Dictionary<string, string>
-                    StudentDic.Add(Caption, EvalValue);
+                    //StudentDic.Add(Caption, EvalValue);
                     StudentDatas.Add(new StudentData { EntryCaption = Caption, EntryValue = EvalValue });
                     // StudentData.Add(propertyInfo.Name, StudentDic);
                 }

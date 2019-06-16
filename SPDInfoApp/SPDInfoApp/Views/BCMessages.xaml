@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SPDInfoApp.Convertors"
+             xmlns:controls="clr-namespace:SPDInfoApp.Controls"
+             xmlns:cnvrts="clr-namespace:SPDInfoApp.HelperClasses"
+             x:Class="SPDInfoApp.Views.BCMessages" Title="Settings: Broadcast Messages" Icon="SPDLogo.png" 
+             BackgroundColor="GhostWhite">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:HeightConvertor x:Key="heightConverter" />
+            <Color x:Key="BackGroundColorList">White</Color>
+            <Color x:Key="BackGroundColorLeaveRemainRoundBox">#39557C</Color>
+            <Color x:Key="BorderColorLeaveRemainRoundBox">Black</Color>
+            <Color x:Key="BaseBackGroundColorBlue">#39557C</Color>
+            <Color x:Key="BaseBackGroundColorRed">Red</Color>
+            <Color x:Key="BaseForeGroundColor">White</Color>
+            <Color x:Key="DefColorBlack">Black</Color>
+            <Color x:Key="DefColorWhite">White</Color>
+            <Color x:Key="DefColorFloralWhite">FloralWhite</Color>
+            <Color x:Key="DefColorRed">Red</Color>
+            <Color x:Key="DefColorBlue">#39557C</Color>
+            <Color x:Key="LabelDefColorBackground">White</Color>
+            <Color x:Key="LabelDefColorForeground">Black</Color>
+
+            <Color x:Key="EntryDefColorBackground">#daeed8</Color>
+            <Color x:Key="EntryDefColorForeground">Black</Color>
+
+            <Style x:Key="Entryfont" TargetType="Entry">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <Style x:Key="Lablefont" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <cnvrts:DateConvertor x:Key="dateConvert"></cnvrts:DateConvertor>
+            <cnvrts:RatingToTextConvertor x:Key="ratingToTextConvertor"></cnvrts:RatingToTextConvertor>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10">
+                    <Image Source="msg.png" HeightRequest="70" WidthRequest="70" HorizontalOptions="Start" />
+                    <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="EndAndExpand">
+                        <ImageButton x:Name="AddButton" ClassId="N" Source="add.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="25" WidthRequest="25"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="AddButton_Clicked" />
+                        <Label x:Name="lblNew" Text="New Feedback" TextColor="Black" FontSize="8" HorizontalOptions="CenterAndExpand"/>
+                        <ImageButton x:Name="CancelButton" IsVisible="False" ClassId="C" Source="Cancel1.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="25" WidthRequest="25"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="CancelButton_Clicked" />
+                        <Label x:Name="lblCancel" IsVisible="False" Text="Cancel" TextColor="Black" FontSize="8" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout x:Name="AddLayout" IsVisible="True" BackgroundColor="GhostWhite">
+                    <Label Text="Message:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand"/>
+                    <Frame BackgroundColor="SkyBlue" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Entry x:Name="EntryMessage" FontSize="13" FontAttributes="Bold"
+                   HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                   HeightRequest="100" />
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                        <StackLayout Orientation="Horizontal" Spacing="2" >
+                            <Label Text="From Date:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Button x:Name="btnAdmDt1" Clicked="AdmBTN_Clicked" />
+                                    <Image x:Name="ImgAdmDT1" Source="Date.png" WidthRequest="20" HeightRequest="20" Aspect="AspectFit" HorizontalOptions="End">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="AdmDateTapGestureRecognizer_Tapped"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="2" HorizontalOptions="EndAndExpand" >
+                                <Label Text="To Date:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Button x:Name="btnAdmDt2" Clicked="AdmBTN_Clicked" />
+                                        <Image x:Name="ImgAdmDT2" Source="Date.png" WidthRequest="20" HeightRequest="20" Aspect="AspectFit" HorizontalOptions="End">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="AdmDateTapGestureRecognizer_Tapped"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                    </StackLayout>
+                    <controls:CustomDatePicker x:Name="CustDatePicker" IsOpen="False"
+                                ColumnHeaderHeight="40"
+                                HorizontalOptions="Center"
+                                PickerHeight="400"
+                                PickerMode="Dialog"
+                                PickerWidth="300"
+                                SelectedItem="{Binding StartDate}"               
+                                CancelButtonClicked="CustDatePicker_CancelButtonClicked"
+                                OkButtonClicked="CustDatePicker_OkButtonClicked"
+                                VerticalOptions="Center"                                              
+                                />
+
+                </StackLayout>
+                <Button x:Name="BtnSubmit" Text="Submit Changes?" FontSize="13" IsVisible="False" 
+                        BackgroundColor="OrangeRed" TextColor="WhiteSmoke" WidthRequest="100" Clicked="BtnSubmit_Clicked" />
+                <StackLayout>
+                    <ListView x:Name="LVMessages" HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="DarkGray">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout HeightRequest="{Binding IsShow, Converter={StaticResource heightConverter}}">
+                                        <BoxView BackgroundColor="Accent" HeightRequest="3" HorizontalOptions="FillAndExpand" />
+                                        <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="3" Margin="5">
+                                            <Label Text="Message:" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                            <Label Text="From:" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand"/>
+                                            <Label Text="{Binding MsgFromDate}" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                            <Label Text="To:" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand"/>
+                                            <Label Text="{Binding MsgToDate}" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                            <StackLayout Orientation="Horizontal" BackgroundColor="Transparent" Margin="0" Padding="0">
+                                                <Image BackgroundColor="Transparent" Source="edit.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding FBID}">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="TapGestureRecognizerEdit_Tapped" CommandParameter="{Binding FBID}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                                <Image Source="delete.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding FBID}">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="TapGestureRecognizerDelete_Tapped" CommandParameter="{Binding FBID}" />
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical" Margin="2" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                            <Label Text="{Binding MsgMessage}" TextColor="Black" FontAttributes="Bold" VerticalTextAlignment="Start"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

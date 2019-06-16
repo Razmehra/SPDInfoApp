@@ -111,6 +111,42 @@ namespace SPDInfoApp.WebServices
             return await Result("POST", "insertSPDInfoRecords.php", null, null, dix);
         }
 
+        public async Task<string> FetchStudentMasterFeedbacks(string[] Params)
+        {
+
+            var dic4 = new Dictionary<string, string>
+                {
+                   {"FBID", Params[0] }
+                };
+
+
+            return await Result("POST", "fetchFeedbacksMst_STD.php", null, null, dic4);
+        }
+
+        public async Task<string> UpdateStudentMasterFeedbacks(string[] Params)
+        {
+
+            var dic4 = new Dictionary<string, string> { { "FBID", Params[0] } };
+            dic4.Add("FBQuestion", Params[1]);
+            dic4.Add("MValue", Params[2]);
+            dic4.Add("IsDelete", Params[3]);
+
+
+            return await Result("POST", "insertFBMaster_STD.php", null, null, dic4);
+        }
+
+        public async Task<string> ResetStudentMasterFeedbacks(string[] Params)
+        {
+
+            var dic4 = new Dictionary<string, string> { { "FBID", Params[0] } };
+            //dic4.Add("FBQuestion", Params[1]);
+            //dic4.Add("MValue", Params[2]);
+            //dic4.Add("IsDelete", Params[3]);
+
+
+            return await Result("POST", "ResetMstFeedbackSTD.php", null, null, dic4);
+        }
+
         public async Task<string> FetchStudentInfo(string[] Params)
         {
 
@@ -121,6 +157,18 @@ namespace SPDInfoApp.WebServices
 
 
             return await Result("POST", "fetchSPDInfoData.php", null, null, dic4);
+        }
+
+        public async Task<string> FetchStudentFeedbacks(string[] Params)
+        {
+
+            var dic4 = new Dictionary<string, string>
+                {
+                   {"ApplicationID", Params[0] }
+                };
+
+
+            return await Result("POST", "FetchFB_Student.php", null, null, dic4);
         }
 
 

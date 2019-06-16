@@ -59,7 +59,7 @@
                                     <StackLayout Spacing="5">
                                         <Label Text="{Binding FeedbackQues,Mode=TwoWay}"  TextColor="#086487"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
                                         <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Spacing="5" >
-                                            <rating:SfRating ItemSize="30" HorizontalOptions="StartAndExpand" Value="{Binding FeedbackValue,Mode=TwoWay}" >
+                                            <rating:SfRating ItemCount="{Binding MValue}" ItemSize="30" HorizontalOptions="StartAndExpand" Value="{Binding FeedbackValue,Mode=TwoWay}" >
                                                 <rating:SfRating.RatingSettings>
                                                     <rating:SfRatingSettings RatedStroke="Black" RatedStrokeWidth="2"/>
                                                 </rating:SfRating.RatingSettings>

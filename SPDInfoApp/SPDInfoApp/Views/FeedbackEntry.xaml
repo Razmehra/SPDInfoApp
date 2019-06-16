@@ -14,10 +14,14 @@
             <StackLayout HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10">
                     <Image Source="Rating.png" HeightRequest="70" WidthRequest="70" HorizontalOptions="Start" />
-                    <StackLayout Spacing="0" HorizontalOptions="EndAndExpand">
-                        <ImageButton x:Name="AddButton" ClassId="N" Source="add.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="50" WidthRequest="50"
+                    <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="EndAndExpand">
+                        <ImageButton x:Name="AddButton" ClassId="N" Source="add.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="25" WidthRequest="25"
                                  Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="AddButton_Clicked" />
                         <Label x:Name="lblFeedback" Text="New Feedback" TextColor="Black" FontSize="8" HorizontalOptions="CenterAndExpand"/>
+                        <ImageButton x:Name="CancelButton" IsVisible="False" ClassId="C" Source="Cancel1.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="25" WidthRequest="25"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="CancelButton_Clicked" />
+                        <Label x:Name="lblFeedbackCancel" IsVisible="False" Text="Cancel" TextColor="Black" FontSize="8" HorizontalOptions="CenterAndExpand"/>
+
                     </StackLayout>
                 </StackLayout>
                 
@@ -32,39 +36,39 @@
                         <Label x:Name="LblStars" Text="No of Stars: 5"  TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
                         <Stepper x:Name="FBValue" Minimum="0" Maximum="10" Value="5" Increment="1" ValueChanged="Stepper_ValueChanged" HeightRequest="40"/>
                     </StackLayout>
-                    <!--<Button x:Name="BtnAdd" Text="+Add" FontSize="13" BackgroundColor="OrangeRed" TextColor="WhiteSmoke" WidthRequest="100" Clicked="BtnAdd_Clicked" />-->
                 </StackLayout>
+                <Button x:Name="BtnSubmit" Text="Submit Changes?" FontSize="13" IsVisible="False" 
+                        BackgroundColor="OrangeRed" TextColor="WhiteSmoke" WidthRequest="100" Clicked="BtnSubmit_Clicked" />
+
                 <StackLayout>
                     <ListView x:Name="LVFeedbacks" HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="DarkGray">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout HeightRequest="{Binding IsShow, Converter={StaticResource heightConverter}}">
-                                        <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="3" Margin="5">
-                                            <Label Text="Feedback Question:" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
-                                            <Label Text="No of Stars required:" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand"/>
-                                            <Label Text="{Binding MValue}" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
-                                            <StackLayout Orientation="Horizontal" BackgroundColor="Gainsboro" Margin="0" Padding="0">
-                                                <Image BackgroundColor="Transparent" Source="edit.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding ID}">
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="TapGestureRecognizerEdit_Tapped" CommandParameter="{Binding ID}"/>
-                                                    </Image.GestureRecognizers>
-                                                </Image>
-                                                <Image Source="delete.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding ID}">
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="TapGestureRecognizerDelete_Tapped" CommandParameter="{Binding ID}" />
-                                                    </Image.GestureRecognizers>
-                                                </Image>
+                                        <StackLayout HeightRequest="{Binding IsShow, Converter={StaticResource heightConverter}}">
+                                            <BoxView BackgroundColor="Accent" HeightRequest="3" HorizontalOptions="FillAndExpand" />
+                                            <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="3" Margin="5">
+                                                    <Label Text="Question:" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                                    <Label Text="No of Stars required:" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand"/>
+                                                    <Label Text="{Binding MValue}" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                                    <StackLayout Orientation="Horizontal" BackgroundColor="Transparent" Margin="0" Padding="0">
+                                                        <Image BackgroundColor="Transparent" Source="edit.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding FBID}">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="TapGestureRecognizerEdit_Tapped" CommandParameter="{Binding FBID}"/>
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                        <Image Source="delete.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding FBID}">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="TapGestureRecognizerDelete_Tapped" CommandParameter="{Binding FBID}" />
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
 
-                                            </StackLayout>
-
+                                                    </StackLayout>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Vertical" Margin="2" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                                        <Label Text="{Binding FBQuestion}" TextColor="Black" FontAttributes="Bold" VerticalTextAlignment="Start"/>
+                                                </StackLayout>
                                         </StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Frame BackgroundColor="SkyBlue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                                <Label Text="{Binding FBQuestion}"/>
-                                            </Frame>
-                                        </StackLayout>
-                                    </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

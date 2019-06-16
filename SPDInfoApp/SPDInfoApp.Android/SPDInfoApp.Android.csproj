@@ -152,6 +152,9 @@
     <AndroidResource Include="Resources\drawable\EntryIN.png" />
     <AndroidResource Include="Resources\drawable\alumni1.png" />
     <AndroidResource Include="Resources\drawable\Alumni.png" />
+    <AndroidResource Include="Resources\drawable\Cancel1.png" />
+    <AndroidResource Include="Resources\drawable\msg.png" />
+    <AndroidResource Include="Resources\drawable\Events.png" />
     <GoogleServicesJson Include="google-services.json" />
     <Content Include="Assets\IndRazFont-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

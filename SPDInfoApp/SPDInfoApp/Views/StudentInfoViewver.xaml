@@ -4,19 +4,31 @@
              x:Class="SPDInfoApp.Views.StudentInfoViewver" Title="Student Information" BackgroundColor="GhostWhite">
     <ContentPage.Content>
         <StackLayout>
-            <Image x:Name="ProfilePic"
+            <StackLayout Orientation="Horizontal">
+                <StackLayout>
+                    <Image x:Name="ProfilePic"
                    HeightRequest="200" WidthRequest="200"
-                   HorizontalOptions="Center"
+                   HorizontalOptions="Start"
                    VerticalOptions="StartAndExpand"
                    />
-            <ListView x:Name="StudentDataList" HasUnevenRows="True" SeparatorColor="Black" BindingContext="StudentDatas" ItemsSource="StudentDatas">
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Label x:Name="lblStudentName" TextColor="Black" FontAttributes="Bold" FontSize="14"/>
+                    <Label x:Name="lblApplicationID" TextColor="Black" FontAttributes="Bold" FontSize="14"/>
+                    <Label x:Name="lblClass" TextColor="Black" FontAttributes="Bold" FontSize="14"/>
+                    <Label x:Name="lblDOB" TextColor="Black" FontAttributes="Bold" FontSize="14"/>
+                </StackLayout>
+            </StackLayout>
+            <ListView x:Name="StudentDataList" HasUnevenRows="True" SeparatorColor="Black"
+                      BindingContext="StudentDatas" ItemsSource="StudentDatas"
+                      CachingStrategy="RecycleElement">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" Padding="0">
                                 <StackLayout  WidthRequest="200"  BackgroundColor="AntiqueWhite" VerticalOptions="FillAndExpand">
                                     <Label Margin="3,0,0,0" Text="{Binding EntryCaption}" FontSize="13" FontAttributes="None" 
-                                        LineBreakMode="WordWrap"  VerticalOptions="Center"/>
+                                        LineBreakMode="WordWrap"  VerticalOptions="CenterAndExpand"/>
                                 </StackLayout>
                                 <StackLayout HorizontalOptions="FillAndExpand" >
                                     <Label Text="{Binding EntryValue}" Margin="3,0,0,3" LineBreakMode="WordWrap" FontSize="13" FontAttributes="Bold" HorizontalOptions="FillAndExpand"/>

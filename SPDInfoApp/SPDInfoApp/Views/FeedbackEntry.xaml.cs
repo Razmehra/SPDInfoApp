@@ -1,5 +1,7 @@
-﻿using SPDInfoApp.Models;
+﻿using SPDInfoApp.HelperClasses;
+using SPDInfoApp.Models;
 using SPDInfoApp.ViewModels;
+using SPDInfoApp.WebServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,21 +34,32 @@ namespace SPDInfoApp.Views
 
         public FeedbackEntry()
         {
-            BindingContext = this;
+            BindingContext = FBList;
             InitializeComponent();
+            FetchFeedbacks();
+        }
 
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques1", MValue = 1, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques2", MValue = 2, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques3", MValue = 3, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques4", MValue = 4, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques5", MValue = 5, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques6", MValue = 6, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques7", MValue = 7, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques8", MValue = 8, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques9", MValue = 9, IsShow = true });
-            FBList.Add(new MstFeedbackModel() { ID = FBList.Count + 1, FBQuestion = "Ques10", MValue = 10, IsShow = true });
-            LVFeedbacks.BindingContext = this;
-            LVFeedbacks.ItemsSource = FBList.OrderByDescending(w => w.ID);
+        private async void FetchFeedbacks()
+        {
+            PHPServices service = new PHPServices();
+
+            var result = await service.FetchStudentMasterFeedbacks(new string[] { "0" });
+
+            if (result.ToString() == "failure")
+            {
+                return;
+            }
+            var data = Utils.DeserializeFromJson<ObservableCollection<MstFeedbackModel>>(result);
+
+            foreach (var item in data)
+            {
+                item.IsShow = true;
+            }
+            FBList = data;
+            LVFeedbacks.BindingContext = FBList;
+            LVFeedbacks.ItemsSource = null;
+            LVFeedbacks.ItemsSource = FBList.OrderByDescending(w => w.FBID);
+
         }
 
         private void BtnAdd_Clicked(object sender, EventArgs e)
@@ -56,12 +69,12 @@ namespace SPDInfoApp.Views
                 FBQuestion = EntryFBQuestion.Text,
                 MValue = Convert.ToInt32(FBValue.Value),
                 IsShow = true,
-                ID = FBList.Count + 1
+                FBID = FBList.Count + 1
 
             };
             FBList.Add(studentFeedback);
             LVFeedbacks.ItemsSource = null;
-            LVFeedbacks.ItemsSource = FBList.OrderByDescending(w => w.ID);
+            LVFeedbacks.ItemsSource = FBList.OrderByDescending(w => w.FBID);
         }
 
         private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -77,19 +90,21 @@ namespace SPDInfoApp.Views
 
             var s = Int32.Parse(((Image)sender).ClassId);
 
-            FBList.Where(w => w.ID == s).FirstOrDefault().IsShow = false;
-            // LVFeedbacks.ItemsSource = null;
-            // LVFeedbacks.ItemsSource = FBList;
+            FBList.Where(w => w.FBID == s).FirstOrDefault().IsShow = false;
+            LVFeedbacks.BindingContext = FBList;
+            LVFeedbacks.ItemsSource = null;
+            LVFeedbacks.ItemsSource = FBList.OrderByDescending(w => w.FBID);
+            BtnSubmit.IsVisible = true;
         }
         private async void TapGestureRecognizerEdit_Tapped(object sender, EventArgs e)
         {
             AddLayout.IsVisible = false;
             var s = Int32.Parse(((Image)sender).ClassId);
 
-            var FB = FBList.Where(w => w.ID == s).FirstOrDefault();
+            var FB = FBList.Where(w => w.FBID == s).FirstOrDefault();
             EntryFBQuestion.Text = FB.FBQuestion;
             FBValue.Value = FB.MValue;
-            EntryFBQuestion.ClassId = FB.ID.ToString();
+            EntryFBQuestion.ClassId = FB.FBID.ToString();
             AddButton.ClassId = "E";
             await CRUDEFeedback();
         }
@@ -115,9 +130,12 @@ namespace SPDInfoApp.Views
                     case "E":
                         if (!await DisplayAlert("Edit Feedback", "Sure to update?", "Yes", "No")) return;
                         var xID = Int32.Parse(EntryFBQuestion.ClassId);
-                        FBList.Where(w => w.ID == xID).FirstOrDefault().FBQuestion = EntryFBQuestion.Text;
-                        FBList.Where(w => w.ID == xID).FirstOrDefault().MValue = Convert.ToInt32(FBValue.Value);
+                        FBList.Where(w => w.FBID == xID).FirstOrDefault().FBQuestion = EntryFBQuestion.Text;
+                        FBList.Where(w => w.FBID == xID).FirstOrDefault().MValue = Convert.ToInt32(FBValue.Value);
                         AddButton.ClassId = "N";
+                        EntryFBQuestion.Text = "";
+                        FBValue.Value = 5;
+                        BtnSubmit.IsVisible = true;
                         break;
                     case "N":
                         if (!await DisplayAlert("Add New Feedback", "Sure to save?", "Yes", "No")) return;
@@ -126,13 +144,24 @@ namespace SPDInfoApp.Views
                             FBQuestion = EntryFBQuestion.Text,
                             MValue = Convert.ToInt32(FBValue.Value),
                             IsShow = true,
-                            ID = FBList.Count + 1
+                            FBID = FBList.Count + 1
 
                         };
                         FBList.Add(studentFeedback);
                         LVFeedbacks.ItemsSource = null;
-                        LVFeedbacks.ItemsSource = FBList.OrderByDescending(w => w.ID);
+                        LVFeedbacks.ItemsSource = FBList.OrderByDescending(w => w.FBID);
+                        EntryFBQuestion.Text = "";
+                        FBValue.Value = 5;
+                        BtnSubmit.IsVisible = true;
                         break;
+
+                    case "C":
+                        if (!await DisplayAlert("Add New Feedback", "Sure to Cancel?", "Yes", "No")) return;
+                        EntryFBQuestion.Text = "";
+                        FBValue.Value = 5;
+                        // BtnSubmit.IsVisible = false;
+                        break;
+
                     default:
                         break;
                 }
@@ -142,9 +171,27 @@ namespace SPDInfoApp.Views
             AddButton.Source = AddLayout.IsVisible ? "Save.png" : "add.png";
 
             lblFeedback.Text = AddLayout.IsVisible ? "Save Feedback" : "New Feedback";
+            CancelButton.IsVisible = AddLayout.IsVisible;
+            lblFeedbackCancel.IsVisible = AddLayout.IsVisible;
+        }
 
-            //AddButton.ClassId = AddLayout.IsVisible ? "E" : "";
+        private async void CancelButton_Clicked(object sender, EventArgs e)
+        {
+            AddButton.ClassId = "C";
+            await CRUDEFeedback();
+        }
 
+        private async void BtnSubmit_Clicked(object sender, EventArgs e)
+        {
+            PHPServices service = new PHPServices();
+
+            foreach (var FB in FBList)
+            {
+                var result = await service.UpdateStudentMasterFeedbacks(new string[] { FB.FBID.ToString(), FB.FBQuestion, FB.MValue.ToString(), FB.IsShow ? "False" : "True" });
+            }
+            var result1 = await service.ResetStudentMasterFeedbacks(new string[] { "0" });
+            await App.Current.MainPage.DisplayAlert("Feedbacks", "Feedbacks updated successfully.", "OK");
+            BtnSubmit.IsVisible = false;
         }
     }
 }

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SPDInfoApp.Convertors"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:cnvrts="clr-namespace:SPDInfoApp.HelperClasses"
+             x:Class="SPDInfoApp.Views.AdminFeedbacksRep_STD" x:Name="MyPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="BackGroundColorList">White</Color>
+            <Color x:Key="BackGroundColorLeaveRemainRoundBox">#39557C</Color>
+            <Color x:Key="BorderColorLeaveRemainRoundBox">Black</Color>
+            <Color x:Key="BaseBackGroundColorBlue">#39557C</Color>
+            <Color x:Key="BaseBackGroundColorRed">Red</Color>
+            <Color x:Key="BaseForeGroundColor">White</Color>
+            <Color x:Key="DefColorBlack">Black</Color>
+            <Color x:Key="DefColorWhite">White</Color>
+            <Color x:Key="DefColorFloralWhite">FloralWhite</Color>
+            <Color x:Key="DefColorRed">Red</Color>
+            <Color x:Key="DefColorBlue">#39557C</Color>
+            <Color x:Key="LabelDefColorBackground">White</Color>
+            <Color x:Key="LabelDefColorForeground">Black</Color>
+
+            <Color x:Key="EntryDefColorBackground">#daeed8</Color>
+            <Color x:Key="EntryDefColorForeground">Black</Color>
+
+            <Style x:Key="Entryfont" TargetType="Entry">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <Style x:Key="Lablefont" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="FontAttributes" Value="None"/>
+            </Style>
+            <cnvrts:DateConvertor x:Key="dateConvert"></cnvrts:DateConvertor>
+            <cnvrts:RatingToTextConvertor x:Key="ratingToTextConvertor"></cnvrts:RatingToTextConvertor>
+            <cnvrts:RatingToColorConvertor x:Key="ratingToColorConvertor"></cnvrts:RatingToColorConvertor>
+            <local:ImageUrlConvertor x:Key="imageUrlConvertor" ></local:ImageUrlConvertor>
+            <local:FeedbackValueConvertor x:Key="feedbackValueConvertor"></local:FeedbackValueConvertor>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Spacing="0">
+                <ListView x:Name="LVFBStudent" HasUnevenRows="True" CachingStrategy="RecycleElement"
+                          HeightRequest="200" ItemSelected="LVFBStudent_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <Image Source="{Binding PhotoName, Converter={StaticResource imageUrlConvertor}}"
+                                               HeightRequest="50" WidthRequest="50"
+                                               HorizontalOptions="Start"
+                                               />
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label Text="AppID:" FontSize="12"/>
+                                                <Label Text="{Binding ApplicationID}" FontSize="12" />
+                                                <Label Text="{Binding StudentFName}" FontSize="12" HorizontalOptions="CenterAndExpand"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label Text="Class:" FontSize="12"/>
+                                                <Label Text="{Binding AppearingClass}" FontSize="12" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <BoxView HeightRequest="3" BackgroundColor="Black" HorizontalOptions="FillAndExpand"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout>
+                        <Label Text="  Feedbacks by Date(s):" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End"
+                           FontSize="12" FontAttributes="Bold"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <combobox:SfComboBox x:Name="cmbFBDates" DataSource="{Binding fBDates}" BindingContext="{Binding fBDates}"
+                                         HorizontalOptions="FillAndExpand" WidthRequest="300"
+                                         DisplayMemberPath="FormatedDate" SelectedValuePath="FBDateTime" SelectionChanged="CmbFBDates_SelectionChanged">
+                        </combobox:SfComboBox>
+                    </StackLayout>
+                </StackLayout>
+                <BoxView HeightRequest="3" BackgroundColor="ForestGreen" HorizontalOptions="FillAndExpand"/>
+                <StackLayout BindingContext="{x:Reference Name=BusyIndicator}"  IsVisible="{Binding Path=IsRunning}"
+                         HorizontalOptions="Center" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                    <ActivityIndicator x:Name="BusyIndicator" 
+                                 Color="Black" IsVisible="False" IsRunning="False"   >
+                    </ActivityIndicator>
+                    <Label x:Name="lblBusy" BindingContext="{x:Reference Name=BusyIndicator}"  IsVisible="{Binding Path=IsRunning}" Text="Fatching Feedbacks..." FontSize="8" FontAttributes="Bold" TextColor="OrangeRed" />
+                </StackLayout>
+
+                <ListView x:Name="lstFeedback" HasUnevenRows="True" SelectionMode="None" SeparatorVisibility="None" CachingStrategy="RecycleElement" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
+                                <StackLayout Spacing="5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout WidthRequest="200">
+                                            <Label Text="{Binding FeedbackQues,Mode=TwoWay}"  TextColor="#086487"  Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"  HorizontalOptions="CenterAndExpand" Spacing="5" >
+                                            <Label  Text="{Binding FBValueString}" FontSize="12" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+                                            <!--<Label x:Name="lblFBMValue"  Text="{Binding MValue}" IsVisible="False" FontSize="12" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>-->
+                                            <!--<rating:SfRating   IsEnabled="False" ItemCount="{Binding MValue, Converter={StaticResource feedbackValueConvertor}}" ItemSize="20" HorizontalOptions="StartAndExpand" Value="{Binding FeedbackValue,Mode=TwoWay}" >
+                                            <rating:SfRating.RatingSettings>
+                                                <rating:SfRatingSettings RatedStroke="Black" RatedStrokeWidth="2"/>
+                                            </rating:SfRating.RatingSettings>
+                                        </rating:SfRating>-->
+                                            <!--<Label Text="{Binding FeedbackValue}"/>-->
+                                            <!--, Source={x:Reference MyPage},Converter={StaticResource feedbackValueConvertor}, ConverterParameter={x:Reference Name=lblFBMValue}}" />-->
+                                            <Label Text="{Binding FeedbackValue,Converter={StaticResource ratingToTextConvertor}}" 
+                                           WidthRequest="70" VerticalTextAlignment="Center"
+                                           TextColor="{Binding FeedbackValue,Mode=TwoWay,Converter={StaticResource ratingToColorConvertor}}" FontSize="8" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

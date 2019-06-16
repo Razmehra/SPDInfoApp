@@ -46,7 +46,7 @@ namespace SPDInfoApp.Views
 
         private void BtnFeedbackSTD_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new AdminFeedbacksRep_STD() { BackgroundColor = Color.GhostWhite, Title = "Feedbacks (Student)", Icon = "SPDLogo.png" });
         }
 
         private void BtnAlumnyEntries_Clicked(object sender, EventArgs e)
@@ -65,6 +65,16 @@ namespace SPDInfoApp.Views
         }
 
         private void BtnfeedbackMasterAlumni_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnBroadcastMsg_Clicked(object sender, EventArgs e)
+        {
+           // Navigation.PushAsync(new BCMessages() { BackgroundColor = Color.GhostWhite, Title = "Settings: Broadcast Messages", Icon = "SPDLogo.png" });
+        }
+
+        private void BtnBroadcastEvent_Clicked(object sender, EventArgs e)
         {
 
         }

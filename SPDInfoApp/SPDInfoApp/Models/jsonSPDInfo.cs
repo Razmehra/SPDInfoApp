@@ -238,7 +238,7 @@ namespace SPDInfoApp.Models
         public string CertNcc { get; set; }
 
         [JsonProperty("CampNCC")]
-        [Description("NCC attanded")]
+        [Description("NCC camp attanded")]
         public string CampNcc { get; set; }
 
         [JsonProperty("NCCCampOtherDetail")]

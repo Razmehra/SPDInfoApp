@@ -20,7 +20,7 @@
                                 <ActivityIndicator x:Name="BusyIndicator" 
                                  Color="Black" IsVisible="False"  >
                                 </ActivityIndicator>
-                                <Label x:Name="lblBusy"  IsVisible="False" Text="Authenticating user..." FontSize="8" FontAttributes="Bold" TextColor="OrangeRed" />
+                                <Label x:Name="lblBusy"  IsVisible="False"   Text="Authenticating user..." FontSize="8" FontAttributes="Bold" TextColor="OrangeRed" />
                             </StackLayout>
 
                             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" >

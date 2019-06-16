@@ -21,17 +21,22 @@ namespace SPDInfoApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StudentFeedback : ContentPage
     {
-        private ObservableCollection<StudentFeedbackModel> FDList { get; set; }
+        private ObservableCollection<StudentFeedbackModel> FBList { get; set; }
 
         public StudentFeedback(string loginmode = "")
         {
             InitializeComponent();
-            FDList = PopulateData();
-            this.BindingContext = FDList;
-            lstFeedback.BindingContext = this;
-            lstFeedback.ItemsSource = FDList;
-            PopulatePreviousFB();
+            FetchDatas();
 
+        }
+
+        private async void FetchDatas()
+        {
+            FBList = await PopulateData();
+            this.BindingContext = FBList;
+            lstFeedback.BindingContext = this;
+            lstFeedback.ItemsSource = FBList;
+            PopulatePreviousFB();
         }
 
         private void PopulatePreviousFB()
@@ -44,27 +49,46 @@ namespace SPDInfoApp.Views
             if (list.StudentFeedback == null) return;
             foreach (var fb in list.StudentFeedback.ToList())
             {
-                FDList.Where(w => w.ID == fb.ID).Select(w => w.FeedbackValue = fb.FeedbackValue).ToList();
+                FBList.Where(w => w.ID == fb.ID).Select(w => w.FeedbackValue = fb.FeedbackValue).ToList();
             }
         }
 
-        private ObservableCollection<StudentFeedbackModel> PopulateData()
+        private async Task<ObservableCollection<StudentFeedbackModel>> PopulateData()
         {
-            ObservableCollection<StudentFeedbackModel> feedbackDatas = new ObservableCollection<StudentFeedbackModel>()
+
+            PHPServices service = new PHPServices();
+
+            var result = await service.FetchStudentMasterFeedbacks(new string[] { "0" });
+
+            if (result.ToString() == "failure")
             {
-               new StudentFeedbackModel{ ID=1, FeedbackQues="Teaching & Learning:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=2, FeedbackQues="Interaction with faculty & teacher:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=3, FeedbackQues="Interaction with administration and office staff:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=4, FeedbackQues="Examination and evaluation:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=5, FeedbackQues="Infrastructre & facilities:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=6, FeedbackQues="Library facilities:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=7, FeedbackQues="Sports facilities:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=8, FeedbackQues="Personality development and Placement facilities:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=9, FeedbackQues="Internet & Computer facilities:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=10, FeedbackQues="Extra-curricular activities:", FeedbackValue=0, FeedbackValueText=""},
-               new StudentFeedbackModel{ ID=11, FeedbackQues="Overall rating:", FeedbackValue=0, FeedbackValueText=""},
-            };
+                return null;
+            }
+            var data = Utils.DeserializeFromJson<ObservableCollection<MstFeedbackModel>>(result);
+            ObservableCollection<StudentFeedbackModel> feedbackDatas = new ObservableCollection<StudentFeedbackModel>();
+
+            foreach (var fb in data)
+            {
+                feedbackDatas.Add(new StudentFeedbackModel { ID = fb.FBID, FeedbackQues = fb.FBQuestion, MValue = fb.MValue, FeedbackValue = 0, FeedbackValueText = "" });
+
+            }
             return feedbackDatas;
+            //ObservableCollection<StudentFeedbackModel> feedbackDatas = new ObservableCollection<StudentFeedbackModel>()
+            //{
+            //   new StudentFeedbackModel{ ID=1, FeedbackQues="Teaching & Learning:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=2, FeedbackQues="Interaction with faculty & teacher:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=3, FeedbackQues="Interaction with administration and office staff:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=4, FeedbackQues="Examination and evaluation:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=5, FeedbackQues="Infrastructre & facilities:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=6, FeedbackQues="Library facilities:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=7, FeedbackQues="Sports facilities:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=8, FeedbackQues="Personality development and Placement facilities:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=9, FeedbackQues="Internet & Computer facilities:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=10, FeedbackQues="Extra-curricular activities:", FeedbackValue=0, FeedbackValueText=""},
+            //   new StudentFeedbackModel{ ID=11, FeedbackQues="Overall rating:", FeedbackValue=0, FeedbackValueText=""},
+            //};
+            //  return feedbackDatas;
+
         }
 
         private async void BtnApply_Clicked(object sender, EventArgs e)
@@ -80,8 +104,8 @@ namespace SPDInfoApp.Views
             string ApplicationID = Xamarin.Forms.Application.Current.Properties["StudentApplicationID"].ToString();
             list.Select(w => w.ApplicationID = ApplicationID).ToList();
             //
-            DateTime dt = DateTime.Parse( DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
-            list.Where(w => w.ApplicationID == ApplicationID).Select(w => w.FBDateTime=dt).ToList();
+            DateTime dt = DateTime.Parse(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+            list.Where(w => w.ApplicationID == ApplicationID).Select(w => w.FBDateTime = dt).ToList();
 
             string serialData = Utils.SerializeToJson(list).ToString();
             loginInfos.Where(w => w.ApplicationId == ApplicationID).Select(w => w.StudentFeedback = list).ToList();
@@ -91,7 +115,7 @@ namespace SPDInfoApp.Views
 
             var jsonstring = Utils.SerializeToJson(loginInfos);
 
-            var yy= Utils.DeserializeFromJson<List<StudentFeedbackModel>>(jsonstring);
+            var yy = Utils.DeserializeFromJson<List<StudentFeedbackModel>>(jsonstring);
             Application.Current.Properties["LoginInfo"] = jsonstring;
 
             await Xamarin.Forms.Application.Current.SavePropertiesAsync();
@@ -108,7 +132,7 @@ namespace SPDInfoApp.Views
             }
 
 
-            List<StudentFeedbackModel> studentFeedbacks= new List<StudentFeedbackModel>();
+            List<StudentFeedbackModel> studentFeedbacks = new List<StudentFeedbackModel>();
             if (result == "failure")
             {
                 // DisplayInvalidLoginPromt();
@@ -117,28 +141,28 @@ namespace SPDInfoApp.Views
             else
             {
                 var PreviousFeedbacks = Utils.DeserializeFromJson<List<JsonStudentFeedback>>(result);
-                studentFeedbacks = Utils.DeserializeFromJson<List<StudentFeedbackModel>>( PreviousFeedbacks[0].FBJson.ToString());
+                studentFeedbacks = Utils.DeserializeFromJson<List<StudentFeedbackModel>>(PreviousFeedbacks[0].FBJson.ToString());
                 //studentFeedbacks.Add(fb);
             }
 
 
 
             //UpdateFeedback
-          var conList=  studentFeedbacks.Concat(list);
+            var conList = studentFeedbacks.Concat(list);
             studentFeedbacks = conList.ToList();
 
             JsonStudentFeedback Jfb = new JsonStudentFeedback();
             Jfb.ApplicationID = ApplicationID;
             jsonstring = Utils.SerializeToJson(studentFeedbacks);//loginInfos.LastOrDefault().SFB.ToString();  ;// serialData.ToString();// 
-                                                     //var rr= Regex.Unescape(jsonstring);
-                                                     // rr = JsonConvert.DeserializeObject<string>(rr.ToString());
+                                                                 //var rr= Regex.Unescape(jsonstring);
+                                                                 // rr = JsonConvert.DeserializeObject<string>(rr.ToString());
 
             Jfb.FBJson = SanitizeReceivedJson(jsonstring);// JObject.Parse(jsonstring).ToString();
 
             Jfb.FBDateTime = DateTime.Now;
-            
 
-             result = "";
+
+            result = "";
             using (UserDialogs.Instance.Loading("Update feedback .\nPlease Wait.", null, null, true, MaskType.Black))
             {
                 result = await MyService.SubmitStudentFeedback(Jfb);

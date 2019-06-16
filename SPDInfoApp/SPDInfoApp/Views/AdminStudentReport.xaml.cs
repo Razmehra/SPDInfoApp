@@ -34,13 +34,7 @@ namespace SPDInfoApp.Views
             InitializeComponent();
             this.BindingContext = _vm;
 
-            // MyDataGrid.GridLoaded += DataGrid_GridLoaded;
             MyDataGrid.AutoGeneratingColumn += GridAutoGeneratingColumns;
-            //MyDataGrid.GroupColumnDescriptions.Clear();
-            //// MyDataGrid.GroupColumnDescriptions.Remove(GroupingOnEntryDate);
-
-            //MyDataGrid.GroupColumnDescriptions.Add(GroupingOnEntryDate);
-
             MyDataGrid.AllowPullToRefresh = true;
             MyDataGrid.PullToRefreshCommand = new Command(ExecutePullToRefreshCommand);
 
@@ -94,14 +88,6 @@ namespace SPDInfoApp.Views
                 BusyIndicator.IsRunning = true;
                 BusyIndicator.IsEnabled = true;
                 ExecutePullToRefreshCommand();
-
-               // _vm.FetchData();
-               //  if(MyDataGrid.GroupColumnDescriptions.Count==0) MyDataGrid.GroupColumnDescriptions.Add(GroupingOnEntryDate);
-               // MyDataGrid.Refresh();
-               // 
-               //// MyDataGrid.GroupColumnDescriptions.Remove(GroupingOnEntryDate);
-
-                // MyDataGrid.GroupColumnDescriptions.Add(GroupingOnEntryDate);
 
 
             }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SPDInfoApp.Models
 {
-   public class JsonStudentFeedback
+   public class JsonStudentFeedback:JsonSpdInfo
     {
         [JsonProperty("ApplicationID")]
         public string ApplicationID { get; set; }
