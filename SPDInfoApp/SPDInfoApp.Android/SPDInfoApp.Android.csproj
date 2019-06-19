@@ -20,7 +20,7 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidKeyStore>true</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Users\user\AppData\Local\Xamarin\Mono for Android\Keystore\DevKey\DevKey.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>rajahsin8255</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>DevKey</AndroidSigningKeyAlias>

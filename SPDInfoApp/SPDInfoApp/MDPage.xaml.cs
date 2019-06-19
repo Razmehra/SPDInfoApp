@@ -1,4 +1,5 @@
-﻿using SPDInfoApp.Views;
+﻿using Acr.UserDialogs;
+using SPDInfoApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,33 @@ namespace SPDInfoApp
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Alert!", "Close App.\n Do you really want to exit?", "Yes", "No");
+
+                if (result)
+                {
+                    try
+                    {
+
+                       // UserDialogs.Instance.Toast("Closing App..");
+                       // await LogoutAsync();
+                        System.Environment.Exit(0);
+                    }
+                    catch
+                    {
+                        await DisplayAlert("Alert", "Something went wrong..", "Ok");
+                    }
+
+
+                }
+            });
+            return true;
         }
     }
 }

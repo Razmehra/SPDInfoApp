@@ -19,7 +19,8 @@ namespace SPDInfoApp.Models
         public int MsgMode { get; set; }
         private bool _isShow { get; set; }
         public bool IsShow { get { return _isShow; } set { _isShow = value; OnPropertyChanged("IsShow"); } }
-
+        public bool IsScroll { get; set; }
+        public List<MessageTarget> MsgTarget {get;set;}
         protected virtual void OnPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

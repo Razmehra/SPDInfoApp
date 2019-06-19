@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SPDInfoApp.Convertors"
              xmlns:controls="clr-namespace:SPDInfoApp.Controls"
              xmlns:cnvrts="clr-namespace:SPDInfoApp.HelperClasses"
+             xmlns:radiogroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="SPDInfoApp.Views.BCMessages" Title="Settings: Broadcast Messages" Icon="SPDLogo.png" 
              BackgroundColor="GhostWhite">
     <ContentPage.Resources>
@@ -58,9 +59,9 @@
                 <StackLayout x:Name="AddLayout" IsVisible="True" BackgroundColor="GhostWhite">
                     <Label Text="Message:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand"/>
                     <Frame BackgroundColor="SkyBlue" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <Entry x:Name="EntryMessage" FontSize="13" FontAttributes="Bold"
-                   HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
-                   HeightRequest="100" />
+                        <Editor x:Name="EntryMessage" FontSize="13" FontAttributes="Bold" 
+                       HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                       HeightRequest="100" IsSpellCheckEnabled="True"/>
                     </Frame>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                         <StackLayout Orientation="Horizontal" Spacing="2" >
@@ -105,6 +106,44 @@
                                 VerticalOptions="Center"                                              
                                 />
 
+                </StackLayout>
+                <StackLayout BackgroundColor="GhostWhite" IsVisible="False">
+                    <Label Text="Remark:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand"/>
+                    <Entry x:Name="EntryRemark" FontSize="13" FontAttributes="Bold"
+                   HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="GhostWhite" Spacing="0" Orientation="Horizontal">
+                    <Label Text="Message for:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+                    <StackLayout HorizontalOptions="StartAndExpand">
+                        <radiogroup:SfRadioGroup x:Name="rgMessageMode" Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="1" HorizontalOptions="Start">
+                            <radiogroup:SfRadioButton x:Name="rgButton4Student" Text="Student Only" HorizontalOptions="Start"/>
+                            <radiogroup:SfRadioButton x:Name="rgButton4Alumni" Text="Alumni Only"  HorizontalOptions="Start"/>
+                            <radiogroup:SfRadioButton x:Name="rgButton4All" Text="All" HorizontalOptions="Start"/>
+                        </radiogroup:SfRadioGroup>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout BackgroundColor="GhostWhite" Spacing="0" Orientation="Horizontal">
+                    <Label Text="Message Type:" TextColor="Black" FontSize="13" VerticalOptions="CenterAndExpand" />
+                    <StackLayout HorizontalOptions="StartAndExpand">
+                        <radiogroup:SfRadioGroup x:Name="rgMessageType" Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="1" HorizontalOptions="Start">
+                            <radiogroup:SfRadioButton x:Name="rgButtonIsScroll" Text="Scroll" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                            <radiogroup:SfRadioButton x:Name="rgButtonIsStatic" Text="Static" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        </radiogroup:SfRadioGroup>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout>
+                    <ListView x:Name="LVTarget" HasUnevenRows="True" CachingStrategy="RecycleElement" HeightRequest="80" 
+                          HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackLayout>
                 <Button x:Name="BtnSubmit" Text="Submit Changes?" FontSize="13" IsVisible="False" 
                         BackgroundColor="OrangeRed" TextColor="WhiteSmoke" WidthRequest="100" Clicked="BtnSubmit_Clicked" />
