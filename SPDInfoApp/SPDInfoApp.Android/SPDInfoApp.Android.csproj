@@ -89,7 +89,7 @@
       <Version>2.3.5</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Compression">
       <Version>17.1.0.49</Version>
@@ -98,16 +98,19 @@
       <Version>17.1.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid">
       <Version>17.1.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfPicker">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRating">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.49</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView">
+      <Version>17.1.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.XlsIO">
       <Version>17.1.0.49</Version>
@@ -155,6 +158,11 @@
     <AndroidResource Include="Resources\drawable\Cancel1.png" />
     <AndroidResource Include="Resources\drawable\msg.png" />
     <AndroidResource Include="Resources\drawable\Events.png" />
+    <AndroidResource Include="Resources\drawable\student.png" />
+    <AndroidResource Include="Resources\drawable\Eye.png" />
+    <AndroidResource Include="Resources\drawable\Alumni2.png" />
+    <AndroidResource Include="Resources\drawable\message.png" />
+    <AndroidResource Include="Resources\drawable\view.png" />
     <GoogleServicesJson Include="google-services.json" />
     <Content Include="Assets\IndRazFont-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

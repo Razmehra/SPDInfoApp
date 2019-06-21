@@ -71,7 +71,8 @@ namespace SPDInfoApp.Views
 
         private void BtnBroadcastMsg_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new BCMessages() { BackgroundColor = Color.GhostWhite, Title = "Settings: Broadcast Messages", Icon = "SPDLogo.png" });
+            //  Navigation.PushAsync(new BCMessages() { BackgroundColor = Color.GhostWhite, Title = "Settings: Broadcast Messages", Icon = "SPDLogo.png" });
+            Navigation.PushAsync(new BCMessageCenter() { BackgroundColor = Color.FloralWhite, Title = "Settings: Broadcast Messages Center", Icon = "SPDLogo.png" });
         }
 
         private void BtnBroadcastEvent_Clicked(object sender, EventArgs e)

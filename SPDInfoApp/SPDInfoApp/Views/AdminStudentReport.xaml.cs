@@ -22,7 +22,7 @@ namespace SPDInfoApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AdminStudentReport : ContentPage
     {
-      private  GroupColumnDescription GroupingOnEntryDate = new GroupColumnDescription()
+        private GroupColumnDescription GroupingOnEntryDate = new GroupColumnDescription()
         {
             ColumnName = "EntryDate",
             Converter = new GroupConverter()
@@ -55,9 +55,10 @@ namespace SPDInfoApp.Views
         }
         private void GridAutoGeneratingColumns(object sender, AutoGeneratingColumnEventArgs e)
         {
-            if (e.Column.MappingName == "PhotoPath")
+            if (e.Column.MappingName == "PhotoPath" || e.Column.MappingName == "IsSelected")
             {
                 e.Column.IsHidden = true;
+
             }
         }
 
@@ -108,7 +109,7 @@ namespace SPDInfoApp.Views
             //"rajahsin@gmail.com"
             using (UserDialogs.Instance.Loading("Prepare excel .\nPlease Wait.", null, null, true, MaskType.Black))
             {
-                 result = await PHPService.SendExcel2Mail(new string[] { email.Value });
+                result = await PHPService.SendExcel2Mail(new string[] { email.Value });
             }
 
             if (result == "Success")
@@ -117,7 +118,7 @@ namespace SPDInfoApp.Views
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert(result,"Failed to export data.." , "OK");
+                await App.Current.MainPage.DisplayAlert(result, "Failed to export data..", "OK");
             }
 
             return;
@@ -128,15 +129,15 @@ namespace SPDInfoApp.Views
             DependencyService.Get<IFileReadWrite>().WriteData(fileName, data);
             //System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
             var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-           // File.Create
-          
+            // File.Create
+
             var filePath = Path.Combine(documentsPath, fileName);
-           // File.Create(filePath);
+            // File.Create(filePath);
             //File.AppendText()
             File.WriteAllText(filePath, data);
 
 
-           // return;
+            // return;
 
             DataGridExcelExportingController excelExport = new DataGridExcelExportingController();
             var excelEngine = excelExport.ExportToExcel(MyDataGrid);

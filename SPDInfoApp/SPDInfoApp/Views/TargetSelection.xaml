@@ -1,10 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SPDInfoApp.Views.TargetSelection">
+             xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+             xmlns:local="clr-namespace:SPDInfoApp.Convertors"
+             x:Class="SPDInfoApp.Views.TargetSelection" BackgroundColor="FloralWhite">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:GroupConverter x:Key="groupConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
+            <!--<ScrollView>-->
+            <StackLayout VerticalOptions="FillAndExpand">
+                <tabview:SfTabView HeightRequest="500" VerticalOptions="FillAndExpand">
+                    <tabview:SfTabView.Items>
+                        <tabview:SfTabItem Title="Student List"  >
+                            <tabview:SfTabItem.Content>
+                                <ScrollView>
+                                    <!--TODO Option for Filter records -->
+                                    <!--TODO List of Student-->
 
+                                    <StackLayout>
+                                        <datagrid:SfDataGrid 
+                                            x:Name="MyDataGrid"
+                                            ItemsSource="{Binding StudentInfos}"
+                                            ColumnSizer="Auto"
+                                            ShowColumnWhenGrouped="False"
+                                            SelectionMode="Single"
+                                            GridDoubleTapped="MyDataGrid_GridDoubleTapped"
+                                            LiveDataUpdateMode="AllowDataShaping"
+                                            RowHeight="50"
+                                            AllowPullToRefresh="True">
+                                        </datagrid:SfDataGrid>
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </tabview:SfTabItem.Content>
+                        </tabview:SfTabItem>
+
+                        <tabview:SfTabItem Title="Alumni" >
+                            <tabview:SfTabItem.Content>
+                                <StackLayout>
+                                    <!--TODO Option for Filter records -->
+                                    <!--TODO List of Alumni-->
+                                </StackLayout>
+                            </tabview:SfTabItem.Content>
+
+                        </tabview:SfTabItem>
+                    </tabview:SfTabView.Items>
+                </tabview:SfTabView>
+            </StackLayout>
+            <!--</ScrollView>-->
+            <Button x:Name="BtnSelect" Text="Select" Clicked="BtnSelect_Clicked" FontSize="13" FontAttributes="Bold" BackgroundColor="Accent" TextColor="FloralWhite" />
+            <StackLayout>
+                <ListView x:Name="LVTarget" HasUnevenRows="True"
+                      BindingContext="."
+                      ItemsSource="TargetList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding AppID}"/>
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding OtherInfo}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

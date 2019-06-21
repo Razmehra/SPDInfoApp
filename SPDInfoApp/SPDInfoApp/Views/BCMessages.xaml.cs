@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SPDInfoApp.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +15,25 @@ namespace SPDInfoApp.Views
 	public partial class BCMessages : ContentPage
 	{
         private Button _admButton;
+        private ObservableCollection<MessageTarget> TargetList { get; set; }
+        private MessageModel _message { get; set; }
 
-        public BCMessages ()
+
+        public BCMessages (MessageModel message=null)
 		{
 			InitializeComponent ();
-		}
+            MessagingCenter.Unsubscribe<NavigationMessage>(this, "BCMessage:UpdateTargets");
+            MessagingCenter.Subscribe<NavigationMessage>(this, "BCMessage:UpdateTargets", UpdateTarget);
+            _message = message;
+        }
+
+        private void UpdateTarget(NavigationMessage obj)
+        {
+            TargetList = (ObservableCollection<MessageTarget>)obj.Options;
+            LVTarget.BindingContext = this;
+            LVTarget.ItemsSource = null;
+            LVTarget.ItemsSource = TargetList;
+        }
 
         private void AdmBTN_Clicked(object sender, EventArgs e)
         {
@@ -56,7 +72,7 @@ namespace SPDInfoApp.Views
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PopAsync();
         }
 
         private void BtnSubmit_Clicked(object sender, EventArgs e)
@@ -72,6 +88,11 @@ namespace SPDInfoApp.Views
         private void TapGestureRecognizerDelete_Tapped(object sender, EventArgs e)
         {
 
+        }
+
+        private async void BtnSelectTargets_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new TargetSelection() {Title="Target Selection" });
         }
     }
 }

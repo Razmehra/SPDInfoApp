@@ -69,6 +69,19 @@ namespace SPDInfoApp.WebServices
             return dix;
         }
 
+        public async Task<string> FetchMessages(string[] Params)
+        {
+
+            var dic4 = new Dictionary<string, string>
+                {
+                   {"MsgID", Params[0] }
+                };
+
+
+            return await Result("POST", "fetchMessages.php", null, null, dic4);
+        }
+
+
         public async Task<string> SubmitStudentInfo(SPDInfo Params)
         {
 

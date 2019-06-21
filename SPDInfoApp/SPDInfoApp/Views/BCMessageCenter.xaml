@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SPDInfoApp.Convertors"
+             x:Class="SPDInfoApp.Views.BCMessageCenter" 
+             Title="Message Center" BackgroundColor="FloralWhite">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:HeightConvertor x:Key="heightConverter" />
+            <local:DateTime2DateConverter x:Key="dateTime2DateConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="BtnNew" Text="New Message" FontSize="13" IsVisible="True" 
+                        BackgroundColor="OrangeRed" TextColor="WhiteSmoke" WidthRequest="100" Clicked="BtnNew_Clicked" />
+
+            <StackLayout VerticalOptions="FillAndExpand">
+                <ListView x:Name="LVMessages" CachingStrategy="RecycleElement" HasUnevenRows="True"
+                          SeparatorVisibility="Default" SeparatorColor="DarkGray" SelectionMode="None" VerticalOptions="FillAndExpand">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--HeightRequest="{Binding IsShow, Converter={StaticResource heightConverter}}"-->
+                                <StackLayout Spacing="0">
+                                    <BoxView BackgroundColor="Accent" HeightRequest="3" HorizontalOptions="FillAndExpand" />
+                                    <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="3" Margin="5">
+                                        <Image Source="message.png" HeightRequest="20" WidthRequest="20" Aspect="AspectFit" />
+                                        <!--<Label Text="Message:" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>-->
+                                        <Label Text="From:" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="{Binding MsgFromDate, Converter={StaticResource dateTime2DateConverter}}" VerticalOptions="CenterAndExpand" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                        <Label Text="To:" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                                        <Label Text="{Binding MsgToDate, Converter={StaticResource dateTime2DateConverter}}" VerticalOptions="CenterAndExpand" FontSize="12" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                        <StackLayout Orientation="Horizontal" BackgroundColor="Transparent" Margin="0" Padding="0">
+                                            <Image BackgroundColor="Transparent" Source="edit.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding MsgID}">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TGREdit_Tapped" CommandParameter="{Binding MsgID}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Image Source="delete.png" HeightRequest="20" WidthRequest="20" ClassId="{Binding MsgID}">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TGRDelete_Tapped" CommandParameter="{Binding MsgID}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <StackLayout Orientation="Vertical" Margin="0,-5,10,0" Spacing="0" WidthRequest="50" HorizontalOptions="EndAndExpand">
+                                                <Label Text="  Targets  " BackgroundColor="Black" TextColor="FloralWhite" FontSize="8" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+                                                <ImageButton Source="view.png"  
+                                                             BackgroundColor="Transparent"
+                                                             HeightRequest="30" WidthRequest="30" 
+                                                             ClassId="{Binding MsgID}"
+                                                             Clicked="TGRViewTargets_Tapped" 
+                                                             CommandParameter="{Binding MsgID}" 
+                                                             VerticalOptions="StartAndExpand"
+                                                             HorizontalOptions="CenterAndExpand"/>
+                                                <BoxView BackgroundColor="DodgerBlue" Margin="0,-10,0,0"
+                                                         WidthRequest="20" HeightRequest="10"
+                                                         HorizontalOptions="CenterAndExpand"
+                                                         VerticalOptions="EndAndExpand"
+                                                         />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="10,-10,10,5">
+                                        <Frame  BackgroundColor="DodgerBlue"  CornerRadius="10"  HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                            <ScrollView Orientation="Vertical">
+                                            <Label Text="{Binding MsgMessage}" TextColor="Black" BackgroundColor="Transparent" FontAttributes="Bold" VerticalTextAlignment="Start"/>
+                                            </ScrollView>
+                                        </Frame>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -89,7 +89,10 @@ namespace SPDInfoApp.ViewModels
                         Mobile = student.PhoneMobile,
                         Email = student.EMail,
                         EntryDate = DateTime.Parse(dtval),
-                        PhotoPath=student.PhotoName
+                        PhotoPath = student.PhotoName,
+                        IsSelected = false,
+                        AppID =(int) student.Appid
+                       
                     };
                 StudentInfos.Add(info);
                 
@@ -112,6 +115,7 @@ namespace SPDInfoApp.ViewModels
     }
     public class StudentInfo
     {
+        public bool IsSelected { get; set; }
         public long ApplicationID { get; set; }
         public string StudentName { get; set; }
         public string AppearingClass { get; set; }
@@ -120,6 +124,9 @@ namespace SPDInfoApp.ViewModels
         [Description("Date of entry submission.")]
         public DateTime EntryDate { get; set; }
         public string PhotoPath { get; set; }
+        public int AppID { get; set; }
+
+
     }
 
 }

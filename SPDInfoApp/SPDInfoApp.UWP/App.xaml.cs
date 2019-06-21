@@ -1,3 +1,4 @@
+using Syncfusion.XForms.UWP.TabView;
 using Syncfusion.SfDataGrid.XForms.UWP;
 using Syncfusion.SfRating.XForms.UWP;
 using Syncfusion.SfPicker.XForms.UWP;
@@ -60,6 +61,7 @@ namespace SPDInfoApp.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
 List<Assembly> assembliesToInclude = new List<Assembly>();
+assembliesToInclude.Add(typeof(SfTabViewRenderer).GetTypeInfo().Assembly);
 assembliesToInclude.Add(typeof(SfDataGridRenderer).GetTypeInfo().Assembly);
 assembliesToInclude.Add(typeof(SfRatingRenderer).GetTypeInfo().Assembly);
 assembliesToInclude.Add(typeof(SfCheckBoxRenderer).GetTypeInfo().Assembly);
