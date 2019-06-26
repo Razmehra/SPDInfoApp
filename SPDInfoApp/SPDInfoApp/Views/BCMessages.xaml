@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SPDInfoApp.Convertors"
              xmlns:controls="clr-namespace:SPDInfoApp.Controls"
@@ -12,6 +13,13 @@
             <local:HeightConvertor x:Key="heightConverter" />
             <local:BoolToImageConvertor x:Key="boolToImageConvertor"/>
             <local:BoolToColorConverter4MSG x:Key="boolToColorConverter4MSG"/>
+            <local:MessageModeConvertor_1 x:Key="messageModeConvertor_1"/>
+            <local:MessageModeConvertor_2 x:Key="messageModeConvertor_2"/>
+            <local:MessageModeConvertor_3 x:Key="messageModeConvertor_3"/>
+            <local:MessageTypeConverterScroll x:Key="messageTypeConverterScroll"/>
+            <local:MessageTypeConverterStatic x:Key="messageTypeConverterStatic"/>
+            <local:DateTime2DateConverter x:Key="dateTime2DateConverter"/>
+
             <Color x:Key="BackGroundColorList">White</Color>
             <Color x:Key="BackGroundColorLeaveRemainRoundBox">#39557C</Color>
             <Color x:Key="BorderColorLeaveRemainRoundBox">Black</Color>
@@ -44,21 +52,27 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <!--<ScrollView>-->
         <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="3" >
                 <StackLayout>
                     <AbsoluteLayout>
                         <Image Source="msg.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start" />
                     </AbsoluteLayout>
-
                 </StackLayout>
-                <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="Aquamarine">
-                    <Label Text="Message:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand"/>
-                    <Editor x:Name="EntryMessage" FontSize="13" FontAttributes="Bold" 
-                                Margin="0,0,0,0"
+                <StackLayout HorizontalOptions="FillAndExpand" >
+                    <!--<Label Text="Message:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand"/>-->
+                    <!--<Editor x:Name="EntryMessage" AutoSize="TextChanges" WidthRequest="300" Text="{Binding MsgMessage}" FontSize="13" FontAttributes="Bold" 
+                                Margin="0,0,0,0" 
                            HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
-                           HeightRequest="100" IsSpellCheckEnabled="True"/>
+                           HeightRequest="100" IsSpellCheckEnabled="True"/>-->
+                    <inputLayout:SfTextInputLayout Hint="Message" EnableHintAnimation="True" 
+                        ContainerType="Filled" OutlineCornerRadius="8"  
+                                                  ContainerBackgroundColor="#E6EEF9">
+                        <Editor Text="{Binding MsgMessage}" FontSize="13" FontAttributes="Bold" 
+                                HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                           HeightRequest="100" />
+                    </inputLayout:SfTextInputLayout>
+
                 </StackLayout>
                 <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="End" >
                     <ImageButton x:Name="CancelButton" IsVisible="True" ClassId="C" Source="Cancel1.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="25" WidthRequest="25"
@@ -77,7 +91,7 @@
                                 <Label Text="From Date:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                                 <StackLayout Orientation="Vertical">
                                     <StackLayout Orientation="Horizontal">
-                                        <Button x:Name="btnAdmDt1" Clicked="AdmBTN_Clicked" />
+                                        <Button x:Name="btnAdmDt1" Text="{Binding MsgFromDate,Converter={x:StaticResource dateTime2DateConverter},Mode=TwoWay}" Clicked="AdmBTN_Clicked" />
                                         <Image x:Name="ImgAdmDT1" Source="Date.png" WidthRequest="20" HeightRequest="20" Aspect="AspectFit" HorizontalOptions="End">
                                             <Image.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="AdmDateTapGestureRecognizer_Tapped"/>
@@ -91,7 +105,7 @@
                                     <Label Text="To Date:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                                     <StackLayout Orientation="Vertical">
                                         <StackLayout Orientation="Horizontal">
-                                            <Button x:Name="btnAdmDt2" Clicked="AdmBTN_Clicked" />
+                                            <Button x:Name="btnAdmDt2" Text="{Binding MsgToDate,Converter={x:StaticResource dateTime2DateConverter},Mode=TwoWay}" Clicked="AdmBTN_Clicked" />
                                             <Image x:Name="ImgAdmDT2" Source="Date.png" WidthRequest="20" HeightRequest="20" Aspect="AspectFit" HorizontalOptions="End">
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="AdmDateTapGestureRecognizer_Tapped"/>
@@ -101,7 +115,6 @@
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>
-
                         </StackLayout>
                         <controls:CustomDatePicker x:Name="CustDatePicker" IsOpen="False"
                                 ColumnHeaderHeight="40"
@@ -118,17 +131,18 @@
                     </StackLayout>
                     <StackLayout BackgroundColor="GhostWhite" IsVisible="False">
                         <Label Text="Remark:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand"/>
-                        <Entry x:Name="EntryRemark" FontSize="13" FontAttributes="Bold"
-                         HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" />
+                        <Entry x:Name="EntryRemark" Text="{Binding Remark}" FontSize="13" FontAttributes="Bold"
+                             HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" />
                     </StackLayout>
 
                     <StackLayout BackgroundColor="GhostWhite" Spacing="0" Orientation="Horizontal">
                         <Label Text="Message for:" TextColor="Black" FontSize="13" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
                         <StackLayout HorizontalOptions="StartAndExpand">
-                            <radiogroup:SfRadioGroup x:Name="rgMessageMode" Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="1" HorizontalOptions="Start">
-                                <radiogroup:SfRadioButton x:Name="rgButton4Student" Text="Student Only" HorizontalOptions="Start"/>
-                                <radiogroup:SfRadioButton x:Name="rgButton4Alumni" Text="Alumni Only"  HorizontalOptions="Start"/>
-                                <radiogroup:SfRadioButton x:Name="rgButton4All" Text="All" HorizontalOptions="Start"/>
+                            <radiogroup:SfRadioGroup x:Name="rgMessageMode"   Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="1" HorizontalOptions="Start">
+                                <radiogroup:SfRadioButton x:Name="rgButton4Student" Text="Student Only"  HorizontalOptions="Start"/>
+                                <radiogroup:SfRadioButton x:Name="rgButton4Alumni" Text="Alumni Only"   HorizontalOptions="Start"/>
+                                <radiogroup:SfRadioButton x:Name="rgButton4All" IsChecked="True" Text="All" HorizontalOptions="Start"/>
+                                <!--IsChecked="{Binding MsgMode, Converter={StaticResource messageModeConvertor_3}}"-->
                             </radiogroup:SfRadioGroup>
                         </StackLayout>
                     </StackLayout>
@@ -136,8 +150,8 @@
                         <Label Text="Message Type:" TextColor="Black" FontSize="13" VerticalOptions="CenterAndExpand" />
                         <StackLayout HorizontalOptions="StartAndExpand">
                             <radiogroup:SfRadioGroup x:Name="rgMessageType" Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="1" HorizontalOptions="Start">
-                                <radiogroup:SfRadioButton x:Name="rgButtonIsScroll" Text="Scroll" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                                <radiogroup:SfRadioButton x:Name="rgButtonIsStatic" Text="Static" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                <radiogroup:SfRadioButton x:Name="rgButtonIsScroll" Text="Scroll"   HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                <radiogroup:SfRadioButton x:Name="rgButtonIsStatic" Text="Static" IsChecked="True"  HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                             </radiogroup:SfRadioGroup>
                         </StackLayout>
                         <Button x:Name="BtnSelectTargets" Text="Select Targets" FontSize="13" IsVisible="True" 
@@ -145,19 +159,6 @@
                         <Button x:Name="BtnSave" Text="Save" FontSize="13" IsVisible="True" 
                         BackgroundColor="CadetBlue"  TextColor="FloralWhite" />
                     </StackLayout>
-
-                    <!--<StackLayout>
-                    <ListView x:Name="LVTarget" HasUnevenRows="True" CachingStrategy="RecycleElement" HeightRequest="80" 
-                          HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>-->
                     <StackLayout VerticalOptions="FillAndExpand">
                         <ListView x:Name="LVTarget" HasUnevenRows="True"
                       BindingContext="."
@@ -229,6 +230,5 @@
                 </ListView>
             </StackLayout>-->
         </StackLayout>
-        <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

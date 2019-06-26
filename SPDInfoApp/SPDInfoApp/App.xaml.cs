@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SPDInfoApp.Views;
 using Plugin.FirebasePushNotification;
+using System.Threading.Tasks;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SPDInfoApp
@@ -132,9 +133,9 @@ namespace SPDInfoApp
 
             //  MainPage = new LoginMenu();//EntryPage();
 
-            MainPage = new BCMessageCenter() { Title="Settings: Broadcast Message Center", BackgroundColor=Color.FloralWhite};
+            MainPage =  new BCMessageCenter() { Title="Settings: Broadcast Message Center", BackgroundColor=Color.FloralWhite};
 
-
+           // LoadMainPage();
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {
                 System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
@@ -172,6 +173,11 @@ namespace SPDInfoApp
 
         }
 
+        //private async Task<Page> LoadMainPage()
+        //{
+        //    //MainPage = await new BCMessageCenter() { Title = "Settings: Broadcast Message Center", BackgroundColor = Color.FloralWhite };
+        //    //return MainPage;
+        //}
 
         protected override void OnStart()
         {

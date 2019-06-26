@@ -94,6 +94,9 @@
     <PackageReference Include="Syncfusion.Xamarin.Compression">
       <Version>17.1.0.49</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Core">
+      <Version>17.1.0.49</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.DataGridExport">
       <Version>17.1.0.49</Version>
     </PackageReference>

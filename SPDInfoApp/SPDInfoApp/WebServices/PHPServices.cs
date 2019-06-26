@@ -124,6 +124,49 @@ namespace SPDInfoApp.WebServices
             return await Result("POST", "insertSPDInfoRecords.php", null, null, dix);
         }
 
+        public async Task<string> SubmitMessages(MessageModel Params)
+        {
+
+            PropertyInfo[] infos = Params.GetType().GetProperties();
+
+            Dictionary<string, string> dix = new Dictionary<string, string>();
+
+            foreach (PropertyInfo info in infos)
+            {
+                var xx = info.GetValue(Params, null);
+                if (info.Name != "MsgID")
+                {
+
+                    bool isDateType = info.PropertyType.ToString().Equals("System.DateTime");
+                    if (isDateType)
+                    {
+                        string DateFormate = (info.Name == "MsgDate" ? "yyyy/MM/dd hh:mm:ss tt" : "yyyy/MM/dd");
+                        string dtVal = ((DateTime)xx).ToString(DateFormate);
+
+                        dix.Add(info.Name, xx == null ? null : dtVal);
+                    }
+                    else
+                    {
+
+                        bool isBoolType = info.PropertyType.ToString().Contains("Bool");
+
+                        if (isBoolType)
+                        {
+                            dix.Add(info.Name, ((bool)xx ? 1 : 0).ToString());
+                        }
+                        else
+                        {
+                            dix.Add(info.Name, (xx ?? "").ToString());
+                        }
+                    }
+
+                }
+            }
+
+            return await Result("POST", "InsertUpdateMessages.php", null, null, dix);
+        }
+
+
         public async Task<string> FetchStudentMasterFeedbacks(string[] Params)
         {
 
