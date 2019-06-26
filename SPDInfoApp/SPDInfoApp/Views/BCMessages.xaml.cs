@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +17,9 @@ namespace SPDInfoApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BCMessages : INotifyPropertyChanged
     {
+        //  private string icon { get; set; }
+        //U+1f514 public string HomeIcon => '\ue900'.ToString();
+        public string MsgIcon => '\uf514'.ToString();
         private bool _isnew;
         private Button _admButton;
         private ObservableCollection<MessageTarget> TargetList { get; set; }
@@ -37,6 +40,7 @@ namespace SPDInfoApp.Views
 
         public BCMessages(MessageModel message = null)
         {
+            
             InitializeComponent();
             MessagingCenter.Unsubscribe<NavigationMessage>(this, "BCMessage:UpdateTargets");
             MessagingCenter.Subscribe<NavigationMessage>(this, "BCMessage:UpdateTargets", UpdateTarget);
@@ -60,7 +64,14 @@ namespace SPDInfoApp.Views
             rgButtonIsStatic.IsChecked = _message.IsScroll == false;
             BindingContext = _message;
             _isnew = message == null;
-
+            if (!_isnew)
+            {
+                if(message.MsgAudience!=null || !string.IsNullOrEmpty(message.MsgAudience))
+                {
+                    var TList = Utils.DeserializeFromJson<ObservableCollection<MessageTarget>>(message.MsgAudience);
+                    UpdateTarget(new NavigationMessage() { Options = TList });
+                }
+            }
         }
 
         //public BCMessages(NavigationMessage message = null)
@@ -115,7 +126,13 @@ namespace SPDInfoApp.Views
 
         private async void AddButton_Clicked(object sender, EventArgs e)
         {
-            
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await DisplayAlert("No Internet", "Network Error:No Internet connection available.\n !Turn ON your data connection or connect using wifi then try again.", "Ok");
+                return;
+            }
+
             if (!await DisplayAlert("Save Message Notification", "Are you sure?", "Yes", "No")) return;
 
             var tList = LVTarget.ItemsSource;
@@ -145,11 +162,20 @@ namespace SPDInfoApp.Views
 
         private async void BtnSubmit_Clicked(object sender, EventArgs e)
         {
-            PHPServices pHPServices = new PHPServices();
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await DisplayAlert("No Internet", "Network Error:No Internet connection available.\n !Turn ON your data connection or connect using wifi then try again.", "Ok");
+                return;
+            }
+
             if (_message == null)
             {
-
+                await DisplayAlert("Message", "Empty message!", "Ok");
+                return;
             }
+
+            PHPServices pHPServices = new PHPServices();
             await pHPServices.SubmitMessages(_message);
 
         }

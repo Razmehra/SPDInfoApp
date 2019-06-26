@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
+using Xamarin.Essentials;
 
 namespace SPDInfoApp.ViewModels
 {
@@ -42,6 +43,9 @@ namespace SPDInfoApp.ViewModels
 
         public AdminStdReportViewModel()
         {
+
+
+
             try
             {
                 using (UserDialogs.Instance.Loading("Fetching data..\nPlease Wait.", null, null, true, MaskType.Black))
@@ -69,7 +73,13 @@ namespace SPDInfoApp.ViewModels
 
         public async void FetchData()
         {
-            
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await App.Current.MainPage.DisplayAlert("No Internet", "Network Error:No Internet connection available.\n !Turn ON your data connection or connect using wifi then try again.", "Ok");
+                return;
+            }
+
             var data = await _phpService.FetchStudentInfo(new string[] { "0" });
             var mydata = JsonSpdInfo.FromJson(data);
 

@@ -166,6 +166,9 @@
     <AndroidResource Include="Resources\drawable\Alumni2.png" />
     <AndroidResource Include="Resources\drawable\message.png" />
     <AndroidResource Include="Resources\drawable\view.png" />
+    <AndroidResource Include="Resources\drawable\Notification2.png" />
+    <AndroidResource Include="Resources\drawable\Notification1.png" />
+    <AndroidResource Include="Resources\drawable\Go_back_icon1.png" />
     <GoogleServicesJson Include="google-services.json" />
     <Content Include="Assets\IndRazFont-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

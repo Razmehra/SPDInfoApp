@@ -48,7 +48,7 @@ namespace SPDInfoApp.Views
 
         }
 
-        private void BtnSelect_Clicked(object sender, EventArgs e)
+        private  void BtnSelect_Clicked(object sender, EventArgs e)
         {
             var xlist = ((ObservableCollection<StudentInfo>)MyDataGrid.ItemsSource).Where(w => w.IsSelected == true).ToList();// as List<StudentInfo>;
             TargetList.Clear();
@@ -72,6 +72,13 @@ namespace SPDInfoApp.Views
             LVTarget.ItemsSource = TargetList;
 
             MessagingCenter.Send(new NavigationMessage(TargetList), "BCMessage:UpdateTargets");
+
         }
+
+        private async void GoBack(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync(true);
+        }
+
     }
 }

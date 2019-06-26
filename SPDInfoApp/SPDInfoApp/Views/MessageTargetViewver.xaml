@@ -1,12 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SPDInfoApp.Views.MessageTargetViewver">
+             xmlns:local="clr-namespace:SPDInfoApp.Convertors"
+             xmlns:cnvrts="clr-namespace:SPDInfoApp.HelperClasses"
+             x:Class="SPDInfoApp.Views.MessageTargetViewver"
+             Title="Message Notification Targets" BackgroundColor="FloralWhite" Icon="SPDInfo.png"
+             
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:HeightConvertor x:Key="heightConverter" />
+            <local:BoolToImageConvertor x:Key="boolToImageConvertor"/>
+            <local:BoolToColorConverter4MSG x:Key="boolToColorConverter4MSG"/>
+            <local:DateTime2DateConverter x:Key="dateTime2DateConverter"/>
+            <cnvrts:DateConvertor x:Key="dateConvert"></cnvrts:DateConvertor>
+
+            <Color x:Key="BackGroundColorList">White</Color>
+            <Color x:Key="BackGroundColorLeaveRemainRoundBox">#39557C</Color>
+            <Color x:Key="BorderColorLeaveRemainRoundBox">Black</Color>
+            <Color x:Key="BaseBackGroundColorBlue">#39557C</Color>
+            <Color x:Key="BaseBackGroundColorRed">Red</Color>
+            <Color x:Key="BaseForeGroundColor">White</Color>
+            <Color x:Key="DefColorBlack">Black</Color>
+            <Color x:Key="DefColorWhite">White</Color>
+            <Color x:Key="DefColorFloralWhite">FloralWhite</Color>
+            <Color x:Key="DefColorRed">Red</Color>
+            <Color x:Key="DefColorBlue">#39557C</Color>
+            <Color x:Key="LabelDefColorBackground">White</Color>
+            <Color x:Key="LabelDefColorForeground">Black</Color>
+
+            <Color x:Key="EntryDefColorBackground">#daeed8</Color>
+            <Color x:Key="EntryDefColorForeground">Black</Color>
+
+            <Style x:Key="Entryfont" TargetType="Entry">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <Style x:Key="Lablefont" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Frame BackgroundColor="FloralWhite" HasShadow="False">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Image Source="Notification1.png" WidthRequest="75" HeightRequest="75" Aspect="AspectFit" 
+                           BackgroundColor="Transparent"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                    <Label Text="Message/Notification to..." TextColor="Black" FontSize="12" FontAttributes="Bold"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           />
+                    <ImageButton Source="Go_back_icon1.png" WidthRequest="65" HeightRequest="65" Aspect="AspectFit"
+                                 BackgroundColor="Transparent"
+                                 Clicked="GoBack"
+                                 VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"/>
+                    
+                </StackLayout>
+            </Frame>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <ListView x:Name="LVTarget" HasUnevenRows="True"
+                      BindingContext="."
+                      SelectionMode="None"
+                      CachingStrategy="RecycleElement"
+                      VerticalOptions="FillAndExpand"
+                      ItemsSource="TargetList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BackgroundColor="{Binding IsStudent, Converter={StaticResource boolToColorConverter4MSG}}"
+                                           CornerRadius="10" Margin="0,0,0,7"
+                                       Padding="5"   
+                                       >
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="{Binding IsStudent, Converter={StaticResource  boolToImageConvertor}}"
+                                               HeightRequest="20" WidthRequest="20"/>
+                                            <Switch x:Name="swtSkipped" OnColor="Red" />
+                                            <Label BindingContext="{x:Reference swtSkipped}"
+                                                   IsVisible="{Binding Path=IsToggled}" Text="Skipped" TextColor="PeachPuff" FontSize="8" FontAttributes="Bold"/>
+                                            <Label Text="{Binding AppID}" TextColor="Black"/>
+                                            <Label Text="{Binding Name}" TextColor="Black" FontSize="12" FontAttributes="Bold"/>
+                                        </StackLayout>
+                                        <Label Text="{Binding OtherInfo}" LineBreakMode="CharacterWrap"/>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

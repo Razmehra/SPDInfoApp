@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SPDInfoApp.Views.MessagesPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout x:Name="absLayout"  HorizontalOptions="FillAndExpand" HeightRequest="40" VerticalOptions="Start" BackgroundColor="Red">
+                <WebView  x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="Black"  HeightRequest="40"
+                                     PropertyChanged="WebView_PropertyChanged" >
+                </WebView>
+                <Button x:Name="btnBrowser"  BackgroundColor="Transparent"  Clicked="BtnBrowser_Clicked" HorizontalOptions="FillAndExpand"  />
+            </AbsoluteLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -14,9 +14,14 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Button x:Name="BtnNew" Text="New Message" FontSize="13" IsVisible="True" 
-                        BackgroundColor="OrangeRed" TextColor="WhiteSmoke" WidthRequest="100" Clicked="BtnNew_Clicked" />
-
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button x:Name="BtnNew" Text="New Message" FontSize="13" IsVisible="True" HorizontalOptions="FillAndExpand"
+                        BackgroundColor="OrangeRed" TextColor="WhiteSmoke"  Clicked="BtnNew_Clicked" />
+                <ImageButton x:Name="BtnRefresh" Source="Sync.png" WidthRequest="50" HeightRequest="50" Aspect="AspectFit"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                             Clicked="BtnRefresh_Clicked"/>
+            </StackLayout>
             <StackLayout VerticalOptions="FillAndExpand">
                 <ListView x:Name="LVMessages" CachingStrategy="RecycleElement" HasUnevenRows="True"
                           SeparatorVisibility="Default" SeparatorColor="DarkGray" SelectionMode="None" VerticalOptions="FillAndExpand"
@@ -54,7 +59,7 @@
                                                              HeightRequest="30" WidthRequest="30" 
                                                              ClassId="{Binding MsgID}"
                                                              Clicked="TGRViewTargets_Tapped" 
-                                                             CommandParameter="{Binding MsgID}" 
+                                                             CommandParameter="{Binding MsgAudience}" 
                                                              VerticalOptions="StartAndExpand"
                                                              HorizontalOptions="CenterAndExpand"/>
                                                 <BoxView BackgroundColor="DodgerBlue" Margin="0,-10,0,0"
@@ -68,7 +73,7 @@
                                     <StackLayout Orientation="Horizontal" Margin="10,-10,10,5">
                                         <Frame  BackgroundColor="DodgerBlue"  CornerRadius="10"  HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                             <ScrollView Orientation="Vertical">
-                                            <Label Text="{Binding MsgMessage}" TextColor="Black" BackgroundColor="Transparent" FontAttributes="Bold" VerticalTextAlignment="Start"/>
+                                                <Label Text="{Binding MsgMessage}" TextColor="Black" BackgroundColor="Transparent" FontAttributes="Bold" VerticalTextAlignment="Start"/>
                                             </ScrollView>
                                         </Frame>
                                     </StackLayout>

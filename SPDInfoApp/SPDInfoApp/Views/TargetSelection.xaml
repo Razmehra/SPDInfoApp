@@ -15,6 +15,22 @@ xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTab
         <StackLayout>
             <!--<ScrollView>-->
             <StackLayout VerticalOptions="FillAndExpand">
+                <Frame BackgroundColor="FloralWhite" HasShadow="False">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <!--<Image Source="Notification1.png" WidthRequest="75" HeightRequest="75" Aspect="AspectFit" 
+                           BackgroundColor="Transparent"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Label Text="Message/Notification to..." TextColor="Black" FontSize="12" FontAttributes="Bold"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           />-->
+                        <ImageButton Source="Go_back_icon1.png" WidthRequest="65" HeightRequest="65" Aspect="AspectFit"
+                                 BackgroundColor="Transparent"
+                                 Clicked="GoBack"
+                                 VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"/>
+
+                    </StackLayout>
+                </Frame>
+
                 <tabview:SfTabView HeightRequest="500" VerticalOptions="FillAndExpand">
                     <tabview:SfTabView.Items>
                         <tabview:SfTabItem Title="Student List"  >

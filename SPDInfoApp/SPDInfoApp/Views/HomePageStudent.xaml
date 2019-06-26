@@ -1,12 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SPDInfoApp.Views.HomePageStudent">
+             x:Class="SPDInfoApp.Views.HomePageStudent" BackgroundColor="FloralWhite">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Student Homepage!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            
+            <AbsoluteLayout x:Name="absLayout"  HorizontalOptions="FillAndExpand" HeightRequest="40" VerticalOptions="Start" BackgroundColor="Red">
+                <WebView  x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="Black"  HeightRequest="40"
+                                     PropertyChanged="WebView_PropertyChanged" >
+                </WebView>
+                <Button x:Name="btnBrowser"  BackgroundColor="Transparent"  Clicked="BtnBrowser_Clicked" HorizontalOptions="FillAndExpand"  />
+            </AbsoluteLayout>
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Button x:Name="BtnFillInformation" Text="Fill Information" HorizontalOptions="FillAndExpand" FontSize="12" 
+                        TextColor="Black" Clicked="BtnFillInformation_Clicked"/>
+                
+            </StackLayout>
+            
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                    <Image Source="SPDLogo.png" HeightRequest="80" WidthRequest="80" Aspect="AspectFit" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>
+
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="#333333" Padding="10" CornerRadius="20">
+                            <Label Text="Message-Notification" TextColor="GhostWhite" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                    </StackLayout>
+
+
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="#333333" Padding="10" CornerRadius="20">
+                            <Label Text="News and Events" TextColor="GhostWhite" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="#333333" Padding="10" CornerRadius="20">
+                            <Label Text="Upcoming Events" TextColor="GhostWhite" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                    </StackLayout>
+
+
+                    <!--<StackLayout HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="#333333" Padding="10" CornerRadius="20">
+                            <Label Text="Settings" TextColor="GhostWhite" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="GhostWhite">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnfeedbackMaster" Source="feedbackEdit.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnfeedbackMaster_Clicked"/>
+                                <Label  Text="Feedback Edit(Student)" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnfeedbackMasterAlumni" Source="feedbackEdit.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnfeedbackMasterAlumni_Clicked"/>
+                                <Label  Text="Feedback Edit(Alumni)" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="GhostWhite">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnBroadcastMsg" Source="msg.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnBroadcastMsg_Clicked"/>
+                                <Label  Text="Brodcast Messages" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <ImageButton x:Name="BtnBroadcastEvent" Source="Events.png" BackgroundColor="Transparent" CornerRadius="20" HeightRequest="70" WidthRequest="70"
+                                 Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Clicked="BtnBroadcastEvent_Clicked"/>
+                                <Label  Text="Broadcast Events &amp; News" TextColor="Black" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+
+                        </StackLayout>
+
+                    </StackLayout>-->
+                    <BoxView HeightRequest="50" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"/>
+
+                </StackLayout>
+            </ScrollView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

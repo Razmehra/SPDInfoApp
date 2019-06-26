@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -65,6 +65,13 @@ namespace SPDInfoApp.Views
 
         private async void FetchMassages()
         {
+            var current = Connectivity.NetworkAccess;
+
+            if (current != NetworkAccess.Internet) {
+                await DisplayAlert("No Internet", "Network Error:No Internet connection available.\n !Turn ON your data connection or connect using wifi then try again.","Ok");
+                return;
+            }
+
             var data = await _phpService.FetchMessages(new string[] { "0" });
             var mydata = Utils.DeserializeFromJson<ObservableCollection<MessageModel>>(data);//List<MessageModel>
 
@@ -98,10 +105,18 @@ namespace SPDInfoApp.Views
 
         }
 
-        private void TGRViewTargets_Tapped(object sender, EventArgs e)
+        private async void TGRViewTargets_Tapped(object sender, EventArgs e)
         {
-
+            var imageButton =(ImageButton)sender;
+            var msgid = imageButton.ClassId;
+            var targets =(string)imageButton.CommandParameter;
+            var TargetList = Utils.DeserializeFromJson<ObservableCollection<MessageTarget>>(targets);
+            await Navigation.PushModalAsync(new MessageTargetViewver(TargetList),true);
         }
 
+        private void BtnRefresh_Clicked(object sender, EventArgs e)
+        {
+            FetchMassages();
+        }
     }
 }

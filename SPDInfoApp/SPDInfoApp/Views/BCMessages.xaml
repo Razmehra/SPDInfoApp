@@ -54,7 +54,7 @@ xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Sync
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="3" >
-                <StackLayout>
+                <StackLayout IsVisible="False">
                     <AbsoluteLayout>
                         <Image Source="msg.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start" />
                     </AbsoluteLayout>
@@ -67,10 +67,17 @@ xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Sync
                            HeightRequest="100" IsSpellCheckEnabled="True"/>-->
                     <inputLayout:SfTextInputLayout Hint="Message" EnableHintAnimation="True" 
                         ContainerType="Filled" OutlineCornerRadius="8"  
-                                                  ContainerBackgroundColor="#E6EEF9">
+                         LeadingViewPosition="Inside" 
+                         ContainerBackgroundColor="#E6EEF9">
+                        
                         <Editor Text="{Binding MsgMessage}" FontSize="13" FontAttributes="Bold" 
                                 HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                            HeightRequest="100" />
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Label
+                                Text="&#127919;" FontSize="Small" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center">
+                            </Label>
+                        </inputLayout:SfTextInputLayout.LeadingView>
                     </inputLayout:SfTextInputLayout>
 
                 </StackLayout>
@@ -156,8 +163,8 @@ xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Sync
                         </StackLayout>
                         <Button x:Name="BtnSelectTargets" Text="Select Targets" FontSize="13" IsVisible="True" 
                         BackgroundColor="OrangeRed" TextColor="WhiteSmoke"  Clicked="BtnSelectTargets_Clicked" />
-                        <Button x:Name="BtnSave" Text="Save" FontSize="13" IsVisible="True" 
-                        BackgroundColor="CadetBlue"  TextColor="FloralWhite" />
+                        <!--<Button x:Name="BtnSave" Text="Save" FontSize="13" IsVisible="True" 
+                        BackgroundColor="CadetBlue"  TextColor="FloralWhite" />-->
                     </StackLayout>
                     <StackLayout VerticalOptions="FillAndExpand">
                         <ListView x:Name="LVTarget" HasUnevenRows="True"

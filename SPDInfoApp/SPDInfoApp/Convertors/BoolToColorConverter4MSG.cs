@@ -11,7 +11,7 @@ namespace SPDInfoApp.Convertors
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            return ((bool)value) ? Color.PaleVioletRed : Color.PaleGreen;
+            return ((bool)value) ? "#56b2df" : "#8fd3d8";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -131,9 +131,9 @@ namespace SPDInfoApp
 
             InitializeComponent();
 
-            //  MainPage = new LoginMenu();//EntryPage();
+             MainPage = new LoginMenu();//EntryPage();
 
-            MainPage =  new BCMessageCenter() { Title="Settings: Broadcast Message Center", BackgroundColor=Color.FloralWhite};
+           // MainPage =  new BCMessageCenter() { Title="Settings: Broadcast Message Center", BackgroundColor=Color.FloralWhite};
 
            // LoadMainPage();
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
