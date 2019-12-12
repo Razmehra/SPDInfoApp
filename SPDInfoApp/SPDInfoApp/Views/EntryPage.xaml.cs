@@ -221,6 +221,7 @@ namespace SPDInfoApp.Views
             txtVoterID.Text = sPDInfo.VoterID;
             txtPAN.Text = sPDInfo.PANNo;
             txtDrivingLicNo.Text = sPDInfo.DrivingLicNo;
+            cmbScholorship.Text = sPDInfo.ScholershipName;
             txtScholershipName.Text = sPDInfo.ScholershipName;
             txtFamilySSSMId.Text = sPDInfo.FamilySSSMID;
             swtNCC.IsToggled = sPDInfo.IsNCC;

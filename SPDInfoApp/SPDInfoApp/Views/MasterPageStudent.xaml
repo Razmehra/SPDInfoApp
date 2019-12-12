@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SPDInfoApp.Views.MasterPageStudent" BackgroundColor="GhostWhite" Title="MyCollegeApp">
+    <ContentPage.Content>
+        <StackLayout>
+            <!--xmlns:ffimageloading="clr-namespace:BPLMistriApp.MDPageMaster;assembly=BPLMistriApp.MDPageMaster"-->
+            <!--x:Class="FFImageLoading.Forms.Sample.Pages.XamlSimpleExamplePage"-->
+            <ListView x:Name="MenuItemsListView"
+              SeparatorVisibility="None"
+              HasUnevenRows="true"
+                ItemSelected="MenuItemsListView_ItemSelected"
+              ItemsSource="{Binding MenuItems}">
+                <ListView.Header>
+                    <Grid BackgroundColor="#191919">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="150"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="3"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="MyCollegeApp Ver 0.1" TextColor="FloralWhite" FontSize="Medium" FontAttributes="Bold"
+                       Grid.Column="0" Grid.ColumnSpan="3"
+                      Grid.Row="1" Grid.RowSpan="2"
+                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                               
+                        />
+
+                        <Image Grid.Column="0" Grid.ColumnSpan="3" Source="WW1.jpg" InputTransparent="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>
+                        <AbsoluteLayout Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand">
+                    <!--HeightRequest="150" WidthRequest="150"-->
+                            <Image x:Name="ImageProfile" Source="SPDLogo.png" Aspect="AspectFit"  HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" />
+                        </AbsoluteLayout>
+                        <!--<Label Grid.Column="0" Grid.ColumnSpan="3"
+                               Grid.Row=""/>-->
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+                                <Label VerticalOptions="FillAndExpand" 
+                                 VerticalTextAlignment="Center" 
+                                 Text="{Binding Title}" 
+                                 TextColor="Black"
+                                 FontSize="15"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

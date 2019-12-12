@@ -65,7 +65,7 @@ namespace SPDInfoApp.Views
                 loginInfo.LoginType = "Alm";
 
             }
-           // Application.Current.Properties["LoginInfo"] = null;
+            // Application.Current.Properties["LoginInfo"] = null;
 
             var cuurentLoginInfo = Application.Current.Properties["LoginInfo"];
             if (cuurentLoginInfo == null)
@@ -79,7 +79,7 @@ namespace SPDInfoApp.Views
             }
             else
             {
-               // var xx = cuurentLoginInfo;
+                // var xx = cuurentLoginInfo;
                 var loginInfos = Utils.DeserializeFromJson<List<LoginInfo>>(cuurentLoginInfo.ToString());// xx.ToString());// LoginInfo.FromJson(cuurentLoginInfo.ToString());// Utils.DeserializeFromJson<LoginInfo>(xx.ToString());
                 loginInfos.Add(loginInfo);
                 var jsonstring = Utils.SerializeToJson(loginInfos);
@@ -160,6 +160,28 @@ namespace SPDInfoApp.Views
             {
                 Application.Current.MainPage = new LoginMenu();
             }
+        }
+
+        private void UserApplicationID_Unfocused(object sender, FocusEventArgs e)
+        {
+            var cuurentLoginInfo = Application.Current.Properties["LoginInfo"];
+
+            if (cuurentLoginInfo != null)
+            {
+                var loginInfos = Utils.DeserializeFromJson<List<LoginInfo>>(cuurentLoginInfo.ToString());
+                var MatchedLogin = loginInfos.Where(w => w.ApplicationId == UserApplicationID.Text.Trim()).FirstOrDefault();
+                if (MatchedLogin == null) return;
+                UserName.Text = MatchedLogin.UserName;
+                UserEmail.Text = MatchedLogin.Email;
+                UserMobile.Text = MatchedLogin.Mobile;
+                BtnSubmit.Focus();
+            }
+            else
+            {
+
+            }
+
+
         }
     }
 }

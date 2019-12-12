@@ -2,6 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SPDInfoApp.Views.HomePageStudent" BackgroundColor="FloralWhite">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="iconexample" Icon="SPDLogo.png" Priority="0" Order="Primary" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
             
@@ -19,7 +23,7 @@
             
             <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
-                    <Image Source="SPDLogo.png" HeightRequest="80" WidthRequest="80" Aspect="AspectFit" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>
+                    <!--<Image Source="SPDLogo.png" HeightRequest="80" WidthRequest="80" Aspect="AspectFit" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>-->
 
                     <StackLayout HorizontalOptions="FillAndExpand">
                         <Frame BackgroundColor="#333333" Padding="10" CornerRadius="20">

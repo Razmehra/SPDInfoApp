@@ -8,9 +8,12 @@ xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRat
                 xmlns:controls="clr-namespace:SPDInfoApp.Controls"
              xmlns:cnvrts="clr-namespace:SPDInfoApp.HelperClasses"
              x:Class="SPDInfoApp.Views.EntryPage"
-             NavigationPage.HasNavigationBar="True"
-             Title="SPDInfo"
+             NavigationPage.HasNavigationBar="False"
+             Title="Acadmic Profile"
              BackgroundColor="GhostWhite">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="iconexample" Icon="SPDLogo.png" Priority="0" Order="Primary" />
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -64,21 +67,21 @@ xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRat
                                         <ListCollection:List x:TypeArguments="x:String">
                                             <x:String>B.A.</x:String>
                                             <x:String>B.Com</x:String>
-                                            <x:String>B.Com[Comp Appl.]</x:String>
-                                            <x:String>B.Sc.[Biology]</x:String>
-                                            <x:String>B.Sc.[Maths]</x:String>
-                                            <x:String>B.sc.[Comp. Sci.]</x:String>
-                                            <x:String>M.Sc.[Botony]</x:String>
-                                            <x:String>M.Sc.[Physics]</x:String>
-                                            <x:String>M.sc.[Zoology]</x:String>
-                                            <x:String>M.A.[Economics]</x:String>
-                                            <x:String>M.A.[English]</x:String>
-                                            <x:String>M.A.[Hindi]</x:String>
-                                            <x:String>M.A.[Geography]</x:String>
-                                            <x:String>M.A.[History]</x:String>
-                                            <x:String>M.A.[Political Science]</x:String>
-                                            <x:String>M.A.[Sanskrit]</x:String>
-                                            <x:String>M.A.[Sociology]</x:String>
+                                            <x:String>B.Com(Comp Appl.)</x:String>
+                                            <x:String>B.Sc.(Biology)</x:String>
+                                            <x:String>B.Sc.(Maths)</x:String>
+                                            <x:String>B.sc.(Comp. Sci.)</x:String>
+                                            <x:String>M.Sc.(Botony)</x:String>
+                                            <x:String>M.Sc.(Physics)</x:String>
+                                            <x:String>M.sc.(Zoology)</x:String>
+                                            <x:String>M.A.(Economics)</x:String>
+                                            <x:String>M.A.(English)</x:String>
+                                            <x:String>M.A.(Hindi)</x:String>
+                                            <x:String>M.A.(Geography)</x:String>
+                                            <x:String>M.A.(History)</x:String>
+                                            <x:String>M.A.(Political Science)</x:String>
+                                            <x:String>M.A.(Sanskrit)</x:String>
+                                            <x:String>M.A.(Sociology)</x:String>
                                             <x:String>M.Com.</x:String>
                                         </ListCollection:List>
                                     </combobox:SfComboBox.ComboBoxSource>
@@ -399,8 +402,33 @@ xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRat
                     <Entry x:Name="txtPAN" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
                     <Label Text="Driving Lincense No:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                     <Entry x:Name="txtDrivingLicNo" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
-                    <Label Text="Scholarship Name (if any):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
-                    <Entry x:Name="txtScholershipName" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
+                    <Label Text="Scholorship Name (if any):"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
+                    <StackLayout>
+                        <combobox:SfComboBox x:Name="cmbScholorship" IsEditableMode="false" TextSize="14"
+                                                         Watermark="Scalership.." WatermarkColor="Gray"
+                                                        HeightRequest="40"
+                                                         TextColor="#1976d2" BorderColor="#1976d2" FontAttributes="Bold" 
+                                                     HorizontalOptions="Start" >
+                            <combobox:SfComboBox.ComboBoxSource>
+                                <ListCollection:List x:TypeArguments="x:String">
+                                    <x:String>Post Metric(PMS)</x:String>
+                                    <x:String>Medhavi(MMVY)</x:String>
+                                    <x:String>Medhavi(MMVJKY)</x:String>
+                                    <x:String>Medhavi(Karmkar)</x:String>
+                                    <x:String>Awas Yojna</x:String>
+                                    <x:String>Gaon Ki Beti</x:String>
+                                    <x:String>Pratibha Kiran</x:String>
+                                    <x:String>Vikramaditya Yojna</x:String>
+                                    <x:String>Minority</x:String>
+                                    <x:String>Handicapped</x:String>
+                                    <x:String>Central Sector</x:String>
+                                    <x:String>Others</x:String>
+                                </ListCollection:List>
+                            </combobox:SfComboBox.ComboBoxSource>
+                        </combobox:SfComboBox>
+                    </StackLayout>
+                    
+                    <Entry x:Name="txtScholershipName" BindingContext="{x:Reference cmbScholorship}" Text="{Binding Path=SelectedItem}" IsVisible="False" Style="{StaticResource Entryfont}" BackgroundColor="{StaticResource EntryDefColorBackground}" TextColor="{StaticResource EntryDefColorForeground}" HorizontalOptions="FillAndExpand" />
                     <!--</StackLayout>-->
                     <Label Text="Co-curricular activity of past:"  TextColor="{StaticResource LabelDefColorForeground}" BackgroundColor="{StaticResource LabelDefColorBackground}" Style="{StaticResource Lablefont}" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  />
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">

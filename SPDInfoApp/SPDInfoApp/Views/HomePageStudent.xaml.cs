@@ -13,19 +13,19 @@ using Xamarin.Forms.Xaml;
 
 namespace SPDInfoApp.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePageStudent : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class HomePageStudent : ContentPage
+    {
         private PHPServices _phpService = new PHPServices();
 
-        public HomePageStudent ()
-		{
-			InitializeComponent ();
-            var htmlSource = new HtmlWebViewSource();
-            htmlSource.Html = @"<html><body><FONT color='#1E0029'><marquee behavior='scroll' direction='left' scrollamount=5>"
-                  + "Special Offer of  Plumber+Electrician Services for 1 year..  Only for upto Rs. 2000.  Tap here for Free Registration.." + "</marquee></FONT></body></html>";
+        public HomePageStudent()
+        {
+            InitializeComponent();
+            //var htmlSource = new HtmlWebViewSource();
+            //htmlSource.Html = @"<html><body><FONT color='#1E0029'><marquee behavior='scroll' direction='left' scrollamount=5>"
+            //      + "Special Offer of  Plumber+Electrician Services for 1 year..  Only for upto Rs. 2000.  Tap here for Free Registration.." + "</marquee></FONT></body></html>";
 
-            webView.Source = htmlSource;
+            //webView.Source = htmlSource;
             FetchMassages();
         }
 
@@ -42,27 +42,46 @@ namespace SPDInfoApp.Views
             var data = await _phpService.FetchMessages(new string[] { "0" });
             var mydata = Utils.DeserializeFromJson<ObservableCollection<MessageModel>>(data);//List<MessageModel>
 
+            // var TargetList = mydata.Where(w => w.IsScroll && (w.MsgMode != 2)).Select(s => s.MsgAudience).ToList();
+            var MyMessages = mydata.Where(w => w.IsScroll && (w.MsgMode != 2)).ToList();
             string Msgs = "";
-
-            foreach (var msg in mydata)
+            var applicationID = int.Parse(Application.Current.Properties["StudentApplicationID"].ToString());
+            foreach (var msg in MyMessages)
             {
-                Msgs = Msgs + " || " + msg.MsgMessage;
+                switch (msg.MsgMode)
+                {
+                    case 1:
+
+                        if (msg.MsgAudience != null)
+                        {
+                            var IsInMsgAudience = (Utils.DeserializeFromJson<List<MessageTarget>>(msg.MsgAudience)).Where(w => w.ApplicationID == applicationID).Count() > 0;
+                           if(IsInMsgAudience) Msgs = Msgs + " || " + msg.MsgMessage;
+                        }
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+                        Msgs = Msgs + " || " + msg.MsgMessage;
+                        break;
+
+                    default:
+                        break;
+                }
+
+
             }
-
-            var htmlSource = new HtmlWebViewSource();
-            htmlSource.Html = @"<html><body><FONT color='#1E0029'><marquee behavior='scroll' direction='left' scrollamount=5>"
-                  + Msgs + "</marquee></FONT></body></html>";
-            webView.Source = null;
-            webView.Source = htmlSource;
-
-
-
-            //  MessagesList = mydata;
-            // MessagesList.OrderByDescending(w => w.MsgID);
-            //LVMessages.BindingContext = this;
-            //LVMessages.ItemsSource = null;
-            //LVMessages.ItemsSource = MessagesList.OrderByDescending(w => w.MsgID);
-
+            if (Msgs.Length > 0)
+            {
+                var htmlSource = new HtmlWebViewSource();
+                //MARQUEE LOOP=2 BEHAVIOR=SLIDE
+                htmlSource.Html = @"<html><body><FONT color='#1E0029'><marquee  behavior='scroll' direction='left' scrollamount=5>"
+                    +  Msgs + "</marquee></FONT></body></html>";
+                
+                webView.Source = null;
+                webView.Source = htmlSource;
+            }
 
         }
 
@@ -86,7 +105,7 @@ namespace SPDInfoApp.Views
 
         private async void BtnFillInformation_Clicked(object sender, EventArgs e)
         {
-          await Navigation.PushModalAsync(  new NavigationPage(new TabPageStudentInfo()));
+            await Navigation.PushModalAsync(new NavigationPage(new TabPageStudentInfo()));
         }
     }
 }

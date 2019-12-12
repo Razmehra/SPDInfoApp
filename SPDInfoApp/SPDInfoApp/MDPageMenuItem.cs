@@ -17,5 +17,8 @@ namespace SPDInfoApp
         public string Title { get; set; }
 
         public Type TargetType { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool IsAlumni { get; set; }
+        public bool IsStudent { get; set; }
     }
 }

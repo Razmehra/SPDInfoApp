@@ -14,6 +14,8 @@ namespace SPDInfoApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MDPage : MasterDetailPage
     {
+      //  MDPageMasterViewModel masterViewModel = new MDPageMasterViewModel();
+
         public MDPage(string loginmode)
         {
             InitializeComponent();
@@ -21,9 +23,13 @@ namespace SPDInfoApp
             switch (loginmode)
             {
                 case "Admin":
-                    Detail = new NavigationPage(new HomePageAdmin()); 
+                    Detail = new NavigationPage(new HomePageAdmin());
+
                     break;
                 case "Student":
+                    Master = new MasterPageStudent();
+                    MasterPage.ListView.ItemsSource = null;
+
                     Detail = new NavigationPage(new HomePageStudent()); //new NavigationPage(new TabPageStudentInfo());//(new EntryPage())
                     break;
                 case "Alumni":
@@ -33,7 +39,7 @@ namespace SPDInfoApp
                     break;
             }
             
-            MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+           // MasterPage.ListView.ItemSelected += ListView_ItemSelected;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

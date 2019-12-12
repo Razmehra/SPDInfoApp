@@ -289,9 +289,11 @@ namespace SPDInfoApp.WebServices
             {
                 string BaseUrl = "http://geoinfotech.org.in/spdinfoservices/";
                 client.BaseAddress = new Uri(BaseUrl + XUri);
-
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "text/html; charset=utf-8");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Accept", "text/html, application/xhtml+xml, */*");
+                //client.DefaultRequestHeaders.Add("Content-Type", "text/html, charset=UTF-8");
                 client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
                 client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.8,sv-SE;q=0.5,sv;q=0.3");
                 client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
@@ -299,6 +301,7 @@ namespace SPDInfoApp.WebServices
                 HttpRequestMessage httpRequestMessage = new HttpRequestMessage
                 {
                     Content = new FormUrlEncodedContent(Dic)
+                   // var content = new StringContent(Dic, Encoding.UTF8, "application/json")
                 };
                 var value4 = new FormUrlEncodedContent(Dic);
                 HttpResponseMessage response = await client.PostAsync(client.BaseAddress.ToString(), value4);

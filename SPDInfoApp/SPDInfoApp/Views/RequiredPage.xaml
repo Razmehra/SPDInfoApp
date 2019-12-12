@@ -15,6 +15,7 @@
                         <StackLayout x:Name="layoutStudentAdmNo" Padding="0" Margin="0">
                             <Label Text="Application No(First Admission):" TextColor="#00f3f5" Margin="0"/>
                             <Entry x:Name="UserApplicationID" Placeholder="Application No.."   
+                                    Unfocused="UserApplicationID_Unfocused" 
                            PlaceholderColor="Gray"   
                            TextColor="White"/>
                         </StackLayout>
@@ -32,8 +33,11 @@
                         <Entry x:Name="UserMobile" Placeholder="Mobile No.."   
                            PlaceholderColor="Gray"   
                            TextColor="White"/>
+
+                        <BoxView HeightRequest="100"/>
                     </StackLayout>
                 </Frame>
+                
             </ScrollView>
             <StackLayout Orientation="Horizontal" Padding="5,-3,5,-3" VerticalOptions="End"  Margin="0" HorizontalOptions="FillAndExpand">
                 <Button x:Name="BtnSubmit" Text="Submit" TextColor="White"  
