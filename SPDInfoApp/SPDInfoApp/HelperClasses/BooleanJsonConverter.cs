@@ -37,13 +37,19 @@ namespace SPDInfoApp.HelperClasses
             switch (reader.Value.ToString().ToLower().Trim())
             {
                 case "true":
+                    return true;
                 case "yes":
+                    return true;
                 case "y":
+                    return true;
                 case "1":
                     return true;
                 case "false":
+                    return false;
                 case "no":
+                    return false;
                 case "n":
+                    return false;
                 case "0":
                     return false;
             }
